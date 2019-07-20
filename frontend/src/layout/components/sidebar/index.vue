@@ -99,7 +99,6 @@
 </style>
 <style lang="scss">
     #sidebar {
-        width: 210px;
         height: 100%;
 
         .logo {

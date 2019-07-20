@@ -22,8 +22,15 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .el-container {
         height: 100%;
+    }
+    .el-aside {
+        width: 210px !important;
+    }
+    .el-main {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
     }
 </style>

@@ -9,9 +9,43 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'dashboard',
-      component: layout
+      component: layout,
+      redirect: '/dashboard',
+      children: [
+        {
+          path: 'dashboard',
+          name: 'dashboard',
+          component: ()=>import('@/views/dashboard'),
+          meta: {title:"dashboard", icon:"dashboard", affix:true},
+        }
+      ]
     },
+    {
+      path: '/document',
+      component: layout,
+      redirect: "/document/index",
+      children: [
+        {
+          path: 'index',
+          name: 'document',
+          component: ()=>import('@/views/document'),
+          meta: {title:"document", icon:"document", affix:true},
+        }
+      ]
+    },
+    {
+      path: '/mock',
+      component: layout,
+      redirect: '/mock/index',
+      children: [
+        {
+          path: 'index',
+          name: 'mock',
+          component: ()=>import('@/views/mock'),
+          meta: {title:"mock", icon:"mock", affix:true},
+        }
+      ]
+    }
     // {
     //   path: '/about',
     //   name: 'about',

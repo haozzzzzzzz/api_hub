@@ -10,21 +10,21 @@
         </div>
         <el-scrollbar>
             <el-menu
-                    :mode="vertical"
+                    mode="vertical"
                     :collapse="false"
                     :collapse-transition="false"
                     :unique-opened="true"
-                    :menu-trigger="click"
 
                     :background-color="variables.menuBg"
                     :text-color="variables.menuText"
                     :active-text-color="variables.menuActiveText"
+                    router="true"
             >
-                <el-menu-item index="1">
+                <el-menu-item index="/document">
                     <i class="el-icon-document"></i>
                     <span slot="title">Document</span>
                 </el-menu-item>
-                <el-menu-item index="2">
+                <el-menu-item index="/mock">
                     <i class="el-icon-connection"></i>
                     <span slot="title">Mock</span>
                 </el-menu-item>

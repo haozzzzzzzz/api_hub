@@ -8,7 +8,11 @@
                 :disabled="item.disable"
                 :closable="item.closable"
         >
-            {{item.viewContent}}
+            <transition name="fade-transform" mode="out-in">
+                <keep-alive>
+                    <router-view :key="item.route"></router-view>
+                </keep-alive>
+            </transition>
         </el-tab-pane>
     </el-tabs>
 </template>
@@ -22,8 +26,8 @@
                 editableTabs: [
                     {
                         title: "document list",
-                        viewContent: "tab 0",
-                        name: "0"
+                        name: "0",
+                        route: "/document/list"
                     }
                 ],
                 tabIndex: 0
@@ -36,7 +40,7 @@
                     this.editableTabs.push({
                         title: 'New Tab ' + newTabName,
                         name: newTabName,
-                        viewContent: "New Tab content"
+                        route: "/document/detail"
                     });
 
                     this.editableTabsValue = newTabName

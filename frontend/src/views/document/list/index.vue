@@ -1,7 +1,7 @@
 <template>
     <div class="tab-content">
         <el-table
-                :data="tableData"
+                :data="items"
                 style="width: 100%"
                 border
         >
@@ -66,26 +66,7 @@
         name: "document_list",
         data(){
             return {
-                tableData: [
-                    {
-                        doc_id: '1',
-                        title: 'test title',
-                        category_name: 'api',
-                        author_name: 'author name',
-                        spec_url: '',
-                        post_status: '1',
-                        create_time: '2019-01-01'
-                    },
-                    {
-                        doc_id: '2',
-                        title: 'test title',
-                        category_name: 'api',
-                        author_name: 'author name',
-                        spec_url: '',
-                        post_status: '1',
-                        create_time: '2019-01-01'
-                    }
-                ]
+                items: []
             }
         },
         methods: {
@@ -101,10 +82,38 @@
             }
         },
         mounted() {
-            apis.docList(this, 1, 20, function (data, err) {
-                console.log(data);
-                console.log(err);
-            })
+            if (this.items.length === 0 ) {
+                apis.docList(this, 1, 20, (data, err) => {
+                    let items = [
+                        {
+                            doc_id: '1',
+                            title: 'test title',
+                            category_name: 'api',
+                            author_name: 'author name',
+                            spec_url: '',
+                            post_status: '1',
+                            create_time: '2019-01-01'
+                        },
+                        {
+                            doc_id: '2',
+                            title: 'test title',
+                            category_name: 'api',
+                            author_name: 'author name',
+                            spec_url: '',
+                            post_status: '1',
+                            create_time: '2019-01-01'
+                        }
+                    ];
+
+                    this.items.push(...items);
+                    console.log(this.items);
+
+                    console.log(data);
+                    console.log(err);
+                });
+            }
+
+
         }
     }
 </script>

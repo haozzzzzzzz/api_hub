@@ -22,6 +22,7 @@ function handleResponse(comp, respData, err, callback) {
             title: '请求出错',
             message: errMsg
         });
+        callback(respData, err);
         return
     }
 
@@ -31,6 +32,7 @@ function handleResponse(comp, respData, err, callback) {
             title: '请求出错',
             message: err.toString()
         });
+        callback(respData, err);
         return
     }
 
@@ -40,6 +42,7 @@ function handleResponse(comp, respData, err, callback) {
            title: '接口返回错误',
            message: 'ret: '  + respData.ret + ', msg: ' + respData.message
         });
+        callback(respData, err);
         return
     }
 

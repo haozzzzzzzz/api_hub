@@ -1,5 +1,5 @@
 <template>
-    <el-tabs v-model="editableTablsValue" type="card" editable @edit="handleTabsEdit">
+    <el-tabs v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit">
         <el-tab-pane
                 v-for="(item, index) in editableTabs"
                 :key="item.name"
@@ -10,7 +10,7 @@
         >
             <transition name="fade-transform" mode="out-in">
                 <keep-alive>
-                    <router-view :key="item.route"></router-view>
+                    <component v-bind:is="currentTabComponent"></component>
                 </keep-alive>
             </transition>
         </el-tab-pane>
@@ -18,6 +18,9 @@
 </template>
 
 <script>
+    import document_detail from './detail'
+    import document_list from './list'
+
     export default {
         name: "document",
         data(){
@@ -30,13 +33,21 @@
                         route: "/document/list"
                     }
                 ],
-                tabIndex: 0
+                tabCounter: 0,
             }
+        },
+        computed: {
+            currentTabComponent: function () {
+                if ( this.editableTabsValue !== '0' ) {
+                    return document_detail
+                }
+                return document_list
+            },
         },
         methods: {
             handleTabsEdit(targetName, action) {
                 if (action === 'add') {
-                    let newTabName = ++ this.tabIndex + '';
+                    let newTabName = ++ this.tabCounter + '';
                     this.editableTabs.push({
                         title: 'New Tab ' + newTabName,
                         name: newTabName,

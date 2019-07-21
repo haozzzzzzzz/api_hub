@@ -18,7 +18,7 @@
                     :background-color="variables.menuBg"
                     :text-color="variables.menuText"
                     :active-text-color="variables.menuActiveText"
-                    router="true"
+                    router
             >
                 <el-menu-item index="/document">
                     <i class="el-icon-document"></i>

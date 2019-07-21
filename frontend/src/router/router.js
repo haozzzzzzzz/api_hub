@@ -15,7 +15,7 @@ export default new Router({
         {
           path: 'dashboard',
           name: 'dashboard',
-          component: ()=>import('@/views/dashboard'),
+          component: ()=>import('@/views/dashboard/index'),
           meta: {title:"dashboard", icon:"dashboard", affix:true},
         }
       ]
@@ -28,7 +28,7 @@ export default new Router({
         {
           path: 'index',
           name: 'document',
-          component: ()=>import('@/views/document'),
+          component: ()=>import('@/views/document/index'),
           meta: {title:"document", icon:"document", affix:true},
         }
       ]
@@ -41,7 +41,7 @@ export default new Router({
         {
           path: 'index',
           name: 'mock',
-          component: ()=>import('@/views/mock'),
+          component: ()=>import('@/views/mock/index'),
           meta: {title:"mock", icon:"mock", affix:true},
         }
       ]

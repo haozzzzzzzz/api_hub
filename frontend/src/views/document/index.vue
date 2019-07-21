@@ -52,7 +52,7 @@
                     this.tabOpen({
                         tabType: 'detail',
                         tabData: {
-                            docId: ''
+                            doc_id: ''
                         }
                     })
 
@@ -83,7 +83,7 @@
                     case 'detail':
                         let existTabName = "";
                         for( let tab of this.editableTabs) {
-                            if (tab.tabType === tabType && tab.tabData.docId === tabData.docId) { // 存在
+                            if (tab.tabType === tabType && tab.tabData.doc_id === tabData.doc_id) { // 存在
                                 existTabName = tab.name;
                                 break;
                             }
@@ -96,12 +96,12 @@
 
                         let newTabName = ++ this.tabCounter + '';
                         this.editableTabs.push({
-                            title: 'New Tab ' + newTabName,
+                            title: (tabData.title ? "(" + tabData.doc_id + ") " + tabData.title : false) || 'New Tab',
                             name: newTabName,
                             route: "/document/detail",
                             tabType: 'detail',
                             tabData: {
-                                docId: tabData.docId,
+                                doc_id: tabData.doc_id,
                             }
                         });
 
@@ -113,5 +113,4 @@
 </script>
 
 <style scoped>
-
 </style>

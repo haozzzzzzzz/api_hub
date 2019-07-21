@@ -1,5 +1,5 @@
 <template>
-    <div id="document-list">
+    <div class="tab-content">
         <el-table
                 :data="tableData"
                 style="width: 100%"
@@ -15,7 +15,7 @@
                     label="title"
             >
                 <template slot-scope="scope">
-                    <el-link type="primary" :key="scope.row.doc_id" @click="openDetail(scope.row.doc_id)">{{scope.row.title}}</el-link>
+                    <el-link type="primary" :key="scope.row.doc_id" @click="openDetail(scope.row)">{{scope.row.title}}</el-link>
                 </template>
             </el-table-column>
 
@@ -62,7 +62,6 @@
 <script>
     export default {
         name: "document_list",
-        el: '#document-list',
         data(){
             return {
                 tableData: [
@@ -71,6 +70,7 @@
                         title: 'test title',
                         category_name: 'api',
                         author_name: 'author name',
+                        spec_url: '',
                         post_status: '1',
                         create_time: '2019-01-01'
                     },
@@ -79,6 +79,7 @@
                         title: 'test title',
                         category_name: 'api',
                         author_name: 'author name',
+                        spec_url: '',
                         post_status: '1',
                         create_time: '2019-01-01'
                     }
@@ -86,11 +87,13 @@
             }
         },
         methods: {
-            openDetail: function (docId) {
+            openDetail: function (row) {
                 this.$emit('custom-tab-open', {
                     tabType: 'detail',
                     tabData: {
-                        docId: docId,
+                        doc_id: row.doc_id,
+                        title: row.title,
+                        spec_url: row.spec_url
                     }
                 })
             }
@@ -102,4 +105,9 @@
     .el-table {
         margin-bottom: 15px;
     }
+
+    .el-tag {
+        margin-right: 5px;
+    }
+
 </style>

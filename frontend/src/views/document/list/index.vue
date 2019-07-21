@@ -7,8 +7,8 @@
         >
             <el-table-column
                     prop="doc_id"
-                    label="doc_id"
-                    width="100"
+                    label="id"
+                    width="50"
             ></el-table-column>
 
             <el-table-column
@@ -101,7 +101,7 @@
             }
         },
         mounted() {
-            apis.docList(1, 20, function (data, err) {
+            apis.docList(this, 1, 20, function (data, err) {
                 console.log(data);
                 console.log(err);
             })

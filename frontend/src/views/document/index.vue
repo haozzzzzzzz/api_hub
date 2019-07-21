@@ -100,12 +100,11 @@
                             name: newTabName,
                             route: "/document/detail",
                             tabType: 'detail',
-                            tabData: {
-                                doc_id: tabData.doc_id,
-                            }
+                            tabData: tabData
                         });
 
                         this.editableTabsValue = newTabName;
+
                 }
             }
         }

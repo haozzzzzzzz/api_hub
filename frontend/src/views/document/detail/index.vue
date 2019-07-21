@@ -13,8 +13,8 @@
         computed: {
             swaggerData() {
                 return {
-                    id: 'swagger-' + this.data.docId,
-                    url: this.data.url
+                    id: 'swagger-' + this.data.doc_id,
+                    url: this.data.spec_url
                 }
             }
         }

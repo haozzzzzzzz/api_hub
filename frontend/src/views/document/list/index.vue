@@ -60,6 +60,8 @@
 </template>
 
 <script>
+    import apis from '@/api/apis'
+
     export default {
         name: "document_list",
         data(){
@@ -97,6 +99,12 @@
                     }
                 })
             }
+        },
+        mounted() {
+            apis.docList(1, 20, function (data, err) {
+                console.log(data);
+                console.log(err);
+            })
         }
     }
 </script>

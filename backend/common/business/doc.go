@@ -40,6 +40,35 @@ func (m *BsDoc) DocList(
 		return
 	}
 
+	mCatIds := make(map[uint32]bool, 0)
+	mAccIds := make(map[uint32]bool, 0)
+	for _, doc := range docs {
+		mCatIds[doc.CategoryId] = true
+		mAccIds[doc.AuthorId] = true
+	}
+
+	catIds := make([]uint32, 0)
+	accIds := make([]uint32, 0)
+	for catId, _ := range mCatIds {
+		catIds = append(catIds, catId)
+	}
+
+	for accId, _ := range mAccIds {
+		accIds = append(accIds, accId)
+	}
+
+	mCategory, err := dbClient.AhCategoryBatch(catIds)
+	if nil != err {
+		logrus.Errorf("batch get ah category failed. error: %s.", err)
+		return
+	}
+
+	mAuthor, err := dbClient.AhAccountBatch(accIds)
+	if nil != err {
+		logrus.Errorf("batch get ah account failed. error: %s.", err)
+		return
+	}
+
 	for _, doc := range docs {
 		item := &DocListItem{
 			DocId:      doc.DocId,
@@ -50,24 +79,17 @@ func (m *BsDoc) DocList(
 		}
 
 		// category
-		cat, errGet := dbClient.AhCategoryGet(doc.CategoryId)
-		err = errGet
-		if nil != err || cat == nil {
-			logrus.Errorf("get ah_category failed. cat_id: %d, error: %s.", doc.CategoryId, err)
-			return
+		cat, ok := mCategory[doc.CategoryId]
+		if ok {
+			item.CategoryName = cat.Name
 		}
-
-		item.CategoryName = cat.Name
 
 		// author
-		author, errGet := dbClient.AhAccountGet(doc.AuthorId)
-		err = errGet
-		if nil != err || author == nil {
-			logrus.Errorf("get ah_account failed. acc_id: %d, error: %s.", doc.AuthorId, err)
-			return
+		author, ok := mAuthor[doc.AuthorId]
+		if ok {
+			item.AuthorName = author.Name
 		}
 
-		item.AuthorName = author.Name
 		items = append(items, item)
 	}
 

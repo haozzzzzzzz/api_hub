@@ -200,6 +200,39 @@ func (m *HubDB) AhAccountGet(
 	return
 }
 
+func (m *HubDB) AhAccountBatch(accIds []uint32) (mAccount map[uint32]*model.AhAccount, err error) {
+	mAccount = make(map[uint32]*model.AhAccount)
+	accounts := make([]*model.AhAccount, 0)
+	strSql := `
+		SELECT
+			acc_id,
+			name,
+			update_time,
+			create_time
+		FROM
+			ah_account
+		WHERE
+			acc_id IN (?)
+	`
+	query, args, err := sqlx.In(strSql, accIds)
+	if nil != err {
+		logrus.Errorf("use sqlx in failed. error: %s.", err)
+		return
+	}
+
+	err = m.Select(&accounts, query, args...)
+	if nil != err {
+		logrus.Errorf("batch get ah_account failed. error: %s.", err)
+		return
+	}
+
+	for _, acc := range accounts {
+		mAccount[acc.AccId] = acc
+	}
+
+	return
+}
+
 // 目录
 func (m *HubDB) AhCategoryGet(
 	catId uint32,
@@ -222,6 +255,40 @@ func (m *HubDB) AhCategoryGet(
 		logrus.Errorf("get ah_category failed. error: %s.", err)
 		return
 	}
+	return
+}
+
+func (m *HubDB) AhCategoryBatch(catIds []uint32) (mCategory map[uint32]*model.AhCategory, err error) {
+	mCategory = make(map[uint32]*model.AhCategory)
+	categories := make([]*model.AhCategory, 0)
+	strSql := `
+		SELECT
+			cat_id,
+			name,
+			doc_num,
+			update_time,
+			create_time
+		FROM
+			ah_category
+		WHERE
+			cat_id IN (?)
+	`
+	query, args, err := sqlx.In(strSql, catIds)
+	if nil != err {
+		logrus.Errorf("use sqlx in failed. error: %s.", err)
+		return
+	}
+
+	err = m.Select(&categories, query, args...)
+	if nil != err {
+		logrus.Errorf("get categories failed. error: %s.", err)
+		return
+	}
+
+	for _, cat := range categories {
+		mCategory[cat.CatId] = cat
+	}
+
 	return
 }
 

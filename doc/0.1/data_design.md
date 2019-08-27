@@ -18,7 +18,6 @@
 | ----------- | ----------------------------- | ---------------- | ------- | --------------------------------------- |
 | doc_id      | document auto-increasement id | UNSIGNED INT     |         | PK; Auto-Increasement                   |
 | title       | doc title                     | VARCHAR(255)     |         | NOT NULL                                |
-| spec        | api specification content     | TEXT             |         | NOT NULL                                |
 | spec_url    | api specification url         | VARCHAR(500)     | ""      | NOT NULL                                |
 | category_id | category id                   | UNSIGNED INT     | 1       | NOT NULL                                |
 | author_id   | author id                     | UNSIGNED INT     |         | NOT NULL                                |
@@ -65,9 +64,9 @@
 
 ### ah_doc_tag
 
-| field       | description | type         | default | remark             |
-| ----------- | ----------- | ------------ | ------- | ------------------ |
-| tag_id      | tag id      | UNSIGNED INT |         | NOT NULL; Unoin PK |
-| doc_id      | doc id      | UNSIGNED INT |         | NOT NULL; Unoin PK |
-| create_time | create time | UNSIGNED INT |         | NOT NULL           |
+| field       | description | type         | default | remark                               |
+| ----------- | ----------- | ------------ | ------- | ------------------------------------ |
+| tag_id      | tag id      | UNSIGNED INT |         | NOT NULL；（tag_id和doc_id）联合索引 |
+| doc_id      | doc id      | UNSIGNED INT |         | NOT NULL; 索引                       |
+| create_time | create time | UNSIGNED INT |         | NOT NULL                             |
 

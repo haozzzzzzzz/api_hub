@@ -4,10 +4,13 @@ import (
 	"backend/api"
 	"backend/config"
 	"fmt"
+	"time"
+
+	"github.com/gin-contrib/cors"
+
 	"github.com/fvbock/endless"
 	"github.com/haozzzzzzzz/go-rapid-development/web/ginbuilder"
 	"github.com/sirupsen/logrus"
-	"time"
 )
 
 func main() {
@@ -16,6 +19,11 @@ func main() {
 	address := fmt.Sprintf("%s:%s", serviceConfig.Host, serviceConfig.Port)
 
 	engine := ginbuilder.DefaultEngine()
+
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowAllOrigins = true
+	engine.Use(cors.New(corsConfig))
+
 	err = api.BindRouters(engine)
 	if nil != err {
 		logrus.Errorf("bind routers failed. error: %s.", err)

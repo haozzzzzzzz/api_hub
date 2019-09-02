@@ -7,6 +7,9 @@ const (
 	PostStatusDeleted
 )
 
+const DefaultAccountId uint32 = 1
+const DefaultCategoryId uint32 = 1
+
 type AhDoc struct {
 	DocId      uint32 `json:"doc_id" db:"doc_id"`
 	Title      string `json:"title" db:"title"`

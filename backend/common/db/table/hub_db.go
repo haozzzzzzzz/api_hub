@@ -131,6 +131,37 @@ func (m *HubDB) AhDocGet(docId uint32) (doc *model.AhDoc, err error) {
 	return
 }
 
+func (m *HubDB) AhDocGetByTitleSpecUrl(
+	title string,
+	specUrl string,
+) (
+	doc *model.AhDoc,
+	err error,
+) {
+	doc = &model.AhDoc{}
+	strSql := `
+		SELECT
+			doc_id,
+			title,
+			spec_url,
+			category_id,
+			author_id,
+			post_status,
+			update_time,
+			create_time
+		FROM
+			ah_doc
+		WHERE
+			title=? AND spec_url=?
+	`
+	err = m.Get(doc, strSql, title, specUrl)
+	if nil != err && err != sql.ErrNoRows {
+		logrus.Errorf("get ah doc failed. error: %s.", err)
+		return
+	}
+	return
+}
+
 func (m *HubDB) AhDocList(
 	pageId uint32,
 	limit uint8,

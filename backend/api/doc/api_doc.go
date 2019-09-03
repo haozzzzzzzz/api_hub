@@ -6,6 +6,7 @@ import (
 	"backend/common/db/model"
 	"backend/common/db/table"
 	"database/sql"
+	"github.com/gin-gonic/gin"
 	"time"
 
 	"github.com/haozzzzzzzz/go-rapid-development/api/code"
@@ -73,14 +74,21 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		// request post data
 		type PostData struct {
-			Title      string `json:"title" form:"title" binding:"required"`             // 文档标题
-			CategoryId uint32 `json:"category_id" form:"category_id" binding:"required"` // 分类ID
-			SpecUrl    string `json:"spec_url" form:"spec_url" binding:"required"`       // swagger.json url
+			Title       string `json:"title" form:"title" binding:"required"`             // 文档标题
+			CategoryId  uint32 `json:"category_id" form:"category_id" binding:"required"` // 分类ID
+			SpecUrl     string `json:"spec_url" form:"spec_url"`                          // swagger.json url
+			SpecContent string `json:"spec_content" form:"spec_content"`                  // swagger content
 		}
 		postData := PostData{}
 		retCode, err := ctx.BindPostData(&postData)
 		if err != nil {
 			ctx.Errorf(retCode, "verify add doc post data failed. %s.", err)
+			return
+		}
+
+		if postData.SpecUrl == "" && postData.SpecContent == "" {
+			retCode.Message = "require spec"
+			ctx.Errorf(retCode, "spec is empty")
 			return
 		}
 
@@ -95,13 +103,14 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		bsDoc := business.NewBsDoc(reqCtx)
 		now := time.Now().Unix()
 		respData.NewDocId, err = bsDoc.DocAdd(&model.AhDoc{
-			Title:      postData.Title,
-			SpecUrl:    postData.SpecUrl,
-			CategoryId: postData.CategoryId,
-			AuthorId:   ses.Auth.AccountId,
-			PostStatus: model.PostStatusPublished,
-			UpdateTime: now,
-			CreateTime: now,
+			Title:       postData.Title,
+			SpecUrl:     postData.SpecUrl,
+			SpecContent: postData.SpecContent,
+			CategoryId:  postData.CategoryId,
+			AuthorId:    ses.Auth.AccountId,
+			PostStatus:  model.PostStatusPublished,
+			UpdateTime:  now,
+			CreateTime:  now,
 		})
 		if nil != err {
 			ctx.Errorf(code.CodeErrorServer.Clone(), "bs doc add doc failed. %s", err)
@@ -124,13 +133,20 @@ var CheckAndAddDoc ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		// request post data
 		type PostData struct {
-			Title   string `json:"title" form:"title" binding:"required"`       // 标题
-			SpecUrl string `json:"spec_url" form:"spec_url" binding:"required"` // swagger.json url
+			Title       string `json:"title" form:"title" binding:"required"` // 标题
+			SpecUrl     string `json:"spec_url" form:"spec_url"`              // swagger.json url
+			SpecContent string `json:"spec_content" form:"spec_content"`
 		}
 		postData := PostData{}
 		retCode, err := ctx.BindPostData(&postData)
 		if err != nil {
 			ctx.Errorf(retCode, "verify check and add doc post data failed. %s.", err)
+			return
+		}
+
+		if postData.SpecUrl == "" && postData.SpecContent == "" {
+			retCode.Message = "require spec"
+			ctx.Errorf(retCode, "spec is empty")
 			return
 		}
 
@@ -143,7 +159,7 @@ var CheckAndAddDoc ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		reqCtx := ctx.RequestCtx
 
 		dbClient := table.NewHubDB(reqCtx)
-		doc, err := dbClient.AhDocGetByTitleSpecUrl(postData.Title, postData.SpecUrl)
+		doc, err := dbClient.AhDocGetByTitle(postData.Title)
 		if nil != err && err != sql.ErrNoRows {
 			ctx.Errorf(code.CodeErrorDBQueryFailed.Clone(), "get ah_doc by title and spec_url failed. %s", err)
 			return
@@ -159,13 +175,14 @@ var CheckAndAddDoc ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		bsDoc := business.NewBsDoc(reqCtx)
 		now := time.Now().Unix()
 		respData.DocId, err = bsDoc.DocAdd(&model.AhDoc{
-			Title:      postData.Title,
-			SpecUrl:    postData.SpecUrl,
-			CategoryId: model.DefaultCategoryId,
-			AuthorId:   ses.Auth.AccountId,
-			PostStatus: model.PostStatusPublished,
-			UpdateTime: now,
-			CreateTime: now,
+			Title:       postData.Title,
+			SpecUrl:     postData.SpecUrl,
+			SpecContent: postData.SpecContent,
+			CategoryId:  model.DefaultCategoryId,
+			AuthorId:    ses.Auth.AccountId,
+			PostStatus:  model.PostStatusPublished,
+			UpdateTime:  now,
+			CreateTime:  now,
 		})
 		if nil != err {
 			ctx.Errorf(code.CodeErrorServer.Clone(), "bs doc add doc failed. %s", err)
@@ -173,6 +190,44 @@ var CheckAndAddDoc ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		}
 
 		ctx.SuccessReturn(respData)
+		return
+	},
+}
+
+var DocDetailSpec ginbuilder.HandleFunc = ginbuilder.HandleFunc{
+	HttpMethod: "GET",
+	RelativePaths: []string{
+		"/api/api_hub/v1/doc/detail/spec/:doc_id",
+	},
+	Handle: func(ctx *ginbuilder.Context) (err error) {
+		// request path data
+		type PathData struct {
+			DocId uint32 `json:"doc_id" form:"doc_id" binding:"required"`
+		}
+		pathData := PathData{}
+		retCode, err := ctx.BindPathData(&pathData)
+		if err != nil {
+			ctx.Errorf(retCode, "verify  path data failed. %s.", err)
+			return
+		}
+
+		reqCtx := ctx.RequestCtx
+		dbClient := table.NewHubDB(reqCtx)
+		doc, err := dbClient.AhDocGet(pathData.DocId)
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDBQueryFailed.Clone(), "get doc failed. %s", err)
+			return
+		}
+
+		if doc.SpecContent != "" {
+			ctx.GinContext.Header("Content-Type", gin.MIMEJSON)
+			ctx.String(doc.SpecContent)
+
+		} else if doc.SpecUrl != "" {
+			ctx.TemporaryRedirect(doc.SpecUrl)
+
+		}
+
 		return
 	},
 }

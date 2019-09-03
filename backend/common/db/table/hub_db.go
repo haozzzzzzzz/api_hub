@@ -56,11 +56,11 @@ func (m *HubDB) AhDocAddTx(
 	strSql := `
 		INSERT INTO ah_doc
 		(
-			doc_id, title, spec_url, category_id, author_id, post_status, update_time, create_time
+			doc_id, title, spec_url, spec_content, category_id, author_id, post_status, update_time, create_time
 		)
 		VALUES
 		(
-			:doc_id, :title, :spec_url, :category_id, :author_id, :post_status, :update_time, :create_time
+			:doc_id, :title, :spec_url, :spec_content, :category_id, :author_id, :post_status, :update_time, :create_time
 		)
 	`
 	result, err := tx.NamedExec(strSql, doc)
@@ -82,6 +82,7 @@ func (m *HubDB) AhDocUpdate(
 	docId uint32,
 	title string,
 	specUrl string,
+	specContent string,
 	categoryId string,
 	postStatus uint8,
 	updateTime int64,
@@ -91,6 +92,7 @@ func (m *HubDB) AhDocUpdate(
 		SET
 			title=?,
 			spec_url=?,
+			spec_content=?,
 			category_id=?,
 			post_status=?,
 			update_time=?
@@ -98,7 +100,7 @@ func (m *HubDB) AhDocUpdate(
 			doc_id=?
 		LIMIT 1
 	`
-	result, err = m.Exec(strSql, title, specUrl, categoryId, postStatus, updateTime)
+	result, err = m.Exec(strSql, title, specUrl, specContent, categoryId, postStatus, updateTime)
 	if nil != err {
 		logrus.Errorf("update ah_doc failed. error: %s.", err)
 		return
@@ -113,6 +115,7 @@ func (m *HubDB) AhDocGet(docId uint32) (doc *model.AhDoc, err error) {
 			doc_id,
 			title,
 			spec_url,
+			spec_content,
 			category_id,
 			author_id,
 			post_status,
@@ -123,7 +126,7 @@ func (m *HubDB) AhDocGet(docId uint32) (doc *model.AhDoc, err error) {
 		WHERE
 			doc_id=?
 	`
-	err = m.Get(doc, strSql)
+	err = m.Get(doc, strSql, docId)
 	if nil != err && err != sql.ErrNoRows {
 		logrus.Errorf("get ah doc failed. error: %s.", err)
 		return
@@ -131,9 +134,8 @@ func (m *HubDB) AhDocGet(docId uint32) (doc *model.AhDoc, err error) {
 	return
 }
 
-func (m *HubDB) AhDocGetByTitleSpecUrl(
+func (m *HubDB) AhDocGetByTitle(
 	title string,
-	specUrl string,
 ) (
 	doc *model.AhDoc,
 	err error,
@@ -152,9 +154,10 @@ func (m *HubDB) AhDocGetByTitleSpecUrl(
 		FROM
 			ah_doc
 		WHERE
-			title=? AND spec_url=?
+			title=?
+		LIMIT 1
 	`
-	err = m.Get(doc, strSql, title, specUrl)
+	err = m.Get(doc, strSql, title)
 	if nil != err && err != sql.ErrNoRows {
 		logrus.Errorf("get ah doc failed. error: %s.", err)
 		return

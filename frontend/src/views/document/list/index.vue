@@ -57,7 +57,7 @@
         <el-pagination
                 background
                 layout="total, prev, pager, next"
-                hide-on-single-page="true"
+                hide-on-single-page
                 @current-change="handleCurrentChange"
                 :page-size="pageSize"
                 :total="count">
@@ -85,7 +85,7 @@
                     tabData: {
                         doc_id: row.doc_id,
                         title: row.title,
-                        spec_url: row.spec_url
+                        spec_url: apis.docDetailSpecUrl(row.doc_id)
                     }
                 })
             },
@@ -105,13 +105,35 @@
                         let unixCreateTime = item.create_time;
                         let mTime = moment.unix(unixCreateTime);
                         let strTime  =mTime.format("YYYY-MM-DD HH:mm:ss");
+
+                        let postStatus = "unknown";
+                        const PostStatusNotPublished = 0;
+                        const PostStatusPublished = 1;
+                        const PostStatusDeleted = 2;
+                        switch (item.post_status) {
+                            case PostStatusNotPublished:
+                                postStatus = "not_published";
+                                break;
+                            case PostStatusPublished:
+                                postStatus = "published";
+                                break;
+
+                            case PostStatusDeleted:
+                                postStatus = "deleted";
+                                break;
+
+                            default:
+                                break
+
+                        }
+
                         this.items.push({
                             doc_id: item.doc_id,
                             title: item.title,
                             category_name: item.category_name,
                             author_name: item.author_name,
                             spec_url: item.spec_url,
-                            post_status: item.post_status,
+                            post_status: postStatus,
                             create_time: strTime
                         });
                     }

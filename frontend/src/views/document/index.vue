@@ -52,7 +52,7 @@
                     this.tabOpen({
                         tabType: 'detail',
                         tabData: {
-                            doc_id: ''
+                            doc_id: 'new_tab' // required for identifying
                         }
                     })
 
@@ -79,8 +79,10 @@
             tabOpen(data) {
                 let tabType = data.tabType;
                 let tabData = data.tabData;
+
                 switch (tabType) {
                     case 'detail':
+                    {
                         let existTabName = "";
                         for( let tab of this.editableTabs) {
                             if (tab.tabType === tabType && tab.tabData.doc_id === tabData.doc_id) { // 存在
@@ -104,7 +106,7 @@
                         });
 
                         this.editableTabsValue = newTabName;
-
+                    }
                 }
             }
         }

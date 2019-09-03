@@ -73,5 +73,9 @@ export default {
         }).catch(function (err) {
             handleResponse(comp, null, err, callback);
         });
+    },
+
+    docDetailSpecUrl(docId) {
+        return config.backendApi + '/api/api_hub/v1/doc/detail/spec/' + docId
     }
 }

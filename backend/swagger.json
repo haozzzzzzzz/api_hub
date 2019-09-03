@@ -5,14 +5,39 @@
 	],
 	"swagger": "2.0",
 	"info": {
-		"description": "api hub backend api",
-		"title": "[sample]Api Hub Backend Api",
+		"description": "Api hub backend api specication",
+		"title": "Api hub backend api",
 		"contact": {
 			"name": "luohao"
 		},
-		"version": "0.1"
+		"version": "1.0"
 	},
+	"host": "127.0.0.1:18000",
 	"paths": {
+		"/api/api_hub/v1/doc/detail/spec/{doc_id}": {
+			"get": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"operationId": "GET-/api/api_hub/v1/doc/detail/spec/{doc_id}",
+				"parameters": [
+					{
+						"type": "integer",
+						"name": "doc_id",
+						"in": "path",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					}
+				}
+			}
+		},
 		"/api/api_hub/v1/doc/doc/add": {
 			"post": {
 				"consumes": [
@@ -37,12 +62,13 @@
 										"category_id"
 									]
 								},
+								"spec_content": {
+									"description": "swagger content",
+									"type": "string"
+								},
 								"spec_url": {
 									"description": "swagger.json url",
-									"type": "string",
-									"required": [
-										"spec_url"
-									]
+									"type": "string"
 								},
 								"title": {
 									"description": "文档标题",
@@ -102,12 +128,12 @@
 						"schema": {
 							"type": "object",
 							"properties": {
+								"spec_content": {
+									"type": "string"
+								},
 								"spec_url": {
 									"description": "swagger.json url",
-									"type": "string",
-									"required": [
-										"spec_url"
-									]
+									"type": "string"
 								},
 								"title": {
 									"description": "标题",
@@ -238,6 +264,30 @@
 								}
 							}
 						}
+					}
+				}
+			}
+		},
+		"/api/api_hub/v1/request/proxy/get": {
+			"get": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"operationId": "GET-/api/api_hub/v1/request/proxy/get",
+				"parameters": [
+					{
+						"type": "string",
+						"name": "source",
+						"in": "query",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
 					}
 				}
 			}

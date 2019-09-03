@@ -1,3 +1,32 @@
+- api_handler_func: DocDetailSpec
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+  api_handler_package: doc
+  package_exported: backend/api/doc
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
+  package_rel_alias: doc
+  http_method: GET
+  relative_paths:
+  - /api/api_hub/v1/doc/detail/spec/:doc_id
+  path_data:
+    type_class: struct
+    name: PathData
+    fields:
+    - name: DocId
+      type_name: uint32
+      tags:
+        binding: required
+        form: doc_id
+        json: doc_id
+      typespec:
+        type_class: basic
+        name: uint32
+      description: ""
+    description: ""
+  query_data: null
+  post_data: null
+  response_data: null
+  summary: ""
+  description: ""
 - api_handler_func: DocAdd
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
   api_handler_package: doc
@@ -36,13 +65,21 @@
     - name: SpecUrl
       type_name: string
       tags:
-        binding: required
         form: spec_url
         json: spec_url
       typespec:
         type_class: basic
         name: string
       description: swagger.json url
+    - name: SpecContent
+      type_name: string
+      tags:
+        form: spec_content
+        json: spec_content
+      typespec:
+        type_class: basic
+        name: string
+      description: swagger content
     description: ""
   response_data:
     type_class: struct
@@ -87,13 +124,21 @@
     - name: SpecUrl
       type_name: string
       tags:
-        binding: required
         form: spec_url
         json: spec_url
       typespec:
         type_class: basic
         name: string
       description: swagger.json url
+    - name: SpecContent
+      type_name: string
+      tags:
+        form: spec_content
+        json: spec_content
+      typespec:
+        type_class: basic
+        name: string
+      description: ""
     description: ""
   response_data:
     type_class: struct
@@ -229,5 +274,34 @@
           description: ""
       description: 文档记录
     description: ""
+  summary: ""
+  description: ""
+- api_handler_func: ProxyGet
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/proxy/api_proxy.go
+  api_handler_package: proxy
+  package_exported: backend/api/proxy
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/proxy
+  package_rel_alias: proxy
+  http_method: GET
+  relative_paths:
+  - /api/api_hub/v1/request/proxy/get
+  path_data: null
+  query_data:
+    type_class: struct
+    name: QueryData
+    fields:
+    - name: Source
+      type_name: string
+      tags:
+        binding: required
+        form: source
+        json: source
+      typespec:
+        type_class: basic
+        name: string
+      description: ""
+    description: ""
+  post_data: null
+  response_data: null
   summary: ""
   description: ""

@@ -6,7 +6,7 @@
 	"swagger": "2.0",
 	"info": {
 		"description": "Api hub backend api specication",
-		"title": "Api hub backend api",
+		"title": "Api",
 		"contact": {
 			"name": "luohao"
 		},

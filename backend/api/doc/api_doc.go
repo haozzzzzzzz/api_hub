@@ -133,8 +133,9 @@ var CheckAndAddDoc ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		// request post data
 		type PostData struct {
-			Title       string `json:"title" form:"title" binding:"required"` // 标题
-			SpecUrl     string `json:"spec_url" form:"spec_url"`              // swagger.json url
+			Title       string `json:"title" form:"title" binding:"required"`             // 标题
+			CategoryId  uint32 `json:"category_id" form:"category_id" binding:"required"` // 分类ID
+			SpecUrl     string `json:"spec_url" form:"spec_url"`                          // swagger.json url
 			SpecContent string `json:"spec_content" form:"spec_content"`
 		}
 		postData := PostData{}
@@ -178,7 +179,7 @@ var CheckAndAddDoc ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 			Title:       postData.Title,
 			SpecUrl:     postData.SpecUrl,
 			SpecContent: postData.SpecContent,
-			CategoryId:  model.DefaultCategoryId,
+			CategoryId:  postData.CategoryId,
 			AuthorId:    ses.Auth.AccountId,
 			PostStatus:  model.PostStatusPublished,
 			UpdateTime:  now,

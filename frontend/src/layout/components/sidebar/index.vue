@@ -24,10 +24,10 @@
                     <i class="el-icon-document"></i>
                     <span slot="title">Document</span>
                 </el-menu-item>
-                <el-menu-item index="/mock">
-                    <i class="el-icon-connection"></i>
-                    <span slot="title">Mock</span>
-                </el-menu-item>
+<!--                <el-menu-item index="/mock">-->
+<!--                    <i class="el-icon-connection"></i>-->
+<!--                    <span slot="title">Mock</span>-->
+<!--                </el-menu-item>-->
 
 <!--                <el-menu-item>-->
 <!--                    <a class="menu-link" href="https://github.com/haozzzzzzzz/api_hub" target="_blank" ref="noopener">-->

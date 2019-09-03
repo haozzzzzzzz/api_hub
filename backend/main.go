@@ -2,7 +2,7 @@ package main
 
 import (
 	"backend/api"
-	"backend/config"
+	"backend/common/config"
 	"fmt"
 	"time"
 

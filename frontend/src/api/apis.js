@@ -1,8 +1,8 @@
 import axios from "axios"
-import config from "@/config/config"
+import config from "@/config/config.json"
 
 const client = axios.create({
-    baseURL: config.backendApi,
+    baseURL: config.backend_api,
     timeout: 10000,
 });
 
@@ -76,6 +76,6 @@ export default {
     },
 
     docDetailSpecUrl(docId) {
-        return config.backendApi + '/api/api_hub/v1/doc/detail/spec/' + docId
+        return config.backend_api + '/api/api_hub/v1/doc/detail/spec/' + docId
     }
 }

@@ -1,3 +1,18 @@
+- api_handler_func: InfoSayHi
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/info/api_info.go
+  api_handler_package: info
+  package_exported: backend/api/info
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/info
+  package_rel_alias: info
+  http_method: GET
+  relative_paths:
+  - /api/api_hub/info/reply/say_hi
+  path_data: null
+  query_data: null
+  post_data: null
+  response_data: null
+  summary: ""
+  description: ""
 - api_handler_func: DocDetailSpec
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
   api_handler_package: doc
@@ -51,7 +66,7 @@
       typespec:
         type_class: basic
         name: string
-      description: 文档标题
+      description: 标题
     - name: CategoryId
       type_name: uint32
       tags:
@@ -79,7 +94,7 @@
       typespec:
         type_class: basic
         name: string
-      description: swagger content
+      description: ""
     description: ""
   response_data:
     type_class: struct
@@ -120,7 +135,17 @@
       typespec:
         type_class: basic
         name: string
-      description: 标题
+      description: 文档标题
+    - name: CategoryId
+      type_name: uint32
+      tags:
+        binding: required
+        form: category_id
+        json: category_id
+      typespec:
+        type_class: basic
+        name: uint32
+      description: 分类ID
     - name: SpecUrl
       type_name: string
       tags:
@@ -138,7 +163,7 @@
       typespec:
         type_class: basic
         name: string
-      description: ""
+      description: swagger content
     description: ""
   response_data:
     type_class: struct

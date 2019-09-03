@@ -28,12 +28,14 @@
 <!--                    <i class="el-icon-connection"></i>-->
 <!--                    <span slot="title">Mock</span>-->
 <!--                </el-menu-item>-->
-<!--                <el-menu-item>-->
-<!--                    <a class="menu-link" href="https://github.com/haozzzzzzzz/api_hub" target="_blank" ref="noopener">-->
-<!--                        <i class="el-icon-service"></i>-->
-<!--                        <span slot="title">Github</span>-->
-<!--                    </a>-->
-<!--                </el-menu-item>-->
+
+                <el-menu-item>
+                    <a class="menu-link" href="https://github.com/haozzzzzzzz/api_hub" target="_blank" ref="noopener">
+                        <i class="el-icon-service"></i>
+                        <span slot="title">Github</span>
+                    </a>
+                </el-menu-item>
+                
             </el-menu>
         </el-scrollbar>
     </div>

@@ -13,6 +13,7 @@ import (
 	"github.com/haozzzzzzzz/go-rapid-development/web/ginbuilder"
 )
 
+// 文档列表
 var DocList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "GET",
 	RelativePaths: []string{
@@ -21,8 +22,8 @@ var DocList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	Handle: func(ctx *ginbuilder.Context) (err error) {
 		// request query data
 		type QueryData struct {
-			Page  uint32 `json:"page" form:"page" binding:"required"`
-			Limit uint8  `json:"limit" form:"limit" binding:"required"`
+			Page  uint32 `json:"page" form:"page" binding:"required"`   // 分页ID
+			Limit uint8  `json:"limit" form:"limit" binding:"required"` // 分页大小
 		}
 		queryData := QueryData{}
 		retCode, err := ctx.BindQueryData(&queryData)
@@ -33,8 +34,8 @@ var DocList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		// response data
 		type ResponseData struct {
-			Count int64                   `json:"count"`
-			Items []*business.DocListItem `json:"items"`
+			Count int64                   `json:"count"` // 记录数目
+			Items []*business.DocListItem `json:"items"` // 文档记录
 		}
 		respData := &ResponseData{
 			Items: make([]*business.DocListItem, 0),
@@ -61,6 +62,7 @@ var DocList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	},
 }
 
+// 添加文档
 var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{
@@ -71,9 +73,9 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		// request post data
 		type PostData struct {
-			Title      string `json:"title" form:"title" binding:"required"`
-			CategoryId uint32 `json:"category_id" form:"category_id" binding:"required"`
-			SpecUrl    string `json:"spec_url" form:"spec_url" binding:"required"`
+			Title      string `json:"title" form:"title" binding:"required"`             // 文档标题
+			CategoryId uint32 `json:"category_id" form:"category_id" binding:"required"` // 分类ID
+			SpecUrl    string `json:"spec_url" form:"spec_url" binding:"required"`       // swagger.json url
 		}
 		postData := PostData{}
 		retCode, err := ctx.BindPostData(&postData)
@@ -84,7 +86,7 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		// response data
 		type ResponseData struct {
-			NewDocId int64 `json:"new_doc_id"`
+			NewDocId int64 `json:"new_doc_id"` // 新建的文档ID
 		}
 		respData := &ResponseData{}
 
@@ -111,6 +113,7 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	},
 }
 
+// 检查并且创建文档
 var CheckAndAddDoc ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{
@@ -121,8 +124,8 @@ var CheckAndAddDoc ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		// request post data
 		type PostData struct {
-			Title   string `json:"title" form:"title" binding:"required"`
-			SpecUrl string `json:"spec_url" form:"spec_url" binding:"required"`
+			Title   string `json:"title" form:"title" binding:"required"`       // 标题
+			SpecUrl string `json:"spec_url" form:"spec_url" binding:"required"` // swagger.json url
 		}
 		postData := PostData{}
 		retCode, err := ctx.BindPostData(&postData)
@@ -133,7 +136,7 @@ var CheckAndAddDoc ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		// response data
 		type ResponseData struct {
-			DocId int64 `json:"doc_id"`
+			DocId int64 `json:"doc_id"` // 文档ID
 		}
 		respData := &ResponseData{}
 

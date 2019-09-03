@@ -1,0 +1,233 @@
+- api_handler_func: DocAdd
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+  api_handler_package: doc
+  package_exported: backend/api/doc
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
+  package_rel_alias: doc
+  http_method: POST
+  relative_paths:
+  - /api/api_hub/v1/doc/doc/add
+  path_data: null
+  query_data: null
+  post_data:
+    type_class: struct
+    name: PostData
+    fields:
+    - name: Title
+      type_name: string
+      tags:
+        binding: required
+        form: title
+        json: title
+      typespec:
+        type_class: basic
+        name: string
+      description: 文档标题
+    - name: CategoryId
+      type_name: uint32
+      tags:
+        binding: required
+        form: category_id
+        json: category_id
+      typespec:
+        type_class: basic
+        name: uint32
+      description: 分类ID
+    - name: SpecUrl
+      type_name: string
+      tags:
+        binding: required
+        form: spec_url
+        json: spec_url
+      typespec:
+        type_class: basic
+        name: string
+      description: swagger.json url
+    description: ""
+  response_data:
+    type_class: struct
+    name: ResponseData
+    fields:
+    - name: NewDocId
+      type_name: int64
+      tags:
+        json: new_doc_id
+      typespec:
+        type_class: basic
+        name: int64
+      description: 新建的文档ID
+    description: ""
+  summary: ""
+  description: ""
+- api_handler_func: CheckAndAddDoc
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+  api_handler_package: doc
+  package_exported: backend/api/doc
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
+  package_rel_alias: doc
+  http_method: POST
+  relative_paths:
+  - /api/api_hub/v1/doc/doc/check_add
+  path_data: null
+  query_data: null
+  post_data:
+    type_class: struct
+    name: PostData
+    fields:
+    - name: Title
+      type_name: string
+      tags:
+        binding: required
+        form: title
+        json: title
+      typespec:
+        type_class: basic
+        name: string
+      description: 标题
+    - name: SpecUrl
+      type_name: string
+      tags:
+        binding: required
+        form: spec_url
+        json: spec_url
+      typespec:
+        type_class: basic
+        name: string
+      description: swagger.json url
+    description: ""
+  response_data:
+    type_class: struct
+    name: ResponseData
+    fields:
+    - name: DocId
+      type_name: int64
+      tags:
+        json: doc_id
+      typespec:
+        type_class: basic
+        name: int64
+      description: 文档ID
+    description: ""
+  summary: ""
+  description: ""
+- api_handler_func: DocList
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+  api_handler_package: doc
+  package_exported: backend/api/doc
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
+  package_rel_alias: doc
+  http_method: GET
+  relative_paths:
+  - /api/api_hub/v1/doc/doc/list
+  path_data: null
+  query_data:
+    type_class: struct
+    name: QueryData
+    fields:
+    - name: Page
+      type_name: uint32
+      tags:
+        binding: required
+        form: page
+        json: page
+      typespec:
+        type_class: basic
+        name: uint32
+      description: 分页ID
+    - name: Limit
+      type_name: uint8
+      tags:
+        binding: required
+        form: limit
+        json: limit
+      typespec:
+        type_class: basic
+        name: uint8
+      description: 分页大小
+    description: ""
+  post_data: null
+  response_data:
+    type_class: struct
+    name: ResponseData
+    fields:
+    - name: Count
+      type_name: int64
+      tags:
+        json: count
+      typespec:
+        type_class: basic
+        name: int64
+      description: 记录数目
+    - name: Items
+      type_name: '[]DocListItem'
+      tags:
+        json: items
+      typespec:
+        type_class: array
+        name: '[]DocListItem'
+        elt_name: DocListItem
+        elt_spec:
+          type_class: struct
+          name: DocListItem
+          fields:
+          - name: DocId
+            type_name: uint32
+            tags:
+              json: doc_id
+            typespec:
+              type_class: basic
+              name: uint32
+            description: 文档ID
+          - name: Title
+            type_name: string
+            tags:
+              json: title
+            typespec:
+              type_class: basic
+              name: string
+            description: 文档标题
+          - name: CategoryName
+            type_name: string
+            tags:
+              json: category_name
+            typespec:
+              type_class: basic
+              name: string
+            description: 分类名称
+          - name: AuthorName
+            type_name: string
+            tags:
+              json: author_name
+            typespec:
+              type_class: basic
+              name: string
+            description: 作者名称
+          - name: SpecUrl
+            type_name: string
+            tags:
+              json: spec_url
+            typespec:
+              type_class: basic
+              name: string
+            description: swagger.json url
+          - name: PostStatus
+            type_name: uint8
+            tags:
+              json: post_status
+            typespec:
+              type_class: basic
+              name: uint8
+            description: 状态
+          - name: CreateTime
+            type_name: int64
+            tags:
+              json: create_time
+            typespec:
+              type_class: basic
+              name: int64
+            description: 创建时间
+          description: ""
+      description: 文档记录
+    description: ""
+  summary: ""
+  description: ""

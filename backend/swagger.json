@@ -1,0 +1,246 @@
+{
+	"schemes": [
+		"http",
+		"https"
+	],
+	"swagger": "2.0",
+	"info": {
+		"description": "api hub backend api",
+		"title": "Api Hub Backend Api",
+		"contact": {
+			"name": "luohao@xunlei.com"
+		},
+		"version": "0.1"
+	},
+	"paths": {
+		"/api/api_hub/v1/doc/doc/add": {
+			"post": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"operationId": "POST-/api/api_hub/v1/doc/doc/add",
+				"parameters": [
+					{
+						"name": "PostData",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"type": "object",
+							"properties": {
+								"category_id": {
+									"description": "分类ID",
+									"type": "integer",
+									"required": [
+										"category_id"
+									]
+								},
+								"spec_url": {
+									"description": "swagger.json url",
+									"type": "string",
+									"required": [
+										"spec_url"
+									]
+								},
+								"title": {
+									"description": "文档标题",
+									"type": "string",
+									"required": [
+										"title"
+									]
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"data": {
+									"description": "result data",
+									"type": "object",
+									"properties": {
+										"new_doc_id": {
+											"description": "新建的文档ID",
+											"type": "integer"
+										}
+									}
+								},
+								"msg": {
+									"description": "result message",
+									"type": "string"
+								},
+								"ret": {
+									"description": "result code",
+									"type": "integer"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/api_hub/v1/doc/doc/check_add": {
+			"post": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"operationId": "POST-/api/api_hub/v1/doc/doc/check_add",
+				"parameters": [
+					{
+						"name": "PostData",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"type": "object",
+							"properties": {
+								"spec_url": {
+									"description": "swagger.json url",
+									"type": "string",
+									"required": [
+										"spec_url"
+									]
+								},
+								"title": {
+									"description": "标题",
+									"type": "string",
+									"required": [
+										"title"
+									]
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"data": {
+									"description": "result data",
+									"type": "object",
+									"properties": {
+										"doc_id": {
+											"description": "文档ID",
+											"type": "integer"
+										}
+									}
+								},
+								"msg": {
+									"description": "result message",
+									"type": "string"
+								},
+								"ret": {
+									"description": "result code",
+									"type": "integer"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/api_hub/v1/doc/doc/list": {
+			"get": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"operationId": "GET-/api/api_hub/v1/doc/doc/list",
+				"parameters": [
+					{
+						"type": "integer",
+						"description": "分页ID",
+						"name": "page",
+						"in": "query",
+						"required": true
+					},
+					{
+						"type": "integer",
+						"description": "分页大小",
+						"name": "limit",
+						"in": "query",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"data": {
+									"description": "result data",
+									"type": "object",
+									"properties": {
+										"count": {
+											"description": "记录数目",
+											"type": "integer"
+										},
+										"items": {
+											"description": "文档记录",
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"author_name": {
+														"description": "作者名称",
+														"type": "string"
+													},
+													"category_name": {
+														"description": "分类名称",
+														"type": "string"
+													},
+													"create_time": {
+														"description": "创建时间",
+														"type": "integer"
+													},
+													"doc_id": {
+														"description": "文档ID",
+														"type": "integer"
+													},
+													"post_status": {
+														"description": "状态",
+														"type": "integer"
+													},
+													"spec_url": {
+														"description": "swagger.json url",
+														"type": "string"
+													},
+													"title": {
+														"description": "文档标题",
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								},
+								"msg": {
+									"description": "result message",
+									"type": "string"
+								},
+								"ret": {
+									"description": "result code",
+									"type": "integer"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

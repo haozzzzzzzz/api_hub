@@ -18,13 +18,13 @@ func NewBsDoc(ctx context.Context) *BsDoc {
 }
 
 type DocListItem struct {
-	DocId        uint32 `json:"doc_id"`
-	Title        string `json:"title"`
-	CategoryName string `json:"category_name"`
-	AuthorName   string `json:"author_name"`
-	SpecUrl      string `json:"spec_url"`
-	PostStatus   uint8  `json:"post_status"`
-	CreateTime   int64  `json:"create_time"`
+	DocId        uint32 `json:"doc_id"`        // 文档ID
+	Title        string `json:"title"`         // 文档标题
+	CategoryName string `json:"category_name"` // 分类名称
+	AuthorName   string `json:"author_name"`   // 作者名称
+	SpecUrl      string `json:"spec_url"`      // swagger.json url
+	PostStatus   uint8  `json:"post_status"`   // 状态
+	CreateTime   int64  `json:"create_time"`   // 创建时间
 }
 
 func (m *BsDoc) DocList(

@@ -6,9 +6,9 @@
 	"swagger": "2.0",
 	"info": {
 		"description": "api hub backend api",
-		"title": "Api Hub Backend Api",
+		"title": "[sample]Api Hub Backend Api",
 		"contact": {
-			"name": "luohao@xunlei.com"
+			"name": "luohao"
 		},
 		"version": "0.1"
 	},

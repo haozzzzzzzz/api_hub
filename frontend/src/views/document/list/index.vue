@@ -57,6 +57,7 @@
         <el-pagination
                 background
                 layout="total, prev, pager, next"
+                hide-on-single-page="true"
                 @current-change="handleCurrentChange"
                 :page-size="pageSize"
                 :total="count">
@@ -95,7 +96,7 @@
                         return
                     }
 
-                    this.count = data.count;
+                    this.count = data.data.count;
 
                     let items = data.data.items;
 

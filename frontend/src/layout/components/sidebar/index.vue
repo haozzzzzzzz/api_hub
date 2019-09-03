@@ -35,7 +35,7 @@
                         <span slot="title">Github</span>
                     </a>
                 </el-menu-item>
-                
+
             </el-menu>
         </el-scrollbar>
     </div>

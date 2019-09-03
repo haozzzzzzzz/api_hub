@@ -2,6 +2,7 @@ package api
 
 import (
 	doc "backend/api/doc"
+	proxy "backend/api/proxy"
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,5 +11,6 @@ func BindRouters(engine *gin.Engine) (err error) {
 	engine.Handle("POST", "/api/api_hub/v1/doc/doc/add", doc.DocAdd.GinHandler)
 	engine.Handle("POST", "/api/api_hub/v1/doc/doc/check_add", doc.CheckAndAddDoc.GinHandler)
 	engine.Handle("GET", "/api/api_hub/v1/doc/doc/list", doc.DocList.GinHandler)
+	engine.Handle("GET", "/api/api_hub/v1/request/proxy/get", proxy.ProxyGet.GinHandler)
 	return
 }

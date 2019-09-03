@@ -54,6 +54,8 @@ github.com/haozzzzzzzz/go-rapid-development v0.1.13 h1:wxBBDqKUGLoi9BZxJ05RSpIKc
 github.com/haozzzzzzzz/go-rapid-development v0.1.13/go.mod h1:+l0MPyOZZosQWtqdexXmRbh+xH/4qF0oh9fxpgsITJw=
 github.com/haozzzzzzzz/go-rapid-development v0.1.18 h1:xbaHL2VBnN8yfNtHrdd5SpUsoXUUeLeZukWAub1kLaw=
 github.com/haozzzzzzzz/go-rapid-development v0.1.18/go.mod h1:Tji/0f8vl0cgbLYQQEf4lnJYM8n1TspMOyjW9g0JoHY=
+github.com/haozzzzzzzz/go-rapid-development v0.1.19 h1:AeD/sDdmV293y3Hg6Sx4hR89tCrfkTPDYrX3VtcSgdA=
+github.com/haozzzzzzzz/go-rapid-development v0.1.19/go.mod h1:Tji/0f8vl0cgbLYQQEf4lnJYM8n1TspMOyjW9g0JoHY=
 github.com/hashicorp/consul/api v1.1.0 h1:BNQPM9ytxj6jbjjdRPioQ94T6YXriSopn0i8COv6SRA=
 github.com/hashicorp/consul/api v1.1.0/go.mod h1:VmuI/Lkw1nC05EYQWNKwWGbkg+FbDBtguAZLlVdkD9Q=
 github.com/hashicorp/consul/sdk v0.1.1/go.mod h1:VKf9jXwCTEY1QZP2MOLRhb5i/I/ssyNV1vwHyQBF0x8=
@@ -170,6 +172,7 @@ golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod h1:t9HGtf8HONx5eT2rtn
 golang.org/x/net v0.0.0-20190503192946-f4e77d36d62c/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
 golang.org/x/net v0.0.0-20190603091049-60506f45cf65/go.mod h1:HSz+uSET+XFnRR8LxR5pz3Of3rY3CfYBVs4xY44aLks=
 golang.org/x/net v0.0.0-20190613194153-d28f0bde5980/go.mod h1:z5CRVTTTmAJ677TzLLGU+0bjPO0LkuOLi4/5GtJWs/s=
+golang.org/x/net v0.0.0-20190724013045-ca1201d0de80 h1:Ao/3l156eZf2AW5wK8a7/smtodRU+gha3+BeqJ69lRk=
 golang.org/x/net v0.0.0-20190724013045-ca1201d0de80/go.mod h1:z5CRVTTTmAJ677TzLLGU+0bjPO0LkuOLi4/5GtJWs/s=
 golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sync v0.0.0-20181108010431-42b317875d0f/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=

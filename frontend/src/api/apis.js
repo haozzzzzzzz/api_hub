@@ -3,10 +3,10 @@ import config from "@/config/config"
 
 const client = axios.create({
     baseURL: config.backendApi,
-    timeout: 5000,
+    timeout: 10000,
 });
 
-function handleResponse(comp, respData, err, callback) {
+function handleResponse(comp, resp, err, callback) {
     if (err !== null) {
         let errMsg = '';
         if (err.response) {
@@ -22,25 +22,28 @@ function handleResponse(comp, respData, err, callback) {
             title: '请求出错',
             message: errMsg
         });
-        callback(respData, err);
+        callback(null, err);
         return
     }
 
-    if (!respData) {
+    if (!resp) {
         comp.$notify({
             type: 'error',
             title: '请求出错',
             message: err.toString()
         });
-        callback(respData, err);
+        callback(null, err);
         return
     }
 
+    let respData = resp.data;
     if (respData.ret !== 0) {
+        // eslint-disable-next-line no-console
+        console.log(respData);
         comp.$notify({
            type: 'error',
            title: '接口返回错误',
-           message: 'ret: '  + respData.ret + ', msg: ' + respData.message
+           message: 'ret: '  + respData.ret + ', msg: ' + respData.msg
         });
         callback(respData, err);
         return
@@ -50,9 +53,21 @@ function handleResponse(comp, respData, err, callback) {
 }
 
 export default {
+    /**
+     * api document list
+     * @param comp component
+     * @param pageId page id
+     * @param limit page limit size
+     * @param callback callback function
+     */
     docList(comp, pageId, limit, callback) {
         client({
-            url: '/api/api_hub/v1/doc/doc/list'
+            method: 'get',
+            url: '/api/api_hub/v1/doc/doc/list',
+            params: {
+                page: pageId,
+                limit: limit,
+            }
         }).then(function (response) {
             handleResponse(comp, response, null, callback);
         }).catch(function (err) {

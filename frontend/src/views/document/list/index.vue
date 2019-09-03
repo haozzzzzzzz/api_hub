@@ -24,17 +24,20 @@
                     label="category"
                     width="100"
             ></el-table-column>
-            <el-table-column
-                    prop="tags"
-                    label="tags"
-                    width="200"
-            >
-                <template slot-scope="scope">
-                    <el-tag effect="light">tag 1</el-tag>
-                    <el-tag effect="light">tag 2</el-tag>
-                    <el-tag effect="light">tag 3</el-tag>
-                </template>
-            </el-table-column>
+
+<!--            tags-->
+<!--            <el-table-column-->
+<!--                    prop="tags"-->
+<!--                    label="tags"-->
+<!--                    width="200"-->
+<!--            >-->
+<!--                <template slot-scope="scope">-->
+<!--                    <el-tag effect="light">tag 1</el-tag>-->
+<!--                    <el-tag effect="light">tag 2</el-tag>-->
+<!--                    <el-tag effect="light">tag 3</el-tag>-->
+<!--                </template>-->
+<!--            </el-table-column>-->
+
             <el-table-column
                     prop="author_name"
                     label="author"
@@ -48,24 +51,29 @@
             <el-table-column
                     prop="create_time"
                     label="time"
-                    width="100"
+                    width="200"
             ></el-table-column>
         </el-table>
         <el-pagination
                 background
                 layout="total, prev, pager, next"
-                :total="1000">
+                @current-change="handleCurrentChange"
+                :page-size="pageSize"
+                :total="count">
         </el-pagination>
     </div>
 </template>
 
 <script>
     import apis from '@/api/apis'
+    import moment from "moment"
 
     export default {
         name: "document_list",
         data(){
             return {
+                pageSize: 20,
+                count: 0,
                 items: []
             }
         },
@@ -79,41 +87,42 @@
                         spec_url: row.spec_url
                     }
                 })
+            },
+            handleCurrentChange: function (page) {
+                this.items = [];
+                apis.docList(this, page, this.pageSize, (data, err) => {
+                    if (err) {
+                        return
+                    }
+
+                    this.count = data.count;
+
+                    let items = data.data.items;
+
+                    for (let i in items) {
+                        let item = items[i];
+                        let unixCreateTime = item.create_time;
+                        let mTime = moment.unix(unixCreateTime);
+                        let strTime  =mTime.format("YYYY-MM-DD HH:mm:ss");
+                        this.items.push({
+                            doc_id: item.doc_id,
+                            title: item.title,
+                            category_name: item.category_name,
+                            author_name: item.author_name,
+                            spec_url: item.spec_url,
+                            post_status: item.post_status,
+                            create_time: strTime
+                        });
+                    }
+
+
+                    // eslint-disable-next-line no-console
+                    console.log(data, err, this.items);
+                });
             }
         },
         mounted() {
-            if (this.items.length === 0 ) {
-                apis.docList(this, 1, 20, (data, err) => {
-                    let items = [
-                        {
-                            doc_id: '1',
-                            title: 'test title',
-                            category_name: 'api',
-                            author_name: 'author name',
-                            spec_url: '',
-                            post_status: '1',
-                            create_time: '2019-01-01'
-                        },
-                        {
-                            doc_id: '2',
-                            title: 'test title',
-                            category_name: 'api',
-                            author_name: 'author name',
-                            spec_url: '',
-                            post_status: '1',
-                            create_time: '2019-01-01'
-                        }
-                    ];
-
-                    this.items.push(...items);
-                    console.log(this.items);
-
-                    console.log(data);
-                    console.log(err);
-                });
-            }
-
-
+            this.handleCurrentChange(1)
         }
     }
 </script>

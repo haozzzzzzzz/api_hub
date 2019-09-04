@@ -6,7 +6,7 @@ CREATE TABLE ah_doc
     doc_id int(10) unsigned NOT NULL AUTO_INCREMENT,
     title varchar(255) NOT NULL COMMENT 'doc title',
     spec_url varchar(500) NOT NULL DEFAULT '' COMMENT 'api specification url',
-    spec_content text NOT NULL COMMENT 'api specification content'
+    spec_content text NOT NULL COMMENT 'api specification content',
     category_id int(10) unsigned NOT NULL DEFAULT '1' COMMENT 'category id',
     author_id int(10) unsigned NOT NULL COMMENT 'author id',
     post_status tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'post status',

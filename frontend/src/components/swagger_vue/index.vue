@@ -7,7 +7,7 @@
 <script>
     import SwaggerUI from 'swagger-ui'
     import 'swagger-ui/dist/swagger-ui.css'
-    import config from '@/../public/config.json'
+    import config from '@/config/config.js'
 
     export default {
         name: "swagger_vue",
@@ -15,7 +15,7 @@
         mounted() {
             SwaggerUI({
                 dom_id: "#"+this.swagger_data.id,
-                url: this.swagger_data.url || config.default_swagger_json_url,
+                url: this.swagger_data.url || config.AppConfig.default_swagger_json_url,
             });
         }
     }

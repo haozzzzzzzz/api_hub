@@ -1,6 +1,6 @@
 driver: mysql
 address: localhost
-source: "root:123456@tcp(127.0.0.1:3306)/api_hub?parseTime=true&loc=Local&charset=utf8mb4"
+source: "root:123456@tcp(host.docker.internal:3306)/api_hub?parseTime=true&loc=Local&charset=utf8mb4"
 max_idle: 5
 max_open: 5
 max_lifetime_seconds: 3600

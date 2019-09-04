@@ -1,8 +1,8 @@
 import axios from "axios"
-import config from "@/../public/config.json"
+import config from "@/config/config.js"
 
 const client = axios.create({
-    baseURL: config.backend_api,
+    baseURL: config.AppConfig.backend_api,
     timeout: 10000,
 });
 

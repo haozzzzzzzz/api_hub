@@ -236,6 +236,9 @@ func (m *HubDB) AhAccountGet(
 
 func (m *HubDB) AhAccountBatch(accIds []uint32) (mAccount map[uint32]*model.AhAccount, err error) {
 	mAccount = make(map[uint32]*model.AhAccount)
+	if len(accIds) == 0 {
+		return
+	}
 	accounts := make([]*model.AhAccount, 0)
 	strSql := `
 		SELECT
@@ -294,6 +297,10 @@ func (m *HubDB) AhCategoryGet(
 
 func (m *HubDB) AhCategoryBatch(catIds []uint32) (mCategory map[uint32]*model.AhCategory, err error) {
 	mCategory = make(map[uint32]*model.AhCategory)
+	if len(catIds) == 0 {
+		return
+	}
+
 	categories := make([]*model.AhCategory, 0)
 	strSql := `
 		SELECT

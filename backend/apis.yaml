@@ -111,7 +111,7 @@
     description: ""
   summary: ""
   description: ""
-- api_handler_func: CheckAndAddDoc
+- api_handler_func: DocCheckPost
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
   api_handler_package: doc
   package_exported: backend/api/doc
@@ -119,7 +119,7 @@
   package_rel_alias: doc
   http_method: POST
   relative_paths:
-  - /api/api_hub/v1/doc/doc/check_add
+  - /api/api_hub/v1/doc/doc/check_post
   path_data: null
   query_data: null
   post_data:
@@ -135,7 +135,7 @@
       typespec:
         type_class: basic
         name: string
-      description: 文档标题
+      description: 标题
     - name: CategoryId
       type_name: uint32
       tags:
@@ -163,7 +163,7 @@
       typespec:
         type_class: basic
         name: string
-      description: swagger content
+      description: ""
     description: ""
   response_data:
     type_class: struct

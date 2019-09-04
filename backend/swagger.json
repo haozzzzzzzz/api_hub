@@ -5,14 +5,14 @@
 	],
 	"swagger": "2.0",
 	"info": {
-		"description": "Api hub backend api specication",
-		"title": "Api",
+		"description": "ApiHub系统后端服务接口",
+		"title": "ApiHub后端服务接口",
 		"contact": {
 			"name": "luohao"
 		},
 		"version": "1.0"
 	},
-	"host": "127.0.0.1:18000",
+	"host": "10.10.63.17:18000",
 	"paths": {
 		"/api/api_hub/info/reply/say_hi": {
 			"get": {
@@ -126,7 +126,7 @@
 				}
 			}
 		},
-		"/api/api_hub/v1/doc/doc/check_add": {
+		"/api/api_hub/v1/doc/doc/check_post": {
 			"post": {
 				"consumes": [
 					"application/json"
@@ -134,7 +134,7 @@
 				"produces": [
 					"application/json"
 				],
-				"operationId": "POST-/api/api_hub/v1/doc/doc/check_add",
+				"operationId": "POST-/api/api_hub/v1/doc/doc/check_post",
 				"parameters": [
 					{
 						"name": "PostData",
@@ -151,7 +151,6 @@
 									]
 								},
 								"spec_content": {
-									"description": "swagger content",
 									"type": "string"
 								},
 								"spec_url": {
@@ -159,7 +158,7 @@
 									"type": "string"
 								},
 								"title": {
-									"description": "文档标题",
+									"description": "标题",
 									"type": "string",
 									"required": [
 										"title"

@@ -123,10 +123,10 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 }
 
 // 检查并且创建文档
-var CheckAndAddDoc ginbuilder.HandleFunc = ginbuilder.HandleFunc{
+var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{
-		"/api/api_hub/v1/doc/doc/check_add",
+		"/api/api_hub/v1/doc/doc/check_post",
 	},
 	Handle: func(ctx *ginbuilder.Context) (err error) {
 		ses := session.GetSession(ctx)
@@ -168,6 +168,22 @@ var CheckAndAddDoc ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		if err == nil && doc != nil {
 			respData.DocId = int64(doc.DocId)
+
+			// update
+			_, err = dbClient.AhDocUpdate(
+				doc.DocId,
+				doc.Title,
+				postData.SpecUrl,
+				postData.SpecContent,
+				doc.CategoryId,
+				doc.PostStatus,
+				time.Now().Unix(),
+			)
+			if nil != err {
+				ctx.Errorf(code.CodeErrorDBUpdateFailed.Clone(), "update doc failed. %s", err)
+				return
+			}
+
 			ctx.SuccessReturn(respData)
 			return
 		}

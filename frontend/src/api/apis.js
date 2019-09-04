@@ -76,6 +76,6 @@ export default {
     },
 
     docDetailSpecUrl(docId) {
-        return config.backend_api + '/api/api_hub/v1/doc/detail/spec/' + docId
+        return config.AppConfig.backend_api + '/api/api_hub/v1/doc/detail/spec/' + docId
     }
 }

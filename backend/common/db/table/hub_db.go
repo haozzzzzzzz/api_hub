@@ -83,7 +83,7 @@ func (m *HubDB) AhDocUpdate(
 	title string,
 	specUrl string,
 	specContent string,
-	categoryId string,
+	categoryId uint32,
 	postStatus uint8,
 	updateTime int64,
 ) (result sql.Result, err error) {
@@ -100,7 +100,15 @@ func (m *HubDB) AhDocUpdate(
 			doc_id=?
 		LIMIT 1
 	`
-	result, err = m.Exec(strSql, title, specUrl, specContent, categoryId, postStatus, updateTime)
+	result, err = m.Exec(strSql,
+		title,
+		specUrl,
+		specContent,
+		categoryId,
+		postStatus,
+		updateTime,
+		docId,
+	)
 	if nil != err {
 		logrus.Errorf("update ah_doc failed. error: %s.", err)
 		return

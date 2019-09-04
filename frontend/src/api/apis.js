@@ -1,5 +1,5 @@
 import axios from "axios"
-import config from "@/config/config.json"
+import config from "@/../public/config.json"
 
 const client = axios.create({
     baseURL: config.backend_api,

@@ -7,7 +7,7 @@
 <script>
     import SwaggerUI from 'swagger-ui'
     import 'swagger-ui/dist/swagger-ui.css'
-    import config from '@/config/config.json'
+    import config from '@/../public/config.json'
 
     export default {
         name: "swagger_vue",

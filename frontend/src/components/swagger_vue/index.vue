@@ -9,6 +9,7 @@
     import 'swagger-ui/dist/swagger-ui.css'
     import config from '@/config/config.js'
 
+    // https://github.com/swagger-api/swagger-ui/blob/HEAD/docs/usage/configuration.md
     export default {
         name: "swagger_vue",
         props: ["swagger_data"],
@@ -16,6 +17,17 @@
             SwaggerUI({
                 dom_id: "#"+this.swagger_data.id,
                 url: this.swagger_data.url || config.AppConfig.default_swagger_json_url,
+                defaultModelExpandDepth: 4,
+                filter: true,
+                displayRequestDuration: true,
+                requestInterceptor: function (req) {
+                    console.log(req);
+                    return req
+                },
+                responseInterceptor: function (resp) {
+                    console.log(resp);
+                    return resp
+                }
             });
         }
     }

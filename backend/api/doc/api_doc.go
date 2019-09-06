@@ -122,6 +122,19 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	},
 }
 
+// 删除文档
+var DocDelele ginbuilder.HandleFunc = ginbuilder.HandleFunc{
+	HttpMethod: "POST",
+	RelativePaths: []string{
+		"/api/api_hub/v1/doc/doc/delete/:doc_id",
+	},
+	Handle: func(ctx *ginbuilder.Context) (err error) {
+		// TODO
+		ctx.Success()
+		return
+	},
+}
+
 // 检查并且创建文档
 var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
@@ -160,7 +173,7 @@ var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		reqCtx := ctx.RequestCtx
 
 		dbClient := table.NewHubDB(reqCtx)
-		doc, err := dbClient.AhDocGetByTitle(postData.Title)
+		doc, err := dbClient.AhDocGetByTitle(postData.Title) // TODO 获取在线的
 		if nil != err && err != sql.ErrNoRows {
 			ctx.Errorf(code.CodeErrorDBQueryFailed.Clone(), "get ah_doc by title and spec_url failed. %s", err)
 			return

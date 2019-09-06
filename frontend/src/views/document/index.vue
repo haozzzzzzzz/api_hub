@@ -21,11 +21,14 @@
     import document_detail from './detail'
     import document_list from './list'
 
+    let documentTabId = "0";
+    let defaultTabId = documentTabId;
+
     export default {
         name: "document",
         data(){
             return {
-                editableTabsValue: '0',
+                editableTabsValue: defaultTabId,
                 editableTabs: [
                     {
                         title: "document list",
@@ -59,6 +62,11 @@
                 } else if (action === 'remove') {
                     let tabs = this.editableTabs;
                     let activeName = this.editableTabsValue;
+
+                    if ( activeName === defaultTabId ) {
+                        return
+                    }
+
                     tabs.forEach((tab, index)=>{
                         if ( tab.name === targetName ) {
                             let nextTab = tabs[index+1] || tabs[index-1];

@@ -1,7 +1,25 @@
 import config from '@/config/config.js'
 
+let SwaggerRequestProxyPlugin = {
+    proxyMap: config.AppConfig.swagger_request_proxy,
+    requestInterceptor(req) {
+        let reqUrl = req.url;
+        for (let urlPrefix in this.proxyMap) {
+            let idx = reqUrl.indexOf(urlPrefix);
+            if ( idx >= 0){
+                let proxyUrl = reqUrl.replace(urlPrefix, this.proxyMap[urlPrefix]);
+                console.log(`proxy: ${reqUrl} => ${proxyUrl}`)
+            }
+        }
+        return req;
+    },
+    responseInterceptor(resp) {
+        return resp;
+    }
+};
+
 let SwaggerRequestPlugins = {
-    plugins: [],
+    plugins: [SwaggerRequestProxyPlugin],
     loadPlugins(){
         let swaggerPluginPaths = config.AppConfig.swagger_request_plugins;
         if (swaggerPluginPaths===undefined || swaggerPluginPaths.length === 0) {
@@ -13,7 +31,6 @@ let SwaggerRequestPlugins = {
                 this.plugins.push(plugin);
             })
         }
-
     },
 
     requestInterceptor(req) {

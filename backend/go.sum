@@ -56,6 +56,8 @@ github.com/haozzzzzzzz/go-rapid-development v0.1.18 h1:xbaHL2VBnN8yfNtHrdd5SpUso
 github.com/haozzzzzzzz/go-rapid-development v0.1.18/go.mod h1:Tji/0f8vl0cgbLYQQEf4lnJYM8n1TspMOyjW9g0JoHY=
 github.com/haozzzzzzzz/go-rapid-development v0.1.19 h1:AeD/sDdmV293y3Hg6Sx4hR89tCrfkTPDYrX3VtcSgdA=
 github.com/haozzzzzzzz/go-rapid-development v0.1.19/go.mod h1:Tji/0f8vl0cgbLYQQEf4lnJYM8n1TspMOyjW9g0JoHY=
+github.com/haozzzzzzzz/go-rapid-development v0.1.20 h1:I9efZGnifd/ey09FQSSJ+0kkXUgCpdpj80Gv2ieGDjw=
+github.com/haozzzzzzzz/go-rapid-development v0.1.20/go.mod h1:Tji/0f8vl0cgbLYQQEf4lnJYM8n1TspMOyjW9g0JoHY=
 github.com/hashicorp/consul/api v1.1.0 h1:BNQPM9ytxj6jbjjdRPioQ94T6YXriSopn0i8COv6SRA=
 github.com/hashicorp/consul/api v1.1.0/go.mod h1:VmuI/Lkw1nC05EYQWNKwWGbkg+FbDBtguAZLlVdkD9Q=
 github.com/hashicorp/consul/sdk v0.1.1/go.mod h1:VKf9jXwCTEY1QZP2MOLRhb5i/I/ssyNV1vwHyQBF0x8=

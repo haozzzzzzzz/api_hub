@@ -70,3 +70,39 @@ var AccountAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		return
 	},
 }
+
+// 更新账户
+var AccountUpdate ginbuilder.HandleFunc = ginbuilder.HandleFunc{
+	HttpMethod: "POST",
+	RelativePaths: []string{
+		"/api/api_hub/v1/account/account/update/:account_id",
+	},
+	Handle: func(ctx *ginbuilder.Context) (err error) {
+		// request uri data
+		type UriData struct {
+			AccountId string `json:"account_id" uri:"account_id" binding:"required"`
+		}
+		uriData := UriData{}
+		retCode, err := ctx.BindUriData(&uriData)
+		if err != nil {
+			ctx.Errorf(retCode, "verify  uri data failed. %s.", err)
+			return
+		}
+
+		// request post data
+		type PostData struct {
+			Name string `json:"name" form:"name" binding:"required"`
+		}
+		postData := PostData{}
+		retCode, err = ctx.BindPostData(&postData)
+		if err != nil {
+			ctx.Errorf(retCode, "verify  post data failed. %s.", err)
+			return
+		}
+
+		// TODO
+
+		ctx.Success()
+		return
+	},
+}

@@ -10,7 +10,7 @@
         >
             <transition name="fade-transform" mode="out-in">
                 <keep-alive>
-                    <component v-bind:is="currentTabComponent" @custom-tab-open="customTabOpen" :data="item.tabData"></component>
+                    <component v-bind:is="item.tabView" @custom-tab-open="customTabOpen" :data="item.tabData"></component>
                 </keep-alive>
             </transition>
         </el-tab-pane>
@@ -32,22 +32,15 @@
                 editableTabs: [
                     {
                         title: "document list",
-                        name: "0",
+                        name: defaultTabId,
                         route: "/document/list",
                         tabType: 'list',
-                        tabData: {}
+                        tabData: {},
+                        tabView: document_list,
                     }
                 ],
                 tabCounter: 0,
             }
-        },
-        computed: {
-            currentTabComponent: function () {
-                if ( this.editableTabsValue !== '0' ) {
-                    return document_detail
-                }
-                return document_list
-            },
         },
         methods: {
             handleTabsEdit(targetName, action) {
@@ -110,7 +103,8 @@
                             name: newTabName,
                             route: "/document/detail",
                             tabType: 'detail',
-                            tabData: tabData
+                            tabData: tabData,
+                            tabView: document_detail,
                         });
 
                         this.editableTabsValue = newTabName;

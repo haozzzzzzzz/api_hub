@@ -19,7 +19,6 @@ func main() {
 	address := fmt.Sprintf("%s:%s", serviceConfig.Host, serviceConfig.Port)
 
 	engine := ginbuilder.DefaultEngine()
-
 	corsConfig := cors.DefaultConfig()
 	corsConfig.AllowAllOrigins = true
 	corsConfig.AddAllowHeaders("*")

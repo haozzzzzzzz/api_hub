@@ -24,11 +24,20 @@ type LogOutputConfigFormat struct {
 	Compress   bool   `json:"compress" yaml:"compress"`
 }
 
+// 反向代理
+type ReverseProxyConfigFormat struct {
+	ProxyTypeMap map[string]string `yaml:"proxy_type_map"` // proxy_type => proxy_path_prefix
+}
+
 var ServiceConfig ServiceConfigFormat
 var DBConfig db.ClientConfigFormat
+var ReverseProxyConfig = ReverseProxyConfigFormat{
+	ProxyTypeMap: make(map[string]string),
+}
 
 // panic if fail, for stopping process
 func loadPanic() {
 	config.LoadFileYamlPanic("./config/service.yaml", &ServiceConfig)
 	config.LoadFileYamlPanic("./config/db.yaml", &DBConfig)
+	config.LoadFileYamlNoError("./config/reverse_proxy.yaml", &ReverseProxyConfig)
 }

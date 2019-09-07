@@ -12,3 +12,5 @@ require (
 	gopkg.in/go-playground/validator.v9 v9.29.1
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 )
+
+replace github.com/haozzzzzzzz/go-rapid-development v0.1.20 => /Users/hao/Documents/Projects/Github/go-rapid-development

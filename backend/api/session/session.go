@@ -4,6 +4,8 @@ import (
 	"github.com/haozzzzzzzz/go-rapid-development/web/ginbuilder"
 )
 
+const KeySkipSessionValidate = "skip_session_validate"
+
 type Session struct {
 	RequestData struct {
 	} `json:"request_data"`
@@ -28,6 +30,14 @@ func (m *Session) Panic(errPanic interface{}) {
 func Builder(ctx *ginbuilder.Context) (err error) {
 	ses := &Session{}
 	ses.Auth.AccountId = 1 // TODO 目前写死一个用户
+
+	ginCtx := ctx.GinContext
+	skipValidate := ginCtx.GetBool(KeySkipSessionValidate)
+
+	if !skipValidate { // validate session
+
+	}
+
 	ctx.Session = ses
 	return
 }

@@ -28,7 +28,7 @@ var ReverseProxy ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		uriData := UriData{}
 		retCode, err := ctx.BindUriData(&uriData)
 		if err != nil {
-			ctx.Errorf(retCode, "verify  uri data failed. %s.", err)
+			ctx.Errorf(retCode, "verify reverse proxy uri data failed. %s.", err)
 			return
 		}
 

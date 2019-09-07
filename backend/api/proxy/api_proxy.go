@@ -32,7 +32,7 @@ var ReverseProxy ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 			return
 		}
 
-		proxyUrlPrefix, ok := config.ReverseProxyConfig.ProxyTypeMap[uriData.ProxyType]
+		proxyUrlHost, ok := config.ReverseProxyConfig.ProxyTypeHost[uriData.ProxyType]
 		if !ok {
 			retCode = code.CodeErrorRequestFailed.Clone()
 			retCode.Message = fmt.Sprintf("not supported reverse proxy type: %s", uriData.ProxyType)
@@ -40,7 +40,7 @@ var ReverseProxy ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 			return
 		}
 
-		prefixUrl, err := url.Parse(proxyUrlPrefix)
+		prefixUrl, err := url.Parse("http://" + proxyUrlHost)
 		if nil != err {
 			retCode = code.CodeErrorRequestFailed.Clone()
 			retCode.Message = fmt.Sprintf("parse prefix url failed. prefix: %s, error: %s", prefixUrl, err)
@@ -50,6 +50,7 @@ var ReverseProxy ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		ginCtx := ctx.GinContext
 		ginCtx.Request.URL.Path = uriData.TargetUri
+		ginCtx.Request.Host = proxyUrlHost
 		ginCtx.Request.RequestURI = ginCtx.Request.URL.RequestURI()
 		reverseProxy := httputil.NewSingleHostReverseProxy(prefixUrl)
 		ctx.Logger.Infof("make reverse proxy request, url: %s", fmt.Sprintf("%s%s", prefixUrl, ginCtx.Request.RequestURI))

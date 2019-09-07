@@ -26,13 +26,13 @@ type LogOutputConfigFormat struct {
 
 // 反向代理
 type ReverseProxyConfigFormat struct {
-	ProxyTypeMap map[string]string `yaml:"proxy_type_map"` // proxy_type => proxy_path_prefix
+	ProxyTypeHost map[string]string `yaml:"proxy_type_host"` // proxy_type => proxy_path_prefix
 }
 
 var ServiceConfig ServiceConfigFormat
 var DBConfig db.ClientConfigFormat
 var ReverseProxyConfig = ReverseProxyConfigFormat{
-	ProxyTypeMap: make(map[string]string),
+	ProxyTypeHost: make(map[string]string),
 }
 
 // panic if fail, for stopping process

@@ -21,6 +21,7 @@ func main() {
 	engine := ginbuilder.DefaultEngine()
 	corsConfig := cors.DefaultConfig()
 	corsConfig.AllowAllOrigins = true
+	corsConfig.AddAllowHeaders("*")
 	engine.Use(cors.New(corsConfig))
 
 	err = api.BindRouters(engine)

@@ -13,6 +13,7 @@
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "swagger-ui": "^3.23.8",
+    "url-parse": "^1.4.7",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"

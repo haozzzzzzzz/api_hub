@@ -3,7 +3,7 @@ window.AppConfig = {
     "default_swagger_json_url": "https://raw.githubusercontent.com/haozzzzzzzz/api_hub/master/backend/swagger.json",
     "plugins": [ // plugin
         "./swagger_request_plugin.js",
-        "./private/api_hub_plugins/auth.js"
+        "./private/api_hub_plugins/nosign_request.js"
     ],
     "proxy": {
         "test-m.videobuddy.vid007.com": "127.0.0.1:18000/api/api_hub/v1/reverse_proxy/test_videobuddy"

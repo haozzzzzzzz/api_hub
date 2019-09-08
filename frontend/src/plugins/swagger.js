@@ -1,5 +1,5 @@
 import proxy from './proxy'
-
+import Url from 'url-parse'
 let SwaggerRequestProxyPlugin = {
     requestInterceptor(req) {
         req.url = proxy.getProxyUrl(req.url);
@@ -13,6 +13,8 @@ let SwaggerRequestProxyPlugin = {
 let SwaggerRequestPlugins = {
     plugins: [SwaggerRequestProxyPlugin],
     requestInterceptor(req) {
+        let url = new Url(req.url, true);
+        req.headers["Host"] = url.host;
         for (let plugin of this.plugins) {
             req = plugin.requestInterceptor(req);
         }

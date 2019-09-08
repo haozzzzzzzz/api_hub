@@ -29,7 +29,7 @@ let SwaggerRequestPlugins = {
         }
 
         for (let path of swaggerPluginPaths) {
-            import(/* webpackIgnore: true */`${path}`).then(({default: plugin}) => {
+            import(`${path}`).then(({default: plugin}) => {
                 this.plugins.push(plugin);
             })
         }

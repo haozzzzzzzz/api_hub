@@ -5,6 +5,6 @@ window.AppConfig = {
         "./plugins/swagger_request_plugin.js"
     ],
     "swagger_request_proxy": {
-        "localhost:18000": "127.0.0.1:18000/api/api_hub/v1/reverse_proxy/api_hub"
+        "your_domain": "127.0.0.1:18000/api/api_hub/v1/reverse_proxy/test_other"
     }
 };

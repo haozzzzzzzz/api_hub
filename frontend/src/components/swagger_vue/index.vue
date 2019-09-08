@@ -19,12 +19,13 @@
                 defaultModelExpandDepth: 4,
                 filter: true,
                 displayRequestDuration: true,
-                requestInterceptor: function (req) {
-                    req.headers['Product-Id'] = '39';
-                    return RequestPlugins.SwaggerRequestPlugins.requestInterceptor(req);
+                requestInterceptor (req) {
+                    req = RequestPlugins.SwaggerRequestPlugins.requestInterceptor(req);
+                    return req;
                 },
-                responseInterceptor: function (resp) {
-                    return RequestPlugins.SwaggerRequestPlugins.responseInterceptor(resp);
+                responseInterceptor (resp) {
+                    resp = RequestPlugins.SwaggerRequestPlugins.responseInterceptor(resp);
+                    return resp
                 },
             });
         }

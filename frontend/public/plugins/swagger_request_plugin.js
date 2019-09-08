@@ -1,10 +1,12 @@
 let SwaggerRequestPlugin = {
     requestInterceptor(req){
-        console.log(req);
+        // eslint-disable-next-line no-console
+        console.log("swagger_request_plugin.js request:", req);
         return req
     },
     responseInterceptor(resp){
-        console.log(resp);
+        // eslint-disable-next-line no-console
+        console.log("swagger_request_plugin.js response:", resp);
         return resp
     }
 };

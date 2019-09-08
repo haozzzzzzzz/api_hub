@@ -8,7 +8,9 @@ let SwaggerRequestProxyPlugin = {
             let idx = reqUrl.indexOf(urlPrefix);
             if ( idx >= 0){
                 let proxyUrl = reqUrl.replace(urlPrefix, this.proxyMap[urlPrefix]);
-                console.log(`proxy: ${reqUrl} => ${proxyUrl}`)
+                // eslint-disable-next-line no-console
+                console.log(`proxy: ${reqUrl} => ${proxyUrl}`);
+                req.url = proxyUrl;
             }
         }
         return req;

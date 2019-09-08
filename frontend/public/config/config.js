@@ -5,7 +5,7 @@ window.AppConfig = {
         "./swagger_request_plugin.js",
         "./private/api_hub_plugins/auth.js"
     ],
-    "swagger_request_proxy": {
-        "your_domain": "127.0.0.1:18000/api/api_hub/v1/reverse_proxy/test_other"
+    "proxy": {
+        "test-m.videobuddy.vid007.com": "127.0.0.1:18000/api/api_hub/v1/reverse_proxy/test_videobuddy"
     }
 };

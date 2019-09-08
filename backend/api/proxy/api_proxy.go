@@ -6,8 +6,10 @@ import (
 	"fmt"
 	"github.com/haozzzzzzzz/go-rapid-development/api/code"
 	"github.com/haozzzzzzzz/go-rapid-development/web/ginbuilder"
+	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"strings"
 )
 
 var ReverseProxy ginbuilder.HandleFunc = ginbuilder.HandleFunc{
@@ -53,8 +55,20 @@ var ReverseProxy ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		ginCtx.Request.Host = proxyUrlHost
 		ginCtx.Request.RequestURI = ginCtx.Request.URL.RequestURI()
 		reverseProxy := httputil.NewSingleHostReverseProxy(prefixUrl)
+		reverseProxy.ModifyResponse = func(response *http.Response) (proxyRespError error) {
+			// deal with as been blocked by CORS policy: The 'Access-Control-Allow-Origin' header contains multiple values '*, *', but only one is allowed
+			upHeaders := response.Header
+			for key, _ := range upHeaders {
+				if strings.HasPrefix(key, "Access-Control-Allow") {
+					upHeaders[key] = []string{}
+				}
+			}
+			return
+		}
 		ctx.Logger.Infof("make reverse proxy request, url: %s", fmt.Sprintf("%s%s", prefixUrl, ginCtx.Request.RequestURI))
+		// clear response header
 		reverseProxy.ServeHTTP(ginCtx.Writer, ginCtx.Request)
+		ginCtx.Header("X-Xl", "6666")
 		return
 	},
 }

@@ -1,18 +1,8 @@
-import config from '@/config/config.js'
+import proxy from './proxy'
 
 let SwaggerRequestProxyPlugin = {
-    proxyMap: config.AppConfig.swagger_request_proxy,
     requestInterceptor(req) {
-        let reqUrl = req.url;
-        for (let urlPrefix in this.proxyMap) {
-            let idx = reqUrl.indexOf(urlPrefix);
-            if ( idx >= 0){
-                let proxyUrl = reqUrl.replace(urlPrefix, this.proxyMap[urlPrefix]);
-                // eslint-disable-next-line no-console
-                console.log(`proxy: ${reqUrl} => ${proxyUrl}`);
-                req.url = proxyUrl;
-            }
-        }
+        req.url = proxy.getProxyUrl(req.url);
         return req;
     },
     responseInterceptor(resp) {

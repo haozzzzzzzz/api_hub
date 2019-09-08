@@ -1,4 +1,4 @@
-import swaggerPlugins from './request'
+import swaggerPlugins from './swagger'
 
 let SwaggerRequestPlugin = {
     requestInterceptor(req){

@@ -6,7 +6,7 @@
     import SwaggerUI from 'swagger-ui'
     import 'swagger-ui/dist/swagger-ui.css'
     import config from '@/config/config'
-    import RequestPlugins from "../../plugins/request";
+    import RequestPlugins from "../../plugins/swagger";
 
     // https://github.com/swagger-api/swagger-ui/blob/HEAD/docs/usage/configuration.md
     export default {

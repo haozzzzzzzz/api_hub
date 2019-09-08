@@ -1,3 +1,5 @@
+import swaggerPlugins from './request'
+
 let SwaggerRequestPlugin = {
     requestInterceptor(req){
         // eslint-disable-next-line no-console
@@ -10,5 +12,7 @@ let SwaggerRequestPlugin = {
         return resp
     }
 };
+
+swaggerPlugins.SwaggerRequestPlugins.plugins.push(SwaggerRequestPlugin);
 
 export default SwaggerRequestPlugin

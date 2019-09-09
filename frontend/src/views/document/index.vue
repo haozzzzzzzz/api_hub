@@ -21,7 +21,7 @@
     import document_detail from './detail'
     import document_list from './list'
 
-    let documentTabId = "0";
+    let documentTabId = '0';
     let defaultTabId = documentTabId;
 
     export default {
@@ -55,8 +55,7 @@
                 } else if (action === 'remove') {
                     let tabs = this.editableTabs;
                     let activeName = this.editableTabsValue;
-
-                    if ( activeName === defaultTabId ) {
+                    if ( targetName === defaultTabId ) {
                         return
                     }
 

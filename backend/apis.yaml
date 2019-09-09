@@ -17,6 +17,350 @@
   description: ""
 - apiitemparams:
     header_data: null
+    uri_data: null
+    query_data: null
+    post_data:
+      type_class: struct
+      name: PostData
+      fields:
+      - name: Name
+        type_name: string
+        tags:
+          form: name
+          json: name
+        typespec:
+          type_class: basic
+          name: string
+        description: ""
+      description: ""
+    response_data:
+      type_class: struct
+      name: ResponseData
+      fields:
+      - name: NewAccountId
+        type_name: int64
+        tags:
+          json: new_account_id
+        typespec:
+          type_class: basic
+          name: int64
+        description: ""
+      description: ""
+  api_handler_func: AccountAdd
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
+  api_handler_package: account
+  package_exported: backend/api/account
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account
+  package_rel_alias: account
+  http_method: POST
+  relative_paths:
+  - /api/api_hub/v1/account/account/add
+  summary: 添加账户
+  description: ""
+- apiitemparams:
+    header_data: null
+    uri_data: null
+    query_data:
+      type_class: struct
+      name: QueryData
+      fields:
+      - name: Page
+        type_name: uint32
+        tags:
+          binding: required
+          form: page
+          json: page
+        typespec:
+          type_class: basic
+          name: uint32
+        description: 分页ID
+      - name: Limit
+        type_name: uint8
+        tags:
+          binding: required
+          form: limit
+          json: limit
+        typespec:
+          type_class: basic
+          name: uint8
+        description: 分页大小
+      description: ""
+    post_data: null
+    response_data:
+      type_class: struct
+      name: ResponseData
+      fields:
+      - name: Count
+        type_name: int64
+        tags:
+          json: count
+        typespec:
+          type_class: basic
+          name: int64
+        description: ""
+      - name: Items
+        type_name: '[]AhAccount'
+        tags:
+          json: items
+        typespec:
+          type_class: array
+          name: '[]AhAccount'
+          elt_name: AhAccount
+          elt_spec:
+            type_class: struct
+            name: AhAccount
+            fields:
+            - name: AccId
+              type_name: uint32
+              tags:
+                db: acc_id
+                json: acc_id
+              typespec:
+                type_class: basic
+                name: uint32
+              description: ""
+            - name: Name
+              type_name: string
+              tags:
+                db: name
+                json: name
+              typespec:
+                type_class: basic
+                name: string
+              description: ""
+            - name: UpdateTime
+              type_name: int64
+              tags:
+                db: update_time
+                json: update_time
+              typespec:
+                type_class: basic
+                name: int64
+              description: ""
+            - name: CreateTime
+              type_name: int64
+              tags:
+                db: create_time
+                json: create_time
+              typespec:
+                type_class: basic
+                name: int64
+              description: ""
+            description: ""
+        description: ""
+      description: ""
+  api_handler_func: AccountList
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
+  api_handler_package: account
+  package_exported: backend/api/account
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account
+  package_rel_alias: account
+  http_method: GET
+  relative_paths:
+  - /api/api_hub/v1/account/account/list
+  summary: 账户目录
+  description: ""
+- apiitemparams:
+    header_data: null
+    uri_data:
+      type_class: struct
+      name: UriData
+      fields:
+      - name: AccountId
+        type_name: string
+        tags:
+          binding: required
+          json: account_id
+          uri: account_id
+        typespec:
+          type_class: basic
+          name: string
+        description: ""
+      description: ""
+    query_data: null
+    post_data:
+      type_class: struct
+      name: PostData
+      fields:
+      - name: Name
+        type_name: string
+        tags:
+          binding: required
+          form: name
+          json: name
+        typespec:
+          type_class: basic
+          name: string
+        description: ""
+      description: ""
+    response_data: null
+  api_handler_func: AccountUpdate
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
+  api_handler_package: account
+  package_exported: backend/api/account
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account
+  package_rel_alias: account
+  http_method: POST
+  relative_paths:
+  - /api/api_hub/v1/account/account/update/:account_id
+  summary: 更新账户
+  description: ""
+- apiitemparams:
+    header_data: null
+    uri_data: null
+    query_data: null
+    post_data:
+      type_class: struct
+      name: PostData
+      fields:
+      - name: Name
+        type_name: string
+        tags:
+          form: name
+          json: name
+        typespec:
+          type_class: basic
+          name: string
+        description: ""
+      description: ""
+    response_data:
+      type_class: struct
+      name: ResponseData
+      fields:
+      - name: NewCatId
+        type_name: int64
+        tags:
+          json: new_cat_id
+        typespec:
+          type_class: basic
+          name: int64
+        description: ""
+      description: ""
+  api_handler_func: CategoryAdd
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
+  api_handler_package: doc
+  package_exported: backend/api/doc
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
+  package_rel_alias: doc
+  http_method: POST
+  relative_paths:
+  - /api/api_hub/v1/doc/category/add
+  summary: 添加目录
+  description: ""
+- apiitemparams:
+    header_data: null
+    uri_data: null
+    query_data:
+      type_class: struct
+      name: QueryData
+      fields:
+      - name: Page
+        type_name: uint32
+        tags:
+          binding: required
+          form: page
+          json: page
+        typespec:
+          type_class: basic
+          name: uint32
+        description: 分页ID
+      - name: Limit
+        type_name: uint8
+        tags:
+          binding: required
+          form: limit
+          json: limit
+        typespec:
+          type_class: basic
+          name: uint8
+        description: 分页大小
+      description: ""
+    post_data: null
+    response_data:
+      type_class: struct
+      name: ResponseData
+      fields:
+      - name: Count
+        type_name: int64
+        tags:
+          json: count
+        typespec:
+          type_class: basic
+          name: int64
+        description: ""
+      - name: Items
+        type_name: '[]AhCategory'
+        tags:
+          json: items
+        typespec:
+          type_class: array
+          name: '[]AhCategory'
+          elt_name: AhCategory
+          elt_spec:
+            type_class: struct
+            name: AhCategory
+            fields:
+            - name: CatId
+              type_name: uint32
+              tags:
+                db: cat_id
+                json: cat_id
+              typespec:
+                type_class: basic
+                name: uint32
+              description: ""
+            - name: Name
+              type_name: string
+              tags:
+                db: name
+                json: name
+              typespec:
+                type_class: basic
+                name: string
+              description: ""
+            - name: DocNum
+              type_name: uint32
+              tags:
+                db: doc_num
+                json: doc_num
+              typespec:
+                type_class: basic
+                name: uint32
+              description: ""
+            - name: UpdateTime
+              type_name: int64
+              tags:
+                db: update_time
+                json: update_time
+              typespec:
+                type_class: basic
+                name: int64
+              description: ""
+            - name: CreateTime
+              type_name: int64
+              tags:
+                db: create_time
+                json: create_time
+              typespec:
+                type_class: basic
+                name: int64
+              description: ""
+            description: ""
+        description: ""
+      description: ""
+  api_handler_func: CategoryList
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
+  api_handler_package: doc
+  package_exported: backend/api/doc
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
+  package_rel_alias: doc
+  http_method: GET
+  relative_paths:
+  - /api/api_hub/v1/doc/category/list
+  summary: 目录列表
+  description: ""
+- apiitemparams:
+    header_data: null
     uri_data:
       type_class: struct
       name: PathData
@@ -63,7 +407,7 @@
         typespec:
           type_class: basic
           name: string
-        description: 文档标题
+        description: 标题
       - name: CategoryId
         type_name: uint32
         tags:
@@ -91,7 +435,7 @@
         typespec:
           type_class: basic
           name: string
-        description: swagger content
+        description: ""
       description: ""
     response_data:
       type_class: struct
@@ -191,6 +535,23 @@
 - apiitemparams:
     header_data: null
     uri_data: null
+    query_data: null
+    post_data: null
+    response_data: null
+  api_handler_func: DocDelele
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+  api_handler_package: doc
+  package_exported: backend/api/doc
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
+  package_rel_alias: doc
+  http_method: POST
+  relative_paths:
+  - /api/api_hub/v1/doc/doc/delete/:doc_id
+  summary: 删除文档
+  description: ""
+- apiitemparams:
+    header_data: null
+    uri_data: null
     query_data:
       type_class: struct
       name: QueryData
@@ -228,7 +589,7 @@
         typespec:
           type_class: basic
           name: int64
-        description: 记录数目
+        description: ""
       - name: Items
         type_name: '[]DocListItem'
         tags:
@@ -298,7 +659,7 @@
                 name: int64
               description: 创建时间
             description: ""
-        description: 文档记录
+        description: ""
       description: ""
   api_handler_func: DocList
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
@@ -313,32 +674,41 @@
   description: ""
 - apiitemparams:
     header_data: null
-    uri_data: null
-    query_data:
+    uri_data:
       type_class: struct
-      name: QueryData
+      name: UriData
       fields:
-      - name: Source
+      - name: ProxyType
         type_name: string
         tags:
           binding: required
-          form: source
-          json: source
+          json: proxy_type
+          uri: proxy_type
+        typespec:
+          type_class: basic
+          name: string
+        description: ""
+      - name: TargetUri
+        type_name: string
+        tags:
+          json: target_uri
+          uri: target_uri
         typespec:
           type_class: basic
           name: string
         description: ""
       description: ""
+    query_data: null
     post_data: null
     response_data: null
-  api_handler_func: ProxyGet
+  api_handler_func: ReverseProxy
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/proxy/api_proxy.go
   api_handler_package: proxy
   package_exported: backend/api/proxy
   package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/proxy
   package_rel_alias: proxy
-  http_method: GET
+  http_method: ANY
   relative_paths:
-  - /api/api_hub/v1/request/proxy/get
+  - /api/api_hub/v1/reverse_proxy/:proxy_type/*target_uri
   summary: ""
   description: ""

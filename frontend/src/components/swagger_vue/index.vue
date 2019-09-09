@@ -16,7 +16,7 @@
             SwaggerUI({
                 domNode: this.$el,
                 url: this.swagger_data.url || config.AppConfig.default_swagger_json_url,
-                defaultModelExpandDepth: 4,
+                defaultModelExpandDepth: 6,
                 filter: true,
                 displayRequestDuration: true,
                 requestInterceptor (req) {

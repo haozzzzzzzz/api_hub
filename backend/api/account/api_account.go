@@ -5,7 +5,7 @@ import (
 	"github.com/haozzzzzzzz/go-rapid-development/web/ginbuilder"
 )
 
-// 账户目录
+// 账户目录（暂不可用）
 var AccountList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "GET",
 	RelativePaths: []string{
@@ -40,7 +40,7 @@ var AccountList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	},
 }
 
-// 添加账户
+// 添加账户（暂不可用）
 var AccountAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{
@@ -71,7 +71,7 @@ var AccountAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	},
 }
 
-// 更新账户
+// 更新账户（暂不可用）
 var AccountUpdate ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{

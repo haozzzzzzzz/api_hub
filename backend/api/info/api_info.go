@@ -4,6 +4,7 @@ import (
 	"github.com/haozzzzzzzz/go-rapid-development/web/ginbuilder"
 )
 
+// 测试ACK
 var InfoSayHi ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "GET",
 	RelativePaths: []string{

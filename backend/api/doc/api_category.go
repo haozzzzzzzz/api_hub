@@ -5,7 +5,7 @@ import (
 	"github.com/haozzzzzzzz/go-rapid-development/web/ginbuilder"
 )
 
-// 目录列表
+// 目录列表（暂不可用）
 var CategoryList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "GET",
 	RelativePaths: []string{
@@ -40,7 +40,7 @@ var CategoryList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	},
 }
 
-// 添加目录
+// 添加目录（暂不可用）
 var CategoryAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{

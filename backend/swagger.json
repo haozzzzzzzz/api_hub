@@ -22,6 +22,7 @@
 				"produces": [
 					"application/json"
 				],
+				"summary": "测试ACK",
 				"operationId": "GET-/api/api_hub/info/reply/say_hi",
 				"responses": {
 					"200": {
@@ -38,7 +39,7 @@
 				"produces": [
 					"application/json"
 				],
-				"summary": "添加账户",
+				"summary": "添加账户（暂不可用）",
 				"operationId": "POST-/api/api_hub/v1/account/account/add",
 				"parameters": [
 					{
@@ -92,7 +93,7 @@
 				"produces": [
 					"application/json"
 				],
-				"summary": "账户目录",
+				"summary": "账户目录（暂不可用）",
 				"operationId": "GET-/api/api_hub/v1/account/account/list",
 				"parameters": [
 					{
@@ -167,7 +168,7 @@
 				"produces": [
 					"application/json"
 				],
-				"summary": "更新账户",
+				"summary": "更新账户（暂不可用）",
 				"operationId": "POST-/api/api_hub/v1/account/account/update/{account_id}",
 				"parameters": [
 					{
@@ -208,7 +209,7 @@
 				"produces": [
 					"application/json"
 				],
-				"summary": "添加目录",
+				"summary": "添加目录（暂不可用）",
 				"operationId": "POST-/api/api_hub/v1/doc/category/add",
 				"parameters": [
 					{
@@ -262,7 +263,7 @@
 				"produces": [
 					"application/json"
 				],
-				"summary": "目录列表",
+				"summary": "目录列表（暂不可用）",
 				"operationId": "GET-/api/api_hub/v1/doc/category/list",
 				"parameters": [
 					{
@@ -382,6 +383,7 @@
 									]
 								},
 								"spec_content": {
+									"description": "swagger content",
 									"type": "string"
 								},
 								"spec_url": {
@@ -389,7 +391,7 @@
 									"type": "string"
 								},
 								"title": {
-									"description": "标题",
+									"description": "文档标题",
 									"type": "string",
 									"required": [
 										"title"
@@ -455,6 +457,7 @@
 									]
 								},
 								"spec_content": {
+									"description": "swagger content",
 									"type": "string"
 								},
 								"spec_url": {
@@ -462,7 +465,7 @@
 									"type": "string"
 								},
 								"title": {
-									"description": "标题",
+									"description": "文档标题",
 									"type": "string",
 									"required": [
 										"title"
@@ -510,7 +513,7 @@
 				"produces": [
 					"application/json"
 				],
-				"summary": "删除文档",
+				"summary": "删除文档（暂不可用）",
 				"operationId": "POST-/api/api_hub/v1/doc/doc/delete/{doc_id}",
 				"responses": {
 					"200": {

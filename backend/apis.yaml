@@ -13,7 +13,7 @@
   http_method: GET
   relative_paths:
   - /api/api_hub/info/reply/say_hi
-  summary: ""
+  summary: 测试ACK
   description: ""
 - apiitemparams:
     header_data: null
@@ -55,7 +55,7 @@
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/account/account/add
-  summary: 添加账户
+  summary: 添加账户（暂不可用）
   description: ""
 - apiitemparams:
     header_data: null
@@ -158,7 +158,7 @@
   http_method: GET
   relative_paths:
   - /api/api_hub/v1/account/account/list
-  summary: 账户目录
+  summary: 账户目录（暂不可用）
   description: ""
 - apiitemparams:
     header_data: null
@@ -203,7 +203,7 @@
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/account/account/update/:account_id
-  summary: 更新账户
+  summary: 更新账户（暂不可用）
   description: ""
 - apiitemparams:
     header_data: null
@@ -245,7 +245,7 @@
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/doc/category/add
-  summary: 添加目录
+  summary: 添加目录（暂不可用）
   description: ""
 - apiitemparams:
     header_data: null
@@ -357,7 +357,7 @@
   http_method: GET
   relative_paths:
   - /api/api_hub/v1/doc/category/list
-  summary: 目录列表
+  summary: 目录列表（暂不可用）
   description: ""
 - apiitemparams:
     header_data: null
@@ -407,7 +407,7 @@
         typespec:
           type_class: basic
           name: string
-        description: 标题
+        description: 文档标题
       - name: CategoryId
         type_name: uint32
         tags:
@@ -435,7 +435,7 @@
         typespec:
           type_class: basic
           name: string
-        description: ""
+        description: swagger content
       description: ""
     response_data:
       type_class: struct
@@ -478,7 +478,7 @@
         typespec:
           type_class: basic
           name: string
-        description: 标题
+        description: 文档标题
       - name: CategoryId
         type_name: uint32
         tags:
@@ -506,7 +506,7 @@
         typespec:
           type_class: basic
           name: string
-        description: ""
+        description: swagger content
       description: ""
     response_data:
       type_class: struct
@@ -547,7 +547,7 @@
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/doc/doc/delete/:doc_id
-  summary: 删除文档
+  summary: 删除文档（暂不可用）
   description: ""
 - apiitemparams:
     header_data: null

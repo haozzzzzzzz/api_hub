@@ -122,7 +122,7 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	},
 }
 
-// 删除文档
+// 删除文档（暂不可用）
 var DocDelele ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{

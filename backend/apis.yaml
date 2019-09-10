@@ -388,7 +388,7 @@
   http_method: GET
   relative_paths:
   - /api/api_hub/v1/doc/detail/spec/:doc_id
-  summary: ""
+  summary: 查看文档的swagger.json
   description: ""
 - apiitemparams:
     header_data: null

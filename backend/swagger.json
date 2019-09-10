@@ -341,6 +341,7 @@
 				"produces": [
 					"application/json"
 				],
+				"summary": "查看文档的swagger.json",
 				"operationId": "GET-/api/api_hub/v1/doc/detail/spec/{doc_id}",
 				"parameters": [
 					{

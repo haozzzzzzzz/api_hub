@@ -224,6 +224,7 @@ var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	},
 }
 
+// 查看文档的swagger.json
 var DocDetailSpec ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "GET",
 	RelativePaths: []string{

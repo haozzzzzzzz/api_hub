@@ -560,9 +560,11 @@
 									"type": "object",
 									"properties": {
 										"count": {
+											"description": "记录数目",
 											"type": "integer"
 										},
 										"items": {
+											"description": "文档记录",
 											"type": "array",
 											"items": {
 												"type": "object",

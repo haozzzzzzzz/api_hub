@@ -4,6 +4,7 @@
     query_data: null
     post_data: null
     response_data: null
+  api_handler_func_type: 1
   api_handler_func: InfoSayHi
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/info/api_info.go
   api_handler_package: info
@@ -46,6 +47,7 @@
           name: int64
         description: ""
       description: ""
+  api_handler_func_type: 1
   api_handler_func: AccountAdd
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
   api_handler_package: account
@@ -149,6 +151,7 @@
             description: ""
         description: ""
       description: ""
+  api_handler_func_type: 1
   api_handler_func: AccountList
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
   api_handler_package: account
@@ -194,6 +197,7 @@
         description: ""
       description: ""
     response_data: null
+  api_handler_func_type: 1
   api_handler_func: AccountUpdate
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
   api_handler_package: account
@@ -236,6 +240,7 @@
           name: int64
         description: ""
       description: ""
+  api_handler_func_type: 1
   api_handler_func: CategoryAdd
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
   api_handler_package: doc
@@ -348,6 +353,7 @@
             description: ""
         description: 文档记录
       description: ""
+  api_handler_func_type: 1
   api_handler_func: CategoryList
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
   api_handler_package: doc
@@ -379,6 +385,7 @@
     query_data: null
     post_data: null
     response_data: null
+  api_handler_func_type: 1
   api_handler_func: DocDetailSpec
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
   api_handler_package: doc
@@ -450,6 +457,7 @@
           name: int64
         description: 新建的文档ID
       description: ""
+  api_handler_func_type: 1
   api_handler_func: DocAdd
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
   api_handler_package: doc
@@ -521,6 +529,7 @@
           name: int64
         description: 文档ID
       description: ""
+  api_handler_func_type: 1
   api_handler_func: DocCheckPost
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
   api_handler_package: doc
@@ -538,6 +547,7 @@
     query_data: null
     post_data: null
     response_data: null
+  api_handler_func_type: 1
   api_handler_func: DocDelele
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
   api_handler_package: doc
@@ -589,7 +599,7 @@
         typespec:
           type_class: basic
           name: int64
-        description: ""
+        description: 记录数目
       - name: Items
         type_name: '[]DocListItem'
         tags:
@@ -659,8 +669,9 @@
                 name: int64
               description: 创建时间
             description: ""
-        description: ""
+        description: 文档记录
       description: ""
+  api_handler_func_type: 1
   api_handler_func: DocList
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
   api_handler_package: doc
@@ -701,6 +712,7 @@
     query_data: null
     post_data: null
     response_data: null
+  api_handler_func_type: 1
   api_handler_func: ReverseProxy
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/proxy/api_proxy.go
   api_handler_package: proxy

@@ -141,3 +141,53 @@ func (m *BsDoc) DocAdd(doc *model.AhDoc) (newDocId int64, err error) {
 
 	return
 }
+
+func (m *BsDoc) DocDel(docId uint32) (err error) {
+	dbClient := table.NewHubDB(m.Ctx)
+
+	oldDoc, err := dbClient.AhDocGet(docId)
+	if nil != err {
+		logrus.Errorf("get doc failed. %s", err)
+		return
+	}
+
+	tx, err := dbClient.DB.BeginTxx(m.Ctx, nil)
+	if nil != err {
+		logrus.Errorf("doc del begin transaction failed. error: %s.", err)
+		return
+	}
+
+	defer func() {
+		if nil != err {
+			errRoll := tx.Rollback()
+			if nil != errRoll {
+				logrus.Errorf("doc del transaction rollback failed. error: %s.", err)
+				return
+			}
+			return
+
+		} else {
+			err = tx.Commit()
+			if nil != err {
+				logrus.Errorf("doc del transaction commit failed. error: %s.", err)
+				return
+			}
+		}
+
+	}()
+
+	err = dbClient.AhDocDelTx(tx, docId)
+	if nil != err {
+		logrus.Errorf("delete doc failed. error: %s.", err)
+		return
+	}
+
+	// 更新数目
+	err = dbClient.AhCategoryDocNumIncrTx(tx, oldDoc.CategoryId, -1, time.Now().Unix())
+	if nil != err {
+		logrus.Errorf("incr ah_category doc_num failed. error: %s.", err)
+		return
+	}
+
+	return
+}

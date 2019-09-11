@@ -122,14 +122,36 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	},
 }
 
-// 删除文档（暂不可用）
+// 删除文档
 var DocDelele ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{
 		"/api/api_hub/v1/doc/doc/delete/:doc_id",
 	},
 	Handle: func(ctx *ginbuilder.Context) (err error) {
-		// TODO
+		ses := session.GetSession(ctx)
+
+		// request uri data
+		type UriData struct {
+			DocId uint32 `json:"doc_id" uri:"doc_id" binding:"required"` // 文档ID
+		}
+		uriData := UriData{}
+		retCode, err := ctx.BindUriData(&uriData)
+		if err != nil {
+			ctx.Errorf(retCode, "verify delete doc uri data failed. %s.", err)
+			return
+		}
+
+		reqCtx := ctx.RequestCtx
+		bsDoc := business.NewBsDoc(reqCtx)
+		err = bsDoc.DocDel(uriData.DocId)
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDBDeleteFailed.Clone(), "delete doc failed. %s", err)
+			return
+		}
+
+		ctx.Logger.Warnf("delete doc. doc_id: %d, %#v", uriData.DocId, ses.Auth)
+
 		ctx.Success()
 		return
 	},
@@ -173,7 +195,7 @@ var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		reqCtx := ctx.RequestCtx
 
 		dbClient := table.NewHubDB(reqCtx)
-		doc, err := dbClient.AhDocGetByTitle(postData.Title) // TODO 获取在线的
+		doc, err := dbClient.AhDocGetByTitle(postData.Title)
 		if nil != err && err != sql.ErrNoRows {
 			ctx.Errorf(code.CodeErrorDBQueryFailed.Clone(), "get ah_doc by title and spec_url failed. %s", err)
 			return
@@ -233,12 +255,12 @@ var DocDetailSpec ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	Handle: func(ctx *ginbuilder.Context) (err error) {
 		// request path data
 		type PathData struct {
-			DocId uint32 `json:"doc_id" form:"doc_id" binding:"required"`
+			DocId uint32 `json:"doc_id" uri:"doc_id" binding:"required"` // 文档ID
 		}
 		pathData := PathData{}
-		retCode, err := ctx.BindPathData(&pathData)
+		retCode, err := ctx.BindUriData(&pathData)
 		if err != nil {
-			ctx.Errorf(retCode, "verify  path data failed. %s.", err)
+			ctx.Errorf(retCode, "verify doc spec path data failed. %s.", err)
 			return
 		}
 

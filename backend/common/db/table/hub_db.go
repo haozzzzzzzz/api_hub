@@ -56,11 +56,11 @@ func (m *HubDB) AhDocAddTx(
 	strSql := `
 		INSERT INTO ah_doc
 		(
-			doc_id, title, spec_url, spec_content, category_id, author_id, post_status, update_time, create_time
+			title, spec_url, spec_content, category_id, author_id, post_status, update_time, create_time
 		)
 		VALUES
 		(
-			:doc_id, :title, :spec_url, :spec_content, :category_id, :author_id, :post_status, :update_time, :create_time
+			:title, :spec_url, :spec_content, :category_id, :author_id, :post_status, :update_time, :create_time
 		)
 	`
 	result, err := tx.NamedExec(strSql, doc)
@@ -111,6 +111,18 @@ func (m *HubDB) AhDocUpdate(
 	)
 	if nil != err {
 		logrus.Errorf("update ah_doc failed. error: %s.", err)
+		return
+	}
+	return
+}
+
+func (m *HubDB) AhDocDelTx(tx *sqlx.Tx, docId uint32) (err error) {
+	strSql := `
+		DELETE FROM ah_doc WHERE doc_id=? LIMIT 1
+	`
+	_, err = tx.Exec(strSql, docId)
+	if nil != err {
+		logrus.Errorf("del ah doc failed. error: %s.", err)
 		return
 	}
 	return
@@ -344,7 +356,7 @@ func (m *HubDB) AhCategoryBatch(catIds []uint32) (mCategory map[uint32]*model.Ah
 func (m *HubDB) AhCategoryDocNumIncrTx(
 	tx *sqlx.Tx,
 	catId uint32,
-	incrNum uint32,
+	incrNum int,
 	updateTime int64,
 ) (err error) {
 	strSql := `

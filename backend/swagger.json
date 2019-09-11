@@ -348,6 +348,7 @@
 				"parameters": [
 					{
 						"type": "integer",
+						"description": "文档ID",
 						"name": "doc_id",
 						"in": "path",
 						"required": true
@@ -514,8 +515,17 @@
 				"produces": [
 					"application/json"
 				],
-				"summary": "删除文档（暂不可用）",
+				"summary": "删除文档",
 				"operationId": "POST-/api/api_hub/v1/doc/doc/delete/{doc_id}",
+				"parameters": [
+					{
+						"type": "integer",
+						"description": "文档ID",
+						"name": "doc_id",
+						"in": "path",
+						"required": true
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "success"
@@ -560,11 +570,9 @@
 									"type": "object",
 									"properties": {
 										"count": {
-											"description": "记录数目",
 											"type": "integer"
 										},
 										"items": {
-											"description": "文档记录",
 											"type": "array",
 											"items": {
 												"type": "object",

@@ -30,11 +30,12 @@ type DocListItem struct {
 func (m *BsDoc) DocList(
 	page uint32,
 	limit uint8,
+	search string,
 ) (items []*DocListItem, err error) {
 	items = make([]*DocListItem, 0)
 
 	dbClient := table.NewHubDB(m.Ctx)
-	docs, err := dbClient.AhDocList(page, limit)
+	docs, err := dbClient.AhDocList(page, limit, search)
 	if nil != err {
 		logrus.Errorf("get doc list items failed. error: %s.", err)
 		return

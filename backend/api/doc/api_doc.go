@@ -6,7 +6,9 @@ import (
 	"backend/common/db/model"
 	"backend/common/db/table"
 	"database/sql"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"strings"
 	"time"
 
 	"github.com/haozzzzzzzz/go-rapid-development/api/code"
@@ -23,8 +25,9 @@ var DocList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	Handle: func(ctx *ginbuilder.Context) (err error) {
 		// request query data
 		type QueryData struct {
-			Page  uint32 `json:"page" form:"page" binding:"required"`   // 分页ID
-			Limit uint8  `json:"limit" form:"limit" binding:"required"` // 分页大小
+			Page   uint32 `json:"page" form:"page" binding:"required"`   // 分页ID
+			Limit  uint8  `json:"limit" form:"limit" binding:"required"` // 分页大小
+			Search string `json:"search" form:"search"`
 		}
 		queryData := QueryData{}
 		retCode, err := ctx.BindQueryData(&queryData)
@@ -33,6 +36,9 @@ var DocList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 			return
 		}
 
+		queryData.Search = strings.TrimSpace(queryData.Search)
+
+		fmt.Println(queryData.Search)
 		// response data
 		type ResponseData struct {
 			Count int64                   `json:"count"` // 记录数目
@@ -45,14 +51,14 @@ var DocList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		reqCtx := ctx.RequestCtx
 
 		dbClient := table.NewHubDB(reqCtx)
-		respData.Count, err = dbClient.AhDocCount()
+		respData.Count, err = dbClient.AhDocCount(queryData.Search)
 		if nil != err {
 			ctx.Errorf(code.CodeErrorDBQueryFailed.Clone(), "query doc count failed. %s", err)
 			return
 		}
 
 		bsDoc := business.NewBsDoc(reqCtx)
-		respData.Items, err = bsDoc.DocList(queryData.Page, queryData.Limit)
+		respData.Items, err = bsDoc.DocList(queryData.Page, queryData.Limit, queryData.Search)
 		if nil != err {
 			ctx.Errorf(code.CodeErrorServer.Clone(), "get doc list failed. %s", err)
 			return

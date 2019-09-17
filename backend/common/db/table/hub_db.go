@@ -5,6 +5,7 @@ import (
 	"backend/common/db/model"
 	"context"
 	"database/sql"
+	"fmt"
 
 	"github.com/sirupsen/logrus"
 
@@ -188,6 +189,7 @@ func (m *HubDB) AhDocGetByTitle(
 func (m *HubDB) AhDocList(
 	pageId uint32,
 	limit uint8,
+	search string,
 ) (docs []*model.AhDoc, err error) {
 	docs = make([]*model.AhDoc, 0)
 	if pageId <= 0 || limit == 0 {
@@ -206,10 +208,20 @@ func (m *HubDB) AhDocList(
 			create_time
 		FROM
 			ah_doc
+		%s
 		ORDER BY doc_id DESC
 		LIMIT ? OFFSET ?
-`
-	err = m.Select(&docs, strSql, limit, (pageId-1)*uint32(limit))
+	`
+	args := make([]interface{}, 0)
+	if search != "" {
+		strSql = fmt.Sprintf(strSql, "WHERE title LIKE ?")
+		args = append(args, "%"+search+"%", limit, (pageId-1)*uint32(limit))
+	} else {
+		strSql = fmt.Sprintf(strSql, "")
+		args = append(args, limit, (pageId-1)*uint32(limit))
+	}
+
+	err = m.Select(&docs, strSql, args...)
 	if nil != err {
 		logrus.Errorf("db get docs failed. error: %s.", err)
 		return
@@ -218,11 +230,20 @@ func (m *HubDB) AhDocList(
 	return
 }
 
-func (m *HubDB) AhDocCount() (count int64, err error) {
+func (m *HubDB) AhDocCount(search string) (count int64, err error) {
 	strSql := `
-		SELECT COUNT(*) FROM ah_doc
+		SELECT COUNT(*) FROM ah_doc %s
 	`
-	err = m.Get(&count, strSql)
+
+	args := make([]interface{}, 0)
+	if search != "" {
+		strSql = fmt.Sprintf(strSql, " WHERE title LIKE ? ")
+		args = append(args, "%"+search+"%")
+	} else {
+		strSql = fmt.Sprintf(strSql, "")
+	}
+
+	err = m.Get(&count, strSql, args...)
 	if nil != err {
 		logrus.Errorf("get ah_doc count failed. error: %s.", err)
 		return

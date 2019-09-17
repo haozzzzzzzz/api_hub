@@ -1,5 +1,11 @@
 <template>
     <div class="tab-content">
+        <div style="margin-bottom: 15px;">
+            <el-input placeholder="请输入搜索内容" v-model="search" class="input-with-select">
+                <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
+            </el-input>
+        </div>
+
         <el-table
                 :data="items"
                 style="width: 100%"
@@ -75,6 +81,7 @@
             return {
                 pageSize: 20,
                 count: 0,
+                search: '',
                 items: []
             }
         },
@@ -89,9 +96,12 @@
                     }
                 })
             },
+            handleSearch(){
+                this.handleCurrentChange(1)
+            },
             handleCurrentChange: function (page) {
                 this.items = [];
-                apis.docList(this, page, this.pageSize, (data, err) => {
+                apis.docList(this, page, this.pageSize, this.search.trim(), (data, err) => {
                     if (err) {
                         return
                     }
@@ -157,6 +167,10 @@
 
     .el-tag {
         margin-right: 5px;
+    }
+
+    .tab-content .input-with-select .el-input-group__prepend {
+        background-color: #fff !important;
     }
 
 </style>

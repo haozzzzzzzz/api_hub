@@ -58,15 +58,17 @@ export default {
      * @param comp component
      * @param pageId page id
      * @param limit page limit size
+     * @param search search word
      * @param callback callback function
      */
-    docList(comp, pageId, limit, callback) {
+    docList(comp, pageId, limit, search, callback) {
         client({
             method: 'get',
             url: '/api/api_hub/v1/doc/doc/list',
             params: {
                 page: pageId,
                 limit: limit,
+                search: search,
             }
         }).then(function (response) {
             handleResponse(comp, response, null, callback);

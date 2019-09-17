@@ -6,7 +6,6 @@ import (
 	"backend/common/db/model"
 	"backend/common/db/table"
 	"database/sql"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"strings"
 	"time"
@@ -38,7 +37,6 @@ var DocList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		queryData.Search = strings.TrimSpace(queryData.Search)
 
-		fmt.Println(queryData.Search)
 		// response data
 		type ResponseData struct {
 			Count int64                   `json:"count"` // 记录数目

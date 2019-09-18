@@ -12,6 +12,8 @@ import (
 	"strings"
 )
 
+// 代理接口
+// @api_doc_tags: 代理
 var ReverseProxy ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "ANY",
 	RelativePaths: []string{

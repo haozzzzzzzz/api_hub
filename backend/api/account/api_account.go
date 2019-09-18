@@ -6,6 +6,7 @@ import (
 )
 
 // 账户目录（暂不可用）
+// @api_doc_tags: 账号
 var AccountList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "GET",
 	RelativePaths: []string{
@@ -41,6 +42,7 @@ var AccountList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 }
 
 // 添加账户（暂不可用）
+// @api_doc_tags: 账号
 var AccountAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{
@@ -72,6 +74,7 @@ var AccountAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 }
 
 // 更新账户（暂不可用）
+// @api_doc_tags: 账号
 var AccountUpdate ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{

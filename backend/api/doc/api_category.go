@@ -6,6 +6,7 @@ import (
 )
 
 // 目录列表（暂不可用）
+// @api_doc_tags: 目录
 var CategoryList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "GET",
 	RelativePaths: []string{
@@ -41,6 +42,7 @@ var CategoryList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 }
 
 // 添加目录（暂不可用）
+// @api_doc_tags: 目录
 var CategoryAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{

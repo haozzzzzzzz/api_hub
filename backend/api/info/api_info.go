@@ -5,6 +5,7 @@ import (
 )
 
 // 测试ACK
+// @api_doc_tags: 信息
 var InfoSayHi ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "GET",
 	RelativePaths: []string{

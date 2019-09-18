@@ -16,6 +16,7 @@ import (
 )
 
 // 文档列表
+// @api_doc_tags: 文档
 var DocList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "GET",
 	RelativePaths: []string{
@@ -68,6 +69,7 @@ var DocList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 }
 
 // 添加文档
+// @api_doc_tags: 文档
 var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{
@@ -127,6 +129,7 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 }
 
 // 删除文档
+// @api_doc_tags: 文档
 var DocDelele ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{
@@ -162,6 +165,7 @@ var DocDelele ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 }
 
 // 检查并且创建文档
+// @api_doc_tags: 文档
 var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{
@@ -251,6 +255,7 @@ var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 }
 
 // 查看文档的swagger.json
+// @api_doc_tags: 文档
 var DocDetailSpec ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "GET",
 	RelativePaths: []string{

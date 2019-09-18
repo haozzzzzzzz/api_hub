@@ -16,6 +16,8 @@
   - /api/api_hub/info/reply/say_hi
   summary: 测试ACK
   description: ""
+  tags:
+  - 信息
 - apiitemparams:
     header_data: null
     uri_data: null
@@ -59,6 +61,8 @@
   - /api/api_hub/v1/account/account/add
   summary: 添加账户（暂不可用）
   description: ""
+  tags:
+  - 账号
 - apiitemparams:
     header_data: null
     uri_data: null
@@ -163,6 +167,8 @@
   - /api/api_hub/v1/account/account/list
   summary: 账户目录（暂不可用）
   description: ""
+  tags:
+  - 账号
 - apiitemparams:
     header_data: null
     uri_data:
@@ -209,6 +215,8 @@
   - /api/api_hub/v1/account/account/update/:account_id
   summary: 更新账户（暂不可用）
   description: ""
+  tags:
+  - 账号
 - apiitemparams:
     header_data: null
     uri_data: null
@@ -252,6 +260,8 @@
   - /api/api_hub/v1/doc/category/add
   summary: 添加目录（暂不可用）
   description: ""
+  tags:
+  - 目录
 - apiitemparams:
     header_data: null
     uri_data: null
@@ -292,7 +302,7 @@
         typespec:
           type_class: basic
           name: int64
-        description: 记录数目
+        description: ""
       - name: Items
         type_name: '[]AhCategory'
         tags:
@@ -351,7 +361,7 @@
                 name: int64
               description: ""
             description: ""
-        description: 文档记录
+        description: ""
       description: ""
   api_handler_func_type: 1
   api_handler_func: CategoryList
@@ -365,6 +375,8 @@
   - /api/api_hub/v1/doc/category/list
   summary: 目录列表（暂不可用）
   description: ""
+  tags:
+  - 目录
 - apiitemparams:
     header_data: null
     uri_data:
@@ -397,6 +409,8 @@
   - /api/api_hub/v1/doc/detail/spec/:doc_id
   summary: 查看文档的swagger.json
   description: ""
+  tags:
+  - 文档
 - apiitemparams:
     header_data: null
     uri_data: null
@@ -469,6 +483,8 @@
   - /api/api_hub/v1/doc/doc/add
   summary: 添加文档
   description: ""
+  tags:
+  - 文档
 - apiitemparams:
     header_data: null
     uri_data: null
@@ -486,7 +502,7 @@
         typespec:
           type_class: basic
           name: string
-        description: 标题
+        description: 文档标题
       - name: CategoryId
         type_name: uint32
         tags:
@@ -514,7 +530,7 @@
         typespec:
           type_class: basic
           name: string
-        description: ""
+        description: swagger content
       description: ""
     response_data:
       type_class: struct
@@ -541,6 +557,8 @@
   - /api/api_hub/v1/doc/doc/check_post
   summary: 检查并且创建文档
   description: ""
+  tags:
+  - 文档
 - apiitemparams:
     header_data: null
     uri_data:
@@ -573,6 +591,8 @@
   - /api/api_hub/v1/doc/doc/delete/:doc_id
   summary: 删除文档
   description: ""
+  tags:
+  - 文档
 - apiitemparams:
     header_data: null
     uri_data: null
@@ -600,6 +620,15 @@
           type_class: basic
           name: uint8
         description: 分页大小
+      - name: Search
+        type_name: string
+        tags:
+          form: search
+          json: search
+        typespec:
+          type_class: basic
+          name: string
+        description: ""
       description: ""
     post_data: null
     response_data:
@@ -697,6 +726,8 @@
   - /api/api_hub/v1/doc/doc/list
   summary: 文档列表
   description: ""
+  tags:
+  - 文档
 - apiitemparams:
     header_data: null
     uri_data:
@@ -736,5 +767,7 @@
   http_method: ANY
   relative_paths:
   - /api/api_hub/v1/reverse_proxy/:proxy_type/*target_uri
-  summary: ""
+  summary: 代理接口
   description: ""
+  tags:
+  - 代理

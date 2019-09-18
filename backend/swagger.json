@@ -22,6 +22,9 @@
 				"produces": [
 					"application/json"
 				],
+				"tags": [
+					"信息"
+				],
 				"summary": "测试ACK",
 				"operationId": "GET-/api/api_hub/info/reply/say_hi",
 				"responses": {
@@ -38,6 +41,9 @@
 				],
 				"produces": [
 					"application/json"
+				],
+				"tags": [
+					"账号"
 				],
 				"summary": "添加账户（暂不可用）",
 				"operationId": "POST-/api/api_hub/v1/account/account/add",
@@ -92,6 +98,9 @@
 				],
 				"produces": [
 					"application/json"
+				],
+				"tags": [
+					"账号"
 				],
 				"summary": "账户目录（暂不可用）",
 				"operationId": "GET-/api/api_hub/v1/account/account/list",
@@ -168,6 +177,9 @@
 				"produces": [
 					"application/json"
 				],
+				"tags": [
+					"账号"
+				],
 				"summary": "更新账户（暂不可用）",
 				"operationId": "POST-/api/api_hub/v1/account/account/update/{account_id}",
 				"parameters": [
@@ -208,6 +220,9 @@
 				],
 				"produces": [
 					"application/json"
+				],
+				"tags": [
+					"目录"
 				],
 				"summary": "添加目录（暂不可用）",
 				"operationId": "POST-/api/api_hub/v1/doc/category/add",
@@ -263,6 +278,9 @@
 				"produces": [
 					"application/json"
 				],
+				"tags": [
+					"目录"
+				],
 				"summary": "目录列表（暂不可用）",
 				"operationId": "GET-/api/api_hub/v1/doc/category/list",
 				"parameters": [
@@ -292,11 +310,9 @@
 									"type": "object",
 									"properties": {
 										"count": {
-											"description": "记录数目",
 											"type": "integer"
 										},
 										"items": {
-											"description": "文档记录",
 											"type": "array",
 											"items": {
 												"type": "object",
@@ -343,6 +359,9 @@
 				"produces": [
 					"application/json"
 				],
+				"tags": [
+					"文档"
+				],
 				"summary": "查看文档的swagger.json",
 				"operationId": "GET-/api/api_hub/v1/doc/detail/spec/{doc_id}",
 				"parameters": [
@@ -368,6 +387,9 @@
 				],
 				"produces": [
 					"application/json"
+				],
+				"tags": [
+					"文档"
 				],
 				"summary": "添加文档",
 				"operationId": "POST-/api/api_hub/v1/doc/doc/add",
@@ -442,6 +464,9 @@
 				"produces": [
 					"application/json"
 				],
+				"tags": [
+					"文档"
+				],
 				"summary": "检查并且创建文档",
 				"operationId": "POST-/api/api_hub/v1/doc/doc/check_post",
 				"parameters": [
@@ -460,6 +485,7 @@
 									]
 								},
 								"spec_content": {
+									"description": "swagger content",
 									"type": "string"
 								},
 								"spec_url": {
@@ -467,7 +493,7 @@
 									"type": "string"
 								},
 								"title": {
-									"description": "标题",
+									"description": "文档标题",
 									"type": "string",
 									"required": [
 										"title"
@@ -515,6 +541,9 @@
 				"produces": [
 					"application/json"
 				],
+				"tags": [
+					"文档"
+				],
 				"summary": "删除文档",
 				"operationId": "POST-/api/api_hub/v1/doc/doc/delete/{doc_id}",
 				"parameters": [
@@ -541,6 +570,9 @@
 				"produces": [
 					"application/json"
 				],
+				"tags": [
+					"文档"
+				],
 				"summary": "文档列表",
 				"operationId": "GET-/api/api_hub/v1/doc/doc/list",
 				"parameters": [
@@ -557,6 +589,11 @@
 						"name": "limit",
 						"in": "query",
 						"required": true
+					},
+					{
+						"type": "string",
+						"name": "search",
+						"in": "query"
 					}
 				],
 				"responses": {
@@ -624,6 +661,231 @@
 				}
 			}
 		},
-		"/api/api_hub/v1/reverse_proxy/{proxy_type}/*target_uri": {}
+		"/api/api_hub/v1/reverse_proxy/{proxy_type}/*target_uri": {
+			"get": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"tags": [
+					"代理"
+				],
+				"summary": "代理接口",
+				"operationId": "GET-/api/api_hub/v1/reverse_proxy/{proxy_type}/*target_uri",
+				"parameters": [
+					{
+						"type": "string",
+						"name": "proxy_type",
+						"in": "path",
+						"required": true
+					},
+					{
+						"type": "string",
+						"name": "target_uri",
+						"in": "path",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					}
+				}
+			},
+			"put": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"tags": [
+					"代理"
+				],
+				"summary": "代理接口",
+				"operationId": "PUT-/api/api_hub/v1/reverse_proxy/{proxy_type}/*target_uri",
+				"parameters": [
+					{
+						"type": "string",
+						"name": "proxy_type",
+						"in": "path",
+						"required": true
+					},
+					{
+						"type": "string",
+						"name": "target_uri",
+						"in": "path",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					}
+				}
+			},
+			"post": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"tags": [
+					"代理"
+				],
+				"summary": "代理接口",
+				"operationId": "POST-/api/api_hub/v1/reverse_proxy/{proxy_type}/*target_uri",
+				"parameters": [
+					{
+						"type": "string",
+						"name": "proxy_type",
+						"in": "path",
+						"required": true
+					},
+					{
+						"type": "string",
+						"name": "target_uri",
+						"in": "path",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					}
+				}
+			},
+			"delete": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"tags": [
+					"代理"
+				],
+				"summary": "代理接口",
+				"operationId": "DELETE-/api/api_hub/v1/reverse_proxy/{proxy_type}/*target_uri",
+				"parameters": [
+					{
+						"type": "string",
+						"name": "proxy_type",
+						"in": "path",
+						"required": true
+					},
+					{
+						"type": "string",
+						"name": "target_uri",
+						"in": "path",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					}
+				}
+			},
+			"options": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"tags": [
+					"代理"
+				],
+				"summary": "代理接口",
+				"operationId": "OPTIONS-/api/api_hub/v1/reverse_proxy/{proxy_type}/*target_uri",
+				"parameters": [
+					{
+						"type": "string",
+						"name": "proxy_type",
+						"in": "path",
+						"required": true
+					},
+					{
+						"type": "string",
+						"name": "target_uri",
+						"in": "path",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					}
+				}
+			},
+			"head": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"tags": [
+					"代理"
+				],
+				"summary": "代理接口",
+				"operationId": "HEAD-/api/api_hub/v1/reverse_proxy/{proxy_type}/*target_uri",
+				"parameters": [
+					{
+						"type": "string",
+						"name": "proxy_type",
+						"in": "path",
+						"required": true
+					},
+					{
+						"type": "string",
+						"name": "target_uri",
+						"in": "path",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					}
+				}
+			},
+			"patch": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"tags": [
+					"代理"
+				],
+				"summary": "代理接口",
+				"operationId": "PATCH-/api/api_hub/v1/reverse_proxy/{proxy_type}/*target_uri",
+				"parameters": [
+					{
+						"type": "string",
+						"name": "proxy_type",
+						"in": "path",
+						"required": true
+					},
+					{
+						"type": "string",
+						"name": "target_uri",
+						"in": "path",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					}
+				}
+			}
+		}
 	}
 }

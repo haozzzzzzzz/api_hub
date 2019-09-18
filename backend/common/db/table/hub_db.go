@@ -79,12 +79,14 @@ func (m *HubDB) AhDocAddTx(
 	return
 }
 
-func (m *HubDB) AhDocUpdate(
+func (m *HubDB) AhDocUpdateTx(
+	tx *sqlx.Tx,
 	docId uint32,
 	title string,
 	specUrl string,
 	specContent string,
 	categoryId uint32,
+	authorId uint32,
 	postStatus uint8,
 	updateTime int64,
 ) (result sql.Result, err error) {
@@ -95,17 +97,19 @@ func (m *HubDB) AhDocUpdate(
 			spec_url=?,
 			spec_content=?,
 			category_id=?,
+			author_id=?,
 			post_status=?,
 			update_time=?
 		WHERE
 			doc_id=?
 		LIMIT 1
 	`
-	result, err = m.Exec(strSql,
+	result, err = tx.Exec(strSql,
 		title,
 		specUrl,
 		specContent,
 		categoryId,
+		authorId,
 		postStatus,
 		updateTime,
 		docId,
@@ -252,6 +256,82 @@ func (m *HubDB) AhDocCount(search string) (count int64, err error) {
 }
 
 // ah_account
+func (m *HubDB) AhAccountCount() (count int64, err error) {
+	strSql := `
+		SELECT COUNT(*) FROM ah_account
+	`
+	err = m.Get(&count, strSql)
+	if nil != err {
+		logrus.Errorf("get account count failed. error: %s.", err)
+		return
+	}
+	return
+}
+
+func (m *HubDB) AhAccountList(page uint32, limit uint8) (items []*model.AhAccount, err error) {
+	items = make([]*model.AhAccount, 0)
+	if page < 1 || limit <= 0 {
+		return
+	}
+
+	strSql := `
+		SELECT
+			acc_id,
+			name,
+			update_time,
+			create_time
+		FROM
+			ah_account
+		ORDER BY acc_id ASC
+		LIMIT ? OFFSET ?
+	`
+	err = m.Select(&items, strSql, limit, (page-1)*uint32(limit))
+	if nil != err {
+		logrus.Errorf("get account list failed. error: %s.", err)
+		return
+	}
+	return
+}
+
+func (m *HubDB) AhAccountAdd(account *model.AhAccount) (result sql.Result, err error) {
+	strSql := `
+		INSERT INTO ah_account
+		(
+			name,
+			update_time,
+			create_time
+		) VALUES (
+			:name,
+			:update_time,
+			:create_time
+		)
+	`
+	result, err = m.NamedExec(strSql, account)
+	if nil != err {
+		logrus.Errorf("add account failed. error: %s.", err)
+		return
+	}
+	return
+}
+
+func (m *HubDB) AhAccountUpdate(accId uint32, name string, updateTime int64) (err error) {
+	strSql := `
+		UPDATE ah_account
+		SET
+			name=?,
+			update_time=?
+		WHERE
+			acc_id=?
+		LIMIT 1
+	`
+	_, err = m.Exec(strSql, name, updateTime, accId)
+	if nil != err {
+		logrus.Errorf("update account failed. error: %s.", err)
+		return
+	}
+	return
+}
+
 func (m *HubDB) AhAccountGet(
 	accId uint32,
 ) (account *model.AhAccount, err error) {
@@ -312,6 +392,89 @@ func (m *HubDB) AhAccountBatch(accIds []uint32) (mAccount map[uint32]*model.AhAc
 }
 
 // 目录
+func (m *HubDB) AhCategoryCount() (count int64, err error) {
+	strSql := `SELECT COUNT(*) FROM ah_category`
+	err = m.Get(&count, strSql)
+	if nil != err {
+		logrus.Errorf("get ah category count failed. error: %s.", err)
+		return
+	}
+	return
+}
+
+func (m *HubDB) AhCategoryList(page uint32, limit uint8) (items []*model.AhCategory, err error) {
+	items = make([]*model.AhCategory, 0)
+	if page < 1 || limit <= 0 {
+		return
+	}
+
+	strSql := `
+		SELECT
+			cat_id,
+			name,
+			doc_num,
+			update_time,
+			create_time
+		FROM
+			ah_category
+		ORDER BY cat_id ASC
+		LIMIT ? OFFSET ?
+	`
+	err = m.Select(&items, strSql, limit, (page-1)*uint32(limit))
+	if nil != err {
+		logrus.Errorf("get ah category list failed. error: %s.", err)
+		return
+	}
+	return
+}
+
+func (m *HubDB) AhCategoryAdd(
+	cat *model.AhCategory,
+) (result sql.Result, err error) {
+	strSql := `
+		INSERT INTO ah_category
+		(
+			name,
+			doc_num,
+			update_time,
+			create_time
+		) VALUES (
+			:name,
+			:doc_num,
+			:update_time,
+			:create_time
+		)
+	`
+	result, err = m.NamedExec(strSql, cat)
+	if nil != err {
+		logrus.Errorf("add category failed. error: %s.", err)
+		return
+	}
+	return
+}
+
+func (m *HubDB) AhCategoryUpdate(
+	catId uint32,
+	name string,
+	updateTime int64,
+) (err error) {
+	strSql := `
+		UPDATE ah_category
+		SET
+			name=?,
+			update_time=?
+		WHERE
+			cat_id=?
+		LIMIT 1
+	`
+	_, err = m.Exec(strSql, name, updateTime, catId)
+	if nil != err {
+		logrus.Errorf("update category failed. error: %s.", err)
+		return
+	}
+	return
+}
+
 func (m *HubDB) AhCategoryGet(
 	catId uint32,
 ) (cat *model.AhCategory, err error) {

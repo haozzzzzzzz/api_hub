@@ -2,10 +2,13 @@ package account
 
 import (
 	"backend/common/db/model"
+	"backend/common/db/table"
+	"github.com/haozzzzzzzz/go-rapid-development/api/code"
 	"github.com/haozzzzzzzz/go-rapid-development/web/ginbuilder"
+	"time"
 )
 
-// 账户目录（暂不可用）
+// 账户目录
 // @api_doc_tags: 账号
 var AccountList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "GET",
@@ -34,14 +37,26 @@ var AccountList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 			Items: make([]*model.AhAccount, 0),
 		}
 
-		// TODO
+		reqCtx := ctx.RequestCtx
+		dbClient := table.NewHubDB(reqCtx)
+		respData.Count, err = dbClient.AhAccountCount()
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDBQueryFailed.Clone(), "get account count failed. %s", err)
+			return
+		}
+
+		respData.Items, err = dbClient.AhAccountList(queryData.Page, queryData.Limit)
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDBQueryFailed.Clone(), "get account list failed. %s", err)
+			return
+		}
 
 		ctx.SuccessReturn(respData)
 		return
 	},
 }
 
-// 添加账户（暂不可用）
+// 添加账户
 // @api_doc_tags: 账号
 var AccountAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
@@ -66,14 +81,31 @@ var AccountAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		}
 		respData := &ResponseData{}
 
-		// TODO
+		reqCtx := ctx.RequestCtx
+		dbClient := table.NewHubDB(reqCtx)
+		now := time.Now().Unix()
+		result, err := dbClient.AhAccountAdd(&model.AhAccount{
+			Name:       postData.Name,
+			UpdateTime: now,
+			CreateTime: now,
+		})
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDBInsertFailed.Clone(), "add ah account failed. %s", err)
+			return
+		}
+
+		respData.NewAccountId, err = result.LastInsertId()
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDB.Clone(), "get last insert id failed. %s", err)
+			return
+		}
 
 		ctx.SuccessReturn(respData)
 		return
 	},
 }
 
-// 更新账户（暂不可用）
+// 更新账户
 // @api_doc_tags: 账号
 var AccountUpdate ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
@@ -83,12 +115,12 @@ var AccountUpdate ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	Handle: func(ctx *ginbuilder.Context) (err error) {
 		// request uri data
 		type UriData struct {
-			AccountId string `json:"account_id" uri:"account_id" binding:"required"`
+			AccountId uint32 `json:"account_id" uri:"account_id" binding:"required"`
 		}
 		uriData := UriData{}
 		retCode, err := ctx.BindUriData(&uriData)
 		if err != nil {
-			ctx.Errorf(retCode, "verify  uri data failed. %s.", err)
+			ctx.Errorf(retCode, "verify update account uri data failed. %s.", err)
 			return
 		}
 
@@ -99,11 +131,17 @@ var AccountUpdate ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		postData := PostData{}
 		retCode, err = ctx.BindPostData(&postData)
 		if err != nil {
-			ctx.Errorf(retCode, "verify  post data failed. %s.", err)
+			ctx.Errorf(retCode, "verify update account post data failed. %s.", err)
 			return
 		}
 
-		// TODO
+		reqCtx := ctx.RequestCtx
+		dbClient := table.NewHubDB(reqCtx)
+		err = dbClient.AhAccountUpdate(uriData.AccountId, postData.Name, time.Now().Unix())
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDBUpdateFailed.Clone(), "update account failed. %s", err)
+			return
+		}
 
 		ctx.Success()
 		return

@@ -16,11 +16,15 @@ func BindRouters(engine *gin.Engine) (err error) {
 	engine.Handle("POST", "/api/api_hub/v1/account/account/update/:account_id", account.AccountUpdate.GinHandler)
 	engine.Handle("POST", "/api/api_hub/v1/doc/category/add", doc.CategoryAdd.GinHandler)
 	engine.Handle("GET", "/api/api_hub/v1/doc/category/list", doc.CategoryList.GinHandler)
+	engine.Handle("POST", "/api/api_hub/v1/doc/category/update/:cat_id", doc.CategoryUpdate.GinHandler)
 	engine.Handle("GET", "/api/api_hub/v1/doc/detail/spec/:doc_id", doc.DocDetailSpec.GinHandler)
 	engine.Handle("POST", "/api/api_hub/v1/doc/doc/add", doc.DocAdd.GinHandler)
+	engine.Handle("POST", "/api/api_hub/v1/doc/doc/change_author/:doc_id", doc.DocChangeAuthor.GinHandler)
+	engine.Handle("POST", "/api/api_hub/v1/doc/doc/change_category/:doc_id", doc.DocChangeCategory.GinHandler)
 	engine.Handle("POST", "/api/api_hub/v1/doc/doc/check_post", doc.DocCheckPost.GinHandler)
 	engine.Handle("POST", "/api/api_hub/v1/doc/doc/delete/:doc_id", doc.DocDelele.GinHandler)
 	engine.Handle("GET", "/api/api_hub/v1/doc/doc/list", doc.DocList.GinHandler)
+	engine.Handle("POST", "/api/api_hub/v1/doc/doc/update/:doc_id", doc.DocUpdate.GinHandler)
 	engine.Any("/api/api_hub/v1/reverse_proxy/:proxy_type/*target_uri", proxy.ReverseProxy.GinHandler)
 	return
 }

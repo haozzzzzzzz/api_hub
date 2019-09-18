@@ -128,6 +128,186 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	},
 }
 
+/*
+更新文档
+@api_doc_tags: 文档
+更新文档
+*/
+var DocUpdate ginbuilder.HandleFunc = ginbuilder.HandleFunc{
+	HttpMethod: "POST",
+	RelativePaths: []string{
+		"/api/api_hub/v1/doc/doc/update/:doc_id",
+	},
+	Handle: func(ctx *ginbuilder.Context) (err error) {
+		ses := session.GetSession(ctx)
+
+		// request uri data
+		type UriData struct {
+			DocId uint32 `json:"doc_id" uri:"doc_id" binding:"required"`
+		}
+		uriData := UriData{}
+		retCode, err := ctx.BindUriData(&uriData)
+		if err != nil {
+			ctx.Errorf(retCode, "verify  uri data failed. %s.", err)
+			return
+		}
+
+		// request post data
+		type PostData struct {
+			Title       string `json:"title" form:"title" binding:"required"`             // 文档标题
+			CategoryId  uint32 `json:"category_id" form:"category_id" binding:"required"` // 分类ID
+			SpecUrl     string `json:"spec_url" form:"spec_url"`                          // swagger.json url
+			SpecContent string `json:"spec_content" form:"spec_content"`                  // swagger content
+		}
+		postData := PostData{}
+		retCode, err = ctx.BindPostData(&postData)
+		if err != nil {
+			ctx.Errorf(retCode, "verify  post data failed. %s.", err)
+			return
+		}
+
+		if postData.SpecUrl == "" && postData.SpecContent == "" {
+			retCode.Message = "require spec"
+			ctx.Errorf(retCode, "spec is empty")
+			return
+		}
+
+		reqCtx := ctx.RequestCtx
+		bsDoc := business.NewBsDoc(reqCtx)
+		err = bsDoc.DocUpdate(
+			uriData.DocId,
+			postData.Title,
+			postData.CategoryId,
+			ses.Auth.AccountId,
+			postData.SpecUrl,
+			postData.SpecContent,
+			time.Now().Unix(),
+		)
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDBUpdateFailed.Clone(), "update doc failed. %s", err)
+			return
+		}
+
+		ctx.Success()
+		return
+	},
+}
+
+/*
+更改目录
+@api_doc_tags: 文档
+*/
+var DocChangeCategory ginbuilder.HandleFunc = ginbuilder.HandleFunc{
+	HttpMethod: "POST",
+	RelativePaths: []string{
+		"/api/api_hub/v1/doc/doc/change_category/:doc_id",
+	},
+	Handle: func(ctx *ginbuilder.Context) (err error) {
+		// request uri data
+		type UriData struct {
+			DocId uint32 `json:"doc_id" uri:"doc_id" binding:"required"`
+		}
+		uriData := UriData{}
+		retCode, err := ctx.BindUriData(&uriData)
+		if err != nil {
+			ctx.Errorf(retCode, "verify change category uri data failed. %s.", err)
+			return
+		}
+
+		// request post data
+		type PostData struct {
+			CategoryId uint32 `json:"category_id" form:"category_id" binding:"required"`
+		}
+		postData := PostData{}
+		retCode, err = ctx.BindPostData(&postData)
+		if err != nil {
+			ctx.Errorf(retCode, "verify  post data failed. %s.", err)
+			return
+		}
+
+		reqCtx := ctx.RequestCtx
+
+		dbClient := table.NewHubDB(reqCtx)
+		doc, err := dbClient.AhDocGet(uriData.DocId)
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDBQueryFailed.Clone(), "get doc failed. %s", err)
+			return
+		}
+
+		if doc.CategoryId == postData.CategoryId {
+			ctx.Success()
+			return
+		}
+
+		bsDoc := business.NewBsDoc(reqCtx)
+		err = bsDoc.DocUpdate(doc.DocId, doc.Title, postData.CategoryId, doc.AuthorId, doc.SpecUrl, doc.SpecContent, time.Now().Unix())
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDBUpdateFailed.Clone(), "update doc category failed. %s", err)
+			return
+		}
+
+		ctx.Success()
+		return
+	},
+}
+
+/*
+更改发布者
+@api_doc_tags: 文档
+*/
+var DocChangeAuthor ginbuilder.HandleFunc = ginbuilder.HandleFunc{
+	HttpMethod: "POST",
+	RelativePaths: []string{
+		"/api/api_hub/v1/doc/doc/change_author/:doc_id",
+	},
+	Handle: func(ctx *ginbuilder.Context) (err error) {
+		// request uri data
+		type UriData struct {
+			DocId uint32 `json:"doc_id" uri:"doc_id" binding:"required"`
+		}
+		uriData := UriData{}
+		retCode, err := ctx.BindUriData(&uriData)
+		if err != nil {
+			ctx.Errorf(retCode, "verify change author uri data failed. %s.", err)
+			return
+		}
+
+		// request post data
+		type PostData struct {
+			AuthorId uint32 `json:"author_id" form:"author_id" binding:"required"`
+		}
+		postData := PostData{}
+		retCode, err = ctx.BindPostData(&postData)
+		if err != nil {
+			ctx.Errorf(retCode, "verify change author post data failed. %s.", err)
+			return
+		}
+
+		reqCtx := ctx.RequestCtx
+		dbClient := table.NewHubDB(reqCtx)
+		doc, err := dbClient.AhDocGet(uriData.DocId)
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDBQueryFailed.Clone(), "get doc failed. %s", err)
+			return
+		}
+
+		if doc.AuthorId == postData.AuthorId {
+			ctx.Success()
+			return
+		}
+
+		bsDoc := business.NewBsDoc(reqCtx)
+		err = bsDoc.DocUpdate(doc.DocId, doc.Title, doc.CategoryId, postData.AuthorId, doc.SpecUrl, doc.SpecContent, time.Now().Unix())
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDBUpdateFailed.Clone(), "update doc category failed. %s", err)
+			return
+		}
+
+		ctx.Success()
+		return
+	},
+}
+
 // 删除文档
 // @api_doc_tags: 文档
 var DocDelele ginbuilder.HandleFunc = ginbuilder.HandleFunc{
@@ -209,18 +389,21 @@ var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 			return
 		}
 
-		if err == nil && doc != nil {
+		bsDoc := business.NewBsDoc(reqCtx)
+		now := time.Now().Unix()
+
+		if err == nil && doc != nil { // update
 			respData.DocId = int64(doc.DocId)
 
 			// update
-			_, err = dbClient.AhDocUpdate(
+			err = bsDoc.DocUpdate(
 				doc.DocId,
 				doc.Title,
+				postData.CategoryId,
+				ses.Auth.AccountId,
 				postData.SpecUrl,
 				postData.SpecContent,
-				doc.CategoryId,
-				doc.PostStatus,
-				time.Now().Unix(),
+				now,
 			)
 			if nil != err {
 				ctx.Errorf(code.CodeErrorDBUpdateFailed.Clone(), "update doc failed. %s", err)
@@ -232,8 +415,6 @@ var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		}
 		err = nil
 
-		bsDoc := business.NewBsDoc(reqCtx)
-		now := time.Now().Unix()
 		respData.DocId, err = bsDoc.DocAdd(&model.AhDoc{
 			Title:       postData.Title,
 			SpecUrl:     postData.SpecUrl,

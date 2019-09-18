@@ -1,9 +1,26 @@
 - apiitemparams:
-    header_data: null
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
     uri_data: null
     query_data: null
     post_data: null
-    response_data: null
+    response_data:
+      type_class: struct
+      name: struct
+      fields: []
+      description: ""
   api_handler_func_type: 1
   api_handler_func: InfoSayHi
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/info/api_info.go
@@ -19,7 +36,20 @@
   tags:
   - 信息
 - apiitemparams:
-    header_data: null
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
     uri_data: null
     query_data: null
     post_data:
@@ -59,12 +89,25 @@
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/account/account/add
-  summary: 添加账户（暂不可用）
+  summary: 添加账户
   description: ""
   tags:
   - 账号
 - apiitemparams:
-    header_data: null
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
     uri_data: null
     query_data:
       type_class: struct
@@ -165,25 +208,38 @@
   http_method: GET
   relative_paths:
   - /api/api_hub/v1/account/account/list
-  summary: 账户目录（暂不可用）
+  summary: 账户目录
   description: ""
   tags:
   - 账号
 - apiitemparams:
-    header_data: null
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
     uri_data:
       type_class: struct
       name: UriData
       fields:
       - name: AccountId
-        type_name: string
+        type_name: uint32
         tags:
           binding: required
           json: account_id
           uri: account_id
         typespec:
           type_class: basic
-          name: string
+          name: uint32
         description: ""
       description: ""
     query_data: null
@@ -202,7 +258,11 @@
           name: string
         description: ""
       description: ""
-    response_data: null
+    response_data:
+      type_class: struct
+      name: struct
+      fields: []
+      description: ""
   api_handler_func_type: 1
   api_handler_func: AccountUpdate
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
@@ -213,12 +273,25 @@
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/account/account/update/:account_id
-  summary: 更新账户（暂不可用）
+  summary: 更新账户
   description: ""
   tags:
   - 账号
 - apiitemparams:
-    header_data: null
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
     uri_data: null
     query_data: null
     post_data:
@@ -258,12 +331,25 @@
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/doc/category/add
-  summary: 添加目录（暂不可用）
+  summary: 添加目录
   description: ""
   tags:
   - 目录
 - apiitemparams:
-    header_data: null
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
     uri_data: null
     query_data:
       type_class: struct
@@ -373,12 +459,90 @@
   http_method: GET
   relative_paths:
   - /api/api_hub/v1/doc/category/list
-  summary: 目录列表（暂不可用）
+  summary: 目录列表
   description: ""
   tags:
   - 目录
 - apiitemparams:
-    header_data: null
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
+    uri_data:
+      type_class: struct
+      name: UriData
+      fields:
+      - name: CatId
+        type_name: uint32
+        tags:
+          binding: required
+          json: cat_id
+          uri: cat_id
+        typespec:
+          type_class: basic
+          name: uint32
+        description: ""
+      description: ""
+    query_data: null
+    post_data:
+      type_class: struct
+      name: PostData
+      fields:
+      - name: Name
+        type_name: string
+        tags:
+          binding: required
+          form: name
+          json: name
+        typespec:
+          type_class: basic
+          name: string
+        description: ""
+      description: ""
+    response_data:
+      type_class: struct
+      name: struct
+      fields: []
+      description: ""
+  api_handler_func_type: 1
+  api_handler_func: CategoryUpdate
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
+  api_handler_package: doc
+  package_exported: backend/api/doc
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
+  package_rel_alias: doc
+  http_method: POST
+  relative_paths:
+  - /api/api_hub/v1/doc/category/update/:cat_id
+  summary: 更新目录
+  description: ""
+  tags:
+  - 目录
+- apiitemparams:
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
     uri_data:
       type_class: struct
       name: PathData
@@ -396,7 +560,11 @@
       description: ""
     query_data: null
     post_data: null
-    response_data: null
+    response_data:
+      type_class: struct
+      name: struct
+      fields: []
+      description: ""
   api_handler_func_type: 1
   api_handler_func: DocDetailSpec
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
@@ -412,7 +580,20 @@
   tags:
   - 文档
 - apiitemparams:
-    header_data: null
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
     uri_data: null
     query_data: null
     post_data:
@@ -428,7 +609,7 @@
         typespec:
           type_class: basic
           name: string
-        description: 标题
+        description: 文档标题
       - name: CategoryId
         type_name: uint32
         tags:
@@ -456,7 +637,7 @@
         typespec:
           type_class: basic
           name: string
-        description: ""
+        description: swagger content
       description: ""
     response_data:
       type_class: struct
@@ -486,7 +667,150 @@
   tags:
   - 文档
 - apiitemparams:
-    header_data: null
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
+    uri_data:
+      type_class: struct
+      name: UriData
+      fields:
+      - name: DocId
+        type_name: uint32
+        tags:
+          binding: required
+          json: doc_id
+          uri: doc_id
+        typespec:
+          type_class: basic
+          name: uint32
+        description: ""
+      description: ""
+    query_data: null
+    post_data:
+      type_class: struct
+      name: PostData
+      fields:
+      - name: AuthorId
+        type_name: uint32
+        tags:
+          binding: required
+          form: author_id
+          json: author_id
+        typespec:
+          type_class: basic
+          name: uint32
+        description: ""
+      description: ""
+    response_data:
+      type_class: struct
+      name: struct
+      fields: []
+      description: ""
+  api_handler_func_type: 1
+  api_handler_func: DocChangeAuthor
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+  api_handler_package: doc
+  package_exported: backend/api/doc
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
+  package_rel_alias: doc
+  http_method: POST
+  relative_paths:
+  - /api/api_hub/v1/doc/doc/change_author/:doc_id
+  summary: 更改发布者
+  description: ""
+  tags:
+  - 文档
+- apiitemparams:
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
+    uri_data:
+      type_class: struct
+      name: UriData
+      fields:
+      - name: DocId
+        type_name: uint32
+        tags:
+          binding: required
+          json: doc_id
+          uri: doc_id
+        typespec:
+          type_class: basic
+          name: uint32
+        description: ""
+      description: ""
+    query_data: null
+    post_data:
+      type_class: struct
+      name: PostData
+      fields:
+      - name: CategoryId
+        type_name: uint32
+        tags:
+          binding: required
+          form: category_id
+          json: category_id
+        typespec:
+          type_class: basic
+          name: uint32
+        description: ""
+      description: ""
+    response_data:
+      type_class: struct
+      name: struct
+      fields: []
+      description: ""
+  api_handler_func_type: 1
+  api_handler_func: DocChangeCategory
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+  api_handler_package: doc
+  package_exported: backend/api/doc
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
+  package_rel_alias: doc
+  http_method: POST
+  relative_paths:
+  - /api/api_hub/v1/doc/doc/change_category/:doc_id
+  summary: 更改目录
+  description: ""
+  tags:
+  - 文档
+- apiitemparams:
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
     uri_data: null
     query_data: null
     post_data:
@@ -560,7 +884,20 @@
   tags:
   - 文档
 - apiitemparams:
-    header_data: null
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
     uri_data:
       type_class: struct
       name: UriData
@@ -574,11 +911,15 @@
         typespec:
           type_class: basic
           name: uint32
-        description: 文档ID
+        description: ""
       description: ""
     query_data: null
     post_data: null
-    response_data: null
+    response_data:
+      type_class: struct
+      name: struct
+      fields: []
+      description: ""
   api_handler_func_type: 1
   api_handler_func: DocDelele
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
@@ -594,7 +935,20 @@
   tags:
   - 文档
 - apiitemparams:
-    header_data: null
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
     uri_data: null
     query_data:
       type_class: struct
@@ -729,7 +1083,113 @@
   tags:
   - 文档
 - apiitemparams:
-    header_data: null
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
+    uri_data:
+      type_class: struct
+      name: UriData
+      fields:
+      - name: DocId
+        type_name: uint32
+        tags:
+          binding: required
+          json: doc_id
+          uri: doc_id
+        typespec:
+          type_class: basic
+          name: uint32
+        description: ""
+      description: ""
+    query_data: null
+    post_data:
+      type_class: struct
+      name: PostData
+      fields:
+      - name: Title
+        type_name: string
+        tags:
+          binding: required
+          form: title
+          json: title
+        typespec:
+          type_class: basic
+          name: string
+        description: 标题
+      - name: CategoryId
+        type_name: uint32
+        tags:
+          binding: required
+          form: category_id
+          json: category_id
+        typespec:
+          type_class: basic
+          name: uint32
+        description: 分类ID
+      - name: SpecUrl
+        type_name: string
+        tags:
+          form: spec_url
+          json: spec_url
+        typespec:
+          type_class: basic
+          name: string
+        description: swagger.json url
+      - name: SpecContent
+        type_name: string
+        tags:
+          form: spec_content
+          json: spec_content
+        typespec:
+          type_class: basic
+          name: string
+        description: ""
+      description: ""
+    response_data:
+      type_class: struct
+      name: struct
+      fields: []
+      description: ""
+  api_handler_func_type: 1
+  api_handler_func: DocUpdate
+  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+  api_handler_package: doc
+  package_exported: backend/api/doc
+  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
+  package_rel_alias: doc
+  http_method: POST
+  relative_paths:
+  - /api/api_hub/v1/doc/doc/update/:doc_id
+  summary: 更新文档
+  description: 更新文档
+  tags:
+  - 文档
+- apiitemparams:
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
     uri_data:
       type_class: struct
       name: UriData
@@ -756,7 +1216,11 @@
       description: ""
     query_data: null
     post_data: null
-    response_data: null
+    response_data:
+      type_class: struct
+      name: struct
+      fields: []
+      description: ""
   api_handler_func_type: 1
   api_handler_func: ReverseProxy
   source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/proxy/api_proxy.go

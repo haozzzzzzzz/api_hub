@@ -143,6 +143,79 @@ func (m *BsDoc) DocAdd(doc *model.AhDoc) (newDocId int64, err error) {
 	return
 }
 
+func (m *BsDoc) DocUpdate(
+	docId uint32,
+	title string,
+	categoryId uint32,
+	accountId uint32,
+	specUrl string,
+	specContent string,
+	updateTime int64,
+) (err error) {
+	dbClient := table.NewHubDB(m.Ctx)
+	_, err = dbClient.AhCategoryGet(categoryId)
+	if nil != err {
+		logrus.Errorf("get category failed. error: %s.", err)
+		return
+	}
+
+	oldDoc, err := dbClient.AhDocGet(docId)
+	if nil != err {
+		logrus.Errorf("get doc failed. error: %s.", err)
+		return
+	}
+
+	tx, err := dbClient.DB.BeginTxx(m.Ctx, nil)
+	if nil != err {
+		logrus.Errorf("doc.go begin transaction failed. error: %s.", err)
+		return
+	}
+
+	defer func() {
+		if nil != err {
+			errRoll := tx.Rollback()
+			if nil != errRoll {
+				logrus.Errorf("doc.go transaction rollback failed. error: %s.", err)
+				return
+			}
+			return
+
+		} else {
+			err = tx.Commit()
+			if nil != err {
+				logrus.Errorf("doc.go transaction commit failed. error: %s.", err)
+				return
+			}
+		}
+
+	}()
+
+	_, err = dbClient.AhDocUpdateTx(tx, docId, title, specUrl, specContent, categoryId, accountId, oldDoc.PostStatus, updateTime)
+	if nil != err {
+		logrus.Errorf("ah doc update failed. error: %s.", err)
+		return
+	}
+
+	if categoryId != oldDoc.CategoryId {
+		// 减少旧目录数目
+		err = dbClient.AhCategoryDocNumIncrTx(tx, oldDoc.CategoryId, -1, updateTime)
+		if nil != err {
+			logrus.Errorf("descr ah_category doc_num failed. error: %s.", err)
+			return
+		}
+
+		// 更新新目录数目
+		err = dbClient.AhCategoryDocNumIncrTx(tx, categoryId, 1, updateTime)
+		if nil != err {
+			logrus.Errorf("incr ah_category doc_num failed. error: %s.", err)
+			return
+		}
+
+	}
+
+	return
+}
+
 func (m *BsDoc) DocDel(docId uint32) (err error) {
 	dbClient := table.NewHubDB(m.Ctx)
 
@@ -186,7 +259,7 @@ func (m *BsDoc) DocDel(docId uint32) (err error) {
 	// 更新数目
 	err = dbClient.AhCategoryDocNumIncrTx(tx, oldDoc.CategoryId, -1, time.Now().Unix())
 	if nil != err {
-		logrus.Errorf("incr ah_category doc_num failed. error: %s.", err)
+		logrus.Errorf("desc ah_category doc_num failed. error: %s.", err)
 		return
 	}
 

@@ -1,6 +1,8 @@
 package session
 
 import (
+	"backend/common/db/model"
+	"github.com/gosexy/to"
 	"github.com/haozzzzzzzz/go-rapid-development/web/ginbuilder"
 )
 
@@ -8,6 +10,7 @@ const KeySkipSessionValidate = "skip_session_validate"
 
 type Session struct {
 	RequestData struct {
+		HeaderAccountId uint32 `json:"header_account_id"`
 	} `json:"request_data"`
 
 	Auth struct {
@@ -29,10 +32,16 @@ func (m *Session) Panic(errPanic interface{}) {
 
 func Builder(ctx *ginbuilder.Context) (err error) {
 	ses := &Session{}
-	ses.Auth.AccountId = 1 // TODO 目前写死一个用户
 
 	ginCtx := ctx.GinContext
 	skipValidate := ginCtx.GetBool(KeySkipSessionValidate)
+
+	reqHeader := ginCtx.Request.Header
+	ses.RequestData.HeaderAccountId = uint32(to.Uint64(reqHeader.Get("X-Ah-Account-Id")))
+	ses.Auth.AccountId = ses.RequestData.HeaderAccountId // 临时
+	if ses.Auth.AccountId == 0 {
+		ses.Auth.AccountId = model.DefaultAccountId
+	}
 
 	if !skipValidate { // validate session
 

@@ -346,6 +346,7 @@ var DocDelele ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 // 检查并且创建文档
 // @api_doc_tags: 文档
+// 用在swagger.sh上
 var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{

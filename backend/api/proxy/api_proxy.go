@@ -70,7 +70,6 @@ var ReverseProxy ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		ctx.Logger.Infof("make reverse proxy request, url: %s", fmt.Sprintf("%s%s", prefixUrl, ginCtx.Request.RequestURI))
 		// clear response header
 		reverseProxy.ServeHTTP(ginCtx.Writer, ginCtx.Request)
-		ginCtx.Header("X-Xl", "6666")
 		return
 	},
 }

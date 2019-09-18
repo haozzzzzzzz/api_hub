@@ -388,7 +388,7 @@
         typespec:
           type_class: basic
           name: int64
-        description: ""
+        description: 记录数目
       - name: Items
         type_name: '[]AhCategory'
         tags:
@@ -447,7 +447,7 @@
                 name: int64
               description: ""
             description: ""
-        description: ""
+        description: 文档记录
       description: ""
   api_handler_func_type: 1
   api_handler_func: CategoryList
@@ -556,7 +556,7 @@
         typespec:
           type_class: basic
           name: uint32
-        description: 文档ID
+        description: ""
       description: ""
     query_data: null
     post_data: null
@@ -826,7 +826,7 @@
         typespec:
           type_class: basic
           name: string
-        description: 文档标题
+        description: 标题
       - name: CategoryId
         type_name: uint32
         tags:
@@ -854,7 +854,7 @@
         typespec:
           type_class: basic
           name: string
-        description: swagger content
+        description: ""
       description: ""
     response_data:
       type_class: struct
@@ -1110,7 +1110,7 @@
         typespec:
           type_class: basic
           name: uint32
-        description: ""
+        description: 文档ID
       description: ""
     query_data: null
     post_data:
@@ -1126,7 +1126,7 @@
         typespec:
           type_class: basic
           name: string
-        description: 标题
+        description: 文档标题
       - name: CategoryId
         type_name: uint32
         tags:
@@ -1154,7 +1154,7 @@
         typespec:
           type_class: basic
           name: string
-        description: ""
+        description: swagger content
       description: ""
     response_data:
       type_class: struct

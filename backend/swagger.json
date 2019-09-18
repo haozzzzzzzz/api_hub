@@ -382,9 +382,11 @@
 									"type": "object",
 									"properties": {
 										"count": {
+											"description": "记录数目",
 											"type": "integer"
 										},
 										"items": {
+											"description": "文档记录",
 											"type": "array",
 											"items": {
 												"type": "object",
@@ -506,7 +508,6 @@
 				"parameters": [
 					{
 						"type": "integer",
-						"description": "文档ID",
 						"name": "doc_id",
 						"in": "path",
 						"required": true
@@ -794,7 +795,6 @@
 									]
 								},
 								"spec_content": {
-									"description": "swagger content",
 									"type": "string"
 								},
 								"spec_url": {
@@ -802,7 +802,7 @@
 									"type": "string"
 								},
 								"title": {
-									"description": "文档标题",
+									"description": "标题",
 									"type": "string",
 									"required": [
 										"title"
@@ -1015,6 +1015,7 @@
 				"parameters": [
 					{
 						"type": "integer",
+						"description": "文档ID",
 						"name": "doc_id",
 						"in": "path",
 						"required": true
@@ -1040,6 +1041,7 @@
 									]
 								},
 								"spec_content": {
+									"description": "swagger content",
 									"type": "string"
 								},
 								"spec_url": {
@@ -1047,7 +1049,7 @@
 									"type": "string"
 								},
 								"title": {
-									"description": "标题",
+									"description": "文档标题",
 									"type": "string",
 									"required": [
 										"title"

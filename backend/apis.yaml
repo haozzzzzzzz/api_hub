@@ -694,7 +694,7 @@
         typespec:
           type_class: basic
           name: uint32
-        description: ""
+        description: 文档ID
       description: ""
     query_data: null
     post_data:
@@ -759,7 +759,7 @@
         typespec:
           type_class: basic
           name: uint32
-        description: 文档ID
+        description: ""
       description: ""
     query_data: null
     post_data:
@@ -824,7 +824,7 @@
         typespec:
           type_class: basic
           name: uint32
-        description: 文档ID
+        description: ""
       description: ""
     query_data: null
     post_data:
@@ -976,7 +976,7 @@
         typespec:
           type_class: basic
           name: uint32
-        description: 文档ID
+        description: ""
       description: ""
     query_data: null
     post_data: null
@@ -1061,7 +1061,7 @@
         typespec:
           type_class: basic
           name: int64
-        description: 记录数目
+        description: ""
       - name: Items
         type_name: '[]DocListItem'
         tags:
@@ -1131,7 +1131,7 @@
                 name: int64
               description: 创建时间
             description: ""
-        description: 文档记录
+        description: ""
       description: ""
   api_handler_func_type: 1
   api_handler_func: DocList

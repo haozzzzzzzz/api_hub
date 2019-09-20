@@ -27,34 +27,9 @@
 				],
 				"summary": "测试ACK",
 				"operationId": "GET-/api/api_hub/info/reply/say_hi",
-				"parameters": [
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
-					}
-				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			}
@@ -73,12 +48,6 @@
 				"summary": "添加账户",
 				"operationId": "POST-/api/api_hub/v1/account/account/add",
 				"parameters": [
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
-					},
 					{
 						"name": "PostData",
 						"in": "body",
@@ -136,12 +105,6 @@
 				"summary": "账户目录",
 				"operationId": "GET-/api/api_hub/v1/account/account/list",
 				"parameters": [
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
-					},
 					{
 						"type": "integer",
 						"description": "分页ID",
@@ -227,12 +190,6 @@
 						"required": true
 					},
 					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
-					},
-					{
 						"name": "PostData",
 						"in": "body",
 						"required": true,
@@ -251,24 +208,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			}
@@ -287,12 +227,6 @@
 				"summary": "添加目录",
 				"operationId": "POST-/api/api_hub/v1/doc/category/add",
 				"parameters": [
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
-					},
 					{
 						"name": "PostData",
 						"in": "body",
@@ -352,12 +286,6 @@
 				"parameters": [
 					{
 						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
-					},
-					{
-						"type": "integer",
 						"description": "分页ID",
 						"name": "page",
 						"in": "query",
@@ -382,9 +310,11 @@
 									"type": "object",
 									"properties": {
 										"count": {
+											"description": "记录数目",
 											"type": "integer"
 										},
 										"items": {
+											"description": "文档记录",
 											"type": "array",
 											"items": {
 												"type": "object",
@@ -444,12 +374,6 @@
 						"required": true
 					},
 					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
-					},
-					{
 						"name": "PostData",
 						"in": "body",
 						"required": true,
@@ -468,24 +392,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			}
@@ -506,38 +413,14 @@
 				"parameters": [
 					{
 						"type": "integer",
-						"description": "文档ID",
 						"name": "doc_id",
 						"in": "path",
 						"required": true
-					},
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			}
@@ -557,12 +440,6 @@
 				"operationId": "POST-/api/api_hub/v1/doc/doc/add",
 				"parameters": [
 					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
-					},
-					{
 						"name": "PostData",
 						"in": "body",
 						"required": true,
@@ -577,7 +454,6 @@
 									]
 								},
 								"spec_content": {
-									"description": "swagger content",
 									"type": "string"
 								},
 								"spec_url": {
@@ -585,7 +461,7 @@
 									"type": "string"
 								},
 								"title": {
-									"description": "文档标题",
+									"description": "标题",
 									"type": "string",
 									"required": [
 										"title"
@@ -641,16 +517,9 @@
 				"parameters": [
 					{
 						"type": "integer",
-						"description": "文档ID",
 						"name": "doc_id",
 						"in": "path",
 						"required": true
-					},
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
 					},
 					{
 						"name": "PostData",
@@ -671,24 +540,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			}
@@ -709,15 +561,10 @@
 				"parameters": [
 					{
 						"type": "integer",
+						"description": "文档ID",
 						"name": "doc_id",
 						"in": "path",
 						"required": true
-					},
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
 					},
 					{
 						"name": "PostData",
@@ -738,24 +585,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			}
@@ -782,12 +612,6 @@
 						"required": true
 					},
 					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
-					},
-					{
 						"name": "PostData",
 						"in": "body",
 						"required": true,
@@ -806,24 +630,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			}
@@ -844,12 +651,6 @@
 				"operationId": "POST-/api/api_hub/v1/doc/doc/check_post",
 				"parameters": [
 					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
-					},
-					{
 						"name": "PostData",
 						"in": "body",
 						"required": true,
@@ -864,7 +665,6 @@
 									]
 								},
 								"spec_content": {
-									"description": "swagger content",
 									"type": "string"
 								},
 								"spec_url": {
@@ -872,7 +672,7 @@
 									"type": "string"
 								},
 								"title": {
-									"description": "文档标题",
+									"description": "标题",
 									"type": "string",
 									"required": [
 										"title"
@@ -931,12 +731,34 @@
 						"name": "doc_id",
 						"in": "path",
 						"required": true
-					},
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					}
+				}
+			}
+		},
+		"/api/api_hub/v1/doc/doc/get/{doc_id}": {
+			"get": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"tags": [
+					"文档"
+				],
+				"summary": "获取文档内容",
+				"operationId": "GET-/api/api_hub/v1/doc/doc/get/{doc_id}",
+				"parameters": [
 					{
 						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
+						"name": "doc_id",
+						"in": "path",
+						"required": true
 					}
 				],
 				"responses": {
@@ -947,7 +769,41 @@
 							"properties": {
 								"data": {
 									"description": "result data",
-									"type": "object"
+									"type": "object",
+									"properties": {
+										"doc": {
+											"type": "object",
+											"properties": {
+												"author_id": {
+													"type": "integer"
+												},
+												"category_id": {
+													"type": "integer"
+												},
+												"create_time": {
+													"type": "integer"
+												},
+												"doc_id": {
+													"type": "integer"
+												},
+												"post_status": {
+													"type": "integer"
+												},
+												"spec_content": {
+													"type": "string"
+												},
+												"spec_url": {
+													"type": "string"
+												},
+												"title": {
+													"type": "string"
+												},
+												"update_time": {
+													"type": "integer"
+												}
+											}
+										}
+									}
 								},
 								"msg": {
 									"description": "result message",
@@ -979,12 +835,6 @@
 				"parameters": [
 					{
 						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
-					},
-					{
-						"type": "integer",
 						"description": "分页ID",
 						"name": "page",
 						"in": "query",
@@ -1014,9 +864,11 @@
 									"type": "object",
 									"properties": {
 										"count": {
+											"description": "记录数目",
 											"type": "integer"
 										},
 										"items": {
+											"description": "文档记录",
 											"type": "array",
 											"items": {
 												"type": "object",
@@ -1090,12 +942,6 @@
 						"required": true
 					},
 					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
-					},
-					{
 						"name": "PostData",
 						"in": "body",
 						"required": true,
@@ -1130,24 +976,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			}
@@ -1177,34 +1006,11 @@
 						"name": "target_uri",
 						"in": "path",
 						"required": true
-					},
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			},
@@ -1232,34 +1038,11 @@
 						"name": "target_uri",
 						"in": "path",
 						"required": true
-					},
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			},
@@ -1287,34 +1070,11 @@
 						"name": "target_uri",
 						"in": "path",
 						"required": true
-					},
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			},
@@ -1342,34 +1102,11 @@
 						"name": "target_uri",
 						"in": "path",
 						"required": true
-					},
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			},
@@ -1397,34 +1134,11 @@
 						"name": "target_uri",
 						"in": "path",
 						"required": true
-					},
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			},
@@ -1452,34 +1166,11 @@
 						"name": "target_uri",
 						"in": "path",
 						"required": true
-					},
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			},
@@ -1507,34 +1198,11 @@
 						"name": "target_uri",
 						"in": "path",
 						"required": true
-					},
-					{
-						"type": "integer",
-						"description": "（公参）账户ID，不填默认为1",
-						"name": "X-Ah-Account-Id",
-						"in": "header"
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "success",
-						"schema": {
-							"type": "object",
-							"properties": {
-								"data": {
-									"description": "result data",
-									"type": "object"
-								},
-								"msg": {
-									"description": "result message",
-									"type": "string"
-								},
-								"ret": {
-									"description": "result code",
-									"type": "integer"
-								}
-							}
-						}
+						"description": "success"
 					}
 				}
 			}

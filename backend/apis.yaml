@@ -23,11 +23,16 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: InfoSayHi
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/info/api_info.go
-  api_handler_package: info
-  package_exported: backend/api/info
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/info
-  package_rel_alias: info
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/info/api_info.go
+    api_handler_package: info
+    package_exported: backend/api/info
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/info/api_info.go
+    package_rel_alias: info
+    summary: ""
+    description: ""
+    tags: []
+    deprecated: false
   http_method: GET
   relative_paths:
   - /api/api_hub/info/reply/say_hi
@@ -35,6 +40,7 @@
   description: ""
   tags:
   - 信息
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -81,11 +87,16 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: AccountAdd
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
-  api_handler_package: account
-  package_exported: backend/api/account
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account
-  package_rel_alias: account
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
+    api_handler_package: account
+    package_exported: backend/api/account
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
+    package_rel_alias: account
+    summary: ""
+    description: ""
+    tags: []
+    deprecated: false
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/account/account/add
@@ -93,6 +104,7 @@
   description: ""
   tags:
   - 账号
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -200,11 +212,16 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: AccountList
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
-  api_handler_package: account
-  package_exported: backend/api/account
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account
-  package_rel_alias: account
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
+    api_handler_package: account
+    package_exported: backend/api/account
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
+    package_rel_alias: account
+    summary: ""
+    description: ""
+    tags: []
+    deprecated: false
   http_method: GET
   relative_paths:
   - /api/api_hub/v1/account/account/list
@@ -212,6 +229,7 @@
   description: ""
   tags:
   - 账号
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -265,11 +283,16 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: AccountUpdate
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
-  api_handler_package: account
-  package_exported: backend/api/account
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account
-  package_rel_alias: account
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
+    api_handler_package: account
+    package_exported: backend/api/account
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/account/api_account.go
+    package_rel_alias: account
+    summary: ""
+    description: ""
+    tags: []
+    deprecated: false
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/account/account/update/:account_id
@@ -277,6 +300,7 @@
   description: ""
   tags:
   - 账号
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -323,11 +347,16 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: CategoryAdd
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
-  api_handler_package: doc
-  package_exported: backend/api/doc
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
-  package_rel_alias: doc
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags: []
+    deprecated: false
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/doc/category/add
@@ -335,6 +364,7 @@
   description: ""
   tags:
   - 目录
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -388,7 +418,7 @@
         typespec:
           type_class: basic
           name: int64
-        description: ""
+        description: 记录数目
       - name: Items
         type_name: '[]AhCategory'
         tags:
@@ -447,15 +477,20 @@
                 name: int64
               description: ""
             description: ""
-        description: ""
+        description: 文档记录
       description: ""
   api_handler_func_type: 1
   api_handler_func: CategoryList
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
-  api_handler_package: doc
-  package_exported: backend/api/doc
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
-  package_rel_alias: doc
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags: []
+    deprecated: false
   http_method: GET
   relative_paths:
   - /api/api_hub/v1/doc/category/list
@@ -463,6 +498,7 @@
   description: ""
   tags:
   - 目录
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -516,11 +552,16 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: CategoryUpdate
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
-  api_handler_package: doc
-  package_exported: backend/api/doc
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
-  package_rel_alias: doc
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_category.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags: []
+    deprecated: false
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/doc/category/update/:cat_id
@@ -528,6 +569,7 @@
   description: ""
   tags:
   - 目录
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -556,7 +598,7 @@
         typespec:
           type_class: basic
           name: uint32
-        description: 文档ID
+        description: ""
       description: ""
     query_data: null
     post_data: null
@@ -567,11 +609,17 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: DocDetailSpec
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
-  api_handler_package: doc
-  package_exported: backend/api/doc
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
-  package_rel_alias: doc
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags:
+    - 文档
+    deprecated: false
   http_method: GET
   relative_paths:
   - /api/api_hub/v1/doc/detail/spec/:doc_id
@@ -579,6 +627,7 @@
   description: ""
   tags:
   - 文档
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -609,7 +658,7 @@
         typespec:
           type_class: basic
           name: string
-        description: 文档标题
+        description: 标题
       - name: CategoryId
         type_name: uint32
         tags:
@@ -637,7 +686,7 @@
         typespec:
           type_class: basic
           name: string
-        description: swagger content
+        description: ""
       description: ""
     response_data:
       type_class: struct
@@ -654,11 +703,17 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: DocAdd
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
-  api_handler_package: doc
-  package_exported: backend/api/doc
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
-  package_rel_alias: doc
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags:
+    - 文档
+    deprecated: false
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/doc/doc/add
@@ -666,6 +721,79 @@
   description: ""
   tags:
   - 文档
+  deprecated: false
+- apiitemparams:
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
+    uri_data:
+      type_class: struct
+      name: UriData
+      fields:
+      - name: DocId
+        type_name: uint32
+        tags:
+          binding: required
+          json: doc_id
+          uri: doc_id
+        typespec:
+          type_class: basic
+          name: uint32
+        description: ""
+      description: ""
+    query_data: null
+    post_data:
+      type_class: struct
+      name: PostData
+      fields:
+      - name: AuthorId
+        type_name: uint32
+        tags:
+          binding: required
+          form: author_id
+          json: author_id
+        typespec:
+          type_class: basic
+          name: uint32
+        description: ""
+      description: ""
+    response_data:
+      type_class: struct
+      name: struct
+      fields: []
+      description: ""
+  api_handler_func_type: 1
+  api_handler_func: DocChangeAuthor
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags:
+    - 文档
+    deprecated: false
+  http_method: POST
+  relative_paths:
+  - /api/api_hub/v1/doc/doc/change_author/:doc_id
+  summary: 更改发布者
+  description: ""
+  tags:
+  - 文档
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -701,71 +829,6 @@
       type_class: struct
       name: PostData
       fields:
-      - name: AuthorId
-        type_name: uint32
-        tags:
-          binding: required
-          form: author_id
-          json: author_id
-        typespec:
-          type_class: basic
-          name: uint32
-        description: ""
-      description: ""
-    response_data:
-      type_class: struct
-      name: struct
-      fields: []
-      description: ""
-  api_handler_func_type: 1
-  api_handler_func: DocChangeAuthor
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
-  api_handler_package: doc
-  package_exported: backend/api/doc
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
-  package_rel_alias: doc
-  http_method: POST
-  relative_paths:
-  - /api/api_hub/v1/doc/doc/change_author/:doc_id
-  summary: 更改发布者
-  description: ""
-  tags:
-  - 文档
-- apiitemparams:
-    header_data:
-      type_class: struct
-      name: struct
-      fields:
-      - name: X-Ah-Account-Id
-        type_name: uint32
-        tags:
-          binding: ""
-          json: X-Ah-Account-Id
-        typespec:
-          type_class: basic
-          name: （公参）账户ID，不填默认为1|uint32
-        description: （公参）账户ID，不填默认为1
-      description: ""
-    uri_data:
-      type_class: struct
-      name: UriData
-      fields:
-      - name: DocId
-        type_name: uint32
-        tags:
-          binding: required
-          json: doc_id
-          uri: doc_id
-        typespec:
-          type_class: basic
-          name: uint32
-        description: ""
-      description: ""
-    query_data: null
-    post_data:
-      type_class: struct
-      name: PostData
-      fields:
       - name: CategoryId
         type_name: uint32
         tags:
@@ -784,11 +847,17 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: DocChangeCategory
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
-  api_handler_package: doc
-  package_exported: backend/api/doc
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
-  package_rel_alias: doc
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags:
+    - 文档
+    deprecated: false
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/doc/doc/change_category/:doc_id
@@ -796,6 +865,7 @@
   description: ""
   tags:
   - 文档
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -849,11 +919,17 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: DocChangeTitle
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
-  api_handler_package: doc
-  package_exported: backend/api/doc
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
-  package_rel_alias: doc
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags:
+    - 文档
+    deprecated: false
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/doc/doc/change_title/:doc_id
@@ -861,6 +937,7 @@
   description: 只改标题名称
   tags:
   - 文档
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -891,7 +968,7 @@
         typespec:
           type_class: basic
           name: string
-        description: 文档标题
+        description: 标题
       - name: CategoryId
         type_name: uint32
         tags:
@@ -919,7 +996,7 @@
         typespec:
           type_class: basic
           name: string
-        description: swagger content
+        description: ""
       description: ""
     response_data:
       type_class: struct
@@ -936,11 +1013,17 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: DocCheckPost
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
-  api_handler_package: doc
-  package_exported: backend/api/doc
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
-  package_rel_alias: doc
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags:
+    - 文档
+    deprecated: false
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/doc/doc/check_post
@@ -948,6 +1031,7 @@
   description: 用在swagger.sh上
   tags:
   - 文档
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -987,11 +1071,17 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: DocDelele
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
-  api_handler_package: doc
-  package_exported: backend/api/doc
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
-  package_rel_alias: doc
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags:
+    - 文档
+    deprecated: false
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/doc/doc/delete/:doc_id
@@ -999,6 +1089,156 @@
   description: ""
   tags:
   - 文档
+  deprecated: false
+- apiitemparams:
+    header_data:
+      type_class: struct
+      name: struct
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        typespec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+        description: （公参）账户ID，不填默认为1
+      description: ""
+    uri_data:
+      type_class: struct
+      name: UriData
+      fields:
+      - name: DocId
+        type_name: uint32
+        tags:
+          binding: required
+          json: doc_id
+          uri: doc_id
+        typespec:
+          type_class: basic
+          name: uint32
+        description: ""
+      description: ""
+    query_data: null
+    post_data: null
+    response_data:
+      type_class: struct
+      name: ResponseData
+      fields:
+      - name: Doc
+        type_name: AhDoc
+        tags:
+          json: doc
+        typespec:
+          type_class: struct
+          name: AhDoc
+          fields:
+          - name: DocId
+            type_name: uint32
+            tags:
+              db: doc_id
+              json: doc_id
+            typespec:
+              type_class: basic
+              name: uint32
+            description: ""
+          - name: Title
+            type_name: string
+            tags:
+              db: title
+              json: title
+            typespec:
+              type_class: basic
+              name: string
+            description: ""
+          - name: SpecUrl
+            type_name: string
+            tags:
+              db: spec_url
+              json: spec_url
+            typespec:
+              type_class: basic
+              name: string
+            description: ""
+          - name: SpecContent
+            type_name: string
+            tags:
+              db: spec_content
+              json: spec_content
+            typespec:
+              type_class: basic
+              name: string
+            description: ""
+          - name: CategoryId
+            type_name: uint32
+            tags:
+              db: category_id
+              json: category_id
+            typespec:
+              type_class: basic
+              name: uint32
+            description: ""
+          - name: AuthorId
+            type_name: uint32
+            tags:
+              db: author_id
+              json: author_id
+            typespec:
+              type_class: basic
+              name: uint32
+            description: ""
+          - name: PostStatus
+            type_name: uint8
+            tags:
+              db: post_status
+              json: post_status
+            typespec:
+              type_class: basic
+              name: uint8
+            description: ""
+          - name: UpdateTime
+            type_name: int64
+            tags:
+              db: update_time
+              json: update_time
+            typespec:
+              type_class: basic
+              name: int64
+            description: ""
+          - name: CreateTime
+            type_name: int64
+            tags:
+              db: create_time
+              json: create_time
+            typespec:
+              type_class: basic
+              name: int64
+            description: ""
+          description: ""
+        description: ""
+      description: ""
+  api_handler_func_type: 1
+  api_handler_func: DocGet
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags:
+    - 文档
+    deprecated: false
+  http_method: GET
+  relative_paths:
+  - /api/api_hub/v1/doc/doc/get/:doc_id
+  summary: 获取文档内容
+  description: ""
+  tags:
+  - 文档
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -1061,7 +1301,7 @@
         typespec:
           type_class: basic
           name: int64
-        description: ""
+        description: 记录数目
       - name: Items
         type_name: '[]DocListItem'
         tags:
@@ -1131,15 +1371,21 @@
                 name: int64
               description: 创建时间
             description: ""
-        description: ""
+        description: 文档记录
       description: ""
   api_handler_func_type: 1
   api_handler_func: DocList
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
-  api_handler_package: doc
-  package_exported: backend/api/doc
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
-  package_rel_alias: doc
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags:
+    - 文档
+    deprecated: false
   http_method: GET
   relative_paths:
   - /api/api_hub/v1/doc/doc/list
@@ -1147,6 +1393,7 @@
   description: ""
   tags:
   - 文档
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -1228,11 +1475,17 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: DocUpdate
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
-  api_handler_package: doc
-  package_exported: backend/api/doc
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc
-  package_rel_alias: doc
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags:
+    - 文档
+    deprecated: false
   http_method: POST
   relative_paths:
   - /api/api_hub/v1/doc/doc/update/:doc_id
@@ -1240,6 +1493,7 @@
   description: 更新文档
   tags:
   - 文档
+  deprecated: false
 - apiitemparams:
     header_data:
       type_class: struct
@@ -1288,11 +1542,16 @@
       description: ""
   api_handler_func_type: 1
   api_handler_func: ReverseProxy
-  source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/proxy/api_proxy.go
-  api_handler_package: proxy
-  package_exported: backend/api/proxy
-  package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/proxy
-  package_rel_alias: proxy
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/proxy/api_proxy.go
+    api_handler_package: proxy
+    package_exported: backend/api/proxy
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/proxy/api_proxy.go
+    package_rel_alias: proxy
+    summary: ""
+    description: ""
+    tags: []
+    deprecated: false
   http_method: ANY
   relative_paths:
   - /api/api_hub/v1/reverse_proxy/:proxy_type/*target_uri
@@ -1300,3 +1559,4 @@
   description: ""
   tags:
   - 代理
+  deprecated: false

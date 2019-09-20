@@ -22,13 +22,12 @@ export default new Router({
     // },
     {
       path: '/',
-      component: layout,
-      redirect: '/document',
+      // component: layout,
+      redirect: '/document/index',
     },
     {
       path: '/document',
       component: layout,
-      redirect: "/document/index",
       children: [
         {
           path: 'index',

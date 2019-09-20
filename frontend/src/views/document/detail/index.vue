@@ -5,6 +5,7 @@
 </template>
 
 <script>
+    import apis from '@/api/apis'
     import Swagger_vue from "@/components/swagger_vue/index";
     export default {
         name: "document_detail",
@@ -14,8 +15,9 @@
         props: ['data'],
         computed: {
             swaggerData() {
+                let url = apis.docDetailSpecUrl(this.data.doc_id);
                 return {
-                    url: this.data.spec_url
+                    url: url
                 }
             }
         }

@@ -3,7 +3,7 @@ USE api_hub;
 
 CREATE TABLE ah_doc
 (
-    doc_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+    doc_id int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'doc increment id',
     title varchar(255) NOT NULL COMMENT 'doc title',
     spec_url varchar(500) NOT NULL DEFAULT '' COMMENT 'api specification url',
     spec_content longtext NOT NULL COMMENT 'api specification content',

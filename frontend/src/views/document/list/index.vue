@@ -92,7 +92,6 @@
                     tabData: {
                         doc_id: row.doc_id,
                         title: row.title,
-                        spec_url: apis.docDetailSpecUrl(row.doc_id)
                     }
                 })
             },

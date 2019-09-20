@@ -1,3 +1,6 @@
+/*
+@api_doc_tags: 文档
+*/
 package doc
 
 import (
@@ -16,7 +19,6 @@ import (
 )
 
 // 文档列表
-// @api_doc_tags: 文档
 var DocList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "GET",
 	RelativePaths: []string{
@@ -68,8 +70,44 @@ var DocList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	},
 }
 
+// 获取文档内容
+var DocGet ginbuilder.HandleFunc = ginbuilder.HandleFunc{
+	HttpMethod: "GET",
+	RelativePaths: []string{
+		"/api/api_hub/v1/doc/doc/get/:doc_id",
+	},
+	Handle: func(ctx *ginbuilder.Context) (err error) {
+		// request uri data
+		type UriData struct {
+			DocId uint32 `json:"doc_id" uri:"doc_id" binding:"required"`
+		}
+		uriData := UriData{}
+		retCode, err := ctx.BindUriData(&uriData)
+		if err != nil {
+			ctx.Errorf(retCode, "verify  uri data failed. %s.", err)
+			return
+		}
+
+		// response data
+		type ResponseData struct {
+			Doc *model.AhDoc `json:"doc"`
+		}
+		respData := &ResponseData{}
+
+		reqCtx := ctx.RequestCtx
+		dbClient := table.NewHubDB(reqCtx)
+		respData.Doc, err = dbClient.AhDocGet(uriData.DocId)
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDBQueryFailed.Clone(), "get ah doc failed. %s", err)
+			return
+		}
+
+		ctx.SuccessReturn(respData)
+		return
+	},
+}
+
 // 添加文档
-// @api_doc_tags: 文档
 var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{
@@ -130,7 +168,6 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 /*
 更新文档
-@api_doc_tags: 文档
 更新文档
 */
 var DocUpdate ginbuilder.HandleFunc = ginbuilder.HandleFunc{
@@ -195,7 +232,6 @@ var DocUpdate ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 /*
 更改目录
-@api_doc_tags: 文档
 */
 var DocChangeCategory ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
@@ -253,7 +289,6 @@ var DocChangeCategory ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 /*
 更改发布者
-@api_doc_tags: 文档
 */
 var DocChangeAuthor ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
@@ -310,7 +345,6 @@ var DocChangeAuthor ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 /*
 更改标题名称
-@api_doc_tags: 文档
 只改标题名称
 */
 var DocChangeTitle ginbuilder.HandleFunc = ginbuilder.HandleFunc{
@@ -376,7 +410,6 @@ var DocChangeTitle ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 }
 
 // 删除文档
-// @api_doc_tags: 文档
 var DocDelele ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
 	RelativePaths: []string{
@@ -412,7 +445,6 @@ var DocDelele ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 }
 
 // 检查并且创建文档
-// @api_doc_tags: 文档
 // 用在swagger.sh上
 var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",
@@ -504,7 +536,6 @@ var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 }
 
 // 查看文档的swagger.json
-// @api_doc_tags: 文档
 var DocDetailSpec ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "GET",
 	RelativePaths: []string{

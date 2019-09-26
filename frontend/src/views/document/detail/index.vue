@@ -12,10 +12,10 @@
         components: {
             Swagger_vue,
         },
-        props: ['data'],
+        props: ['tabData'],
         computed: {
             swaggerData() {
-                let url = apis.docDetailSpecUrl(this.data.doc_id);
+                let url = apis.docDetailSpecUrl(this.tabData.doc_id);
                 return {
                     url: url
                 }

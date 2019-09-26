@@ -12,3 +12,6 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app');
+
+// eslint-disable-next-line no-console
+console.log("ApiHub open source project: https://github.com/haozzzzzzzz/api_hub");

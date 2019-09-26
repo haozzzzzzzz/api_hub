@@ -27,6 +27,7 @@ func BindRouters(engine *gin.Engine) (err error) {
 	engine.Handle("GET", "/api/api_hub/v1/doc/doc/get/:doc_id", doc.DocGet.GinHandler)
 	engine.Handle("GET", "/api/api_hub/v1/doc/doc/list", doc.DocList.GinHandler)
 	engine.Handle("POST", "/api/api_hub/v1/doc/doc/update/:doc_id", doc.DocUpdate.GinHandler)
+	engine.Handle("POST", "/api/api_hub/v1/doc/es/init_ah_doc", doc.DocEsInitAhDoc.GinHandler)
 	engine.Any("/api/api_hub/v1/reverse_proxy/:proxy_type/*target_uri", proxy.ReverseProxy.GinHandler)
 	return
 }

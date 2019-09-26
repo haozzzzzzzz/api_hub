@@ -52,6 +52,7 @@ function handleResponse(comp, resp, err, callback) {
     callback(respData, err);
 }
 
+let handlingRequest = {};
 export default {
     /**
      * api document list
@@ -62,6 +63,12 @@ export default {
      * @param callback callback function
      */
     docList(comp, pageId, limit, search, callback) {
+        if (handlingRequest[this.docList]) {
+            callback(null, "last doc list request is not finish");
+            return
+        }
+
+        handlingRequest[this.docList] = true;
         client({
             method: 'get',
             url: '/api/api_hub/v1/doc/doc/list',
@@ -70,10 +77,12 @@ export default {
                 limit: limit,
                 search: search,
             }
-        }).then(function (response) {
+        }).then((response) => {
             handleResponse(comp, response, null, callback);
-        }).catch(function (err) {
+            handlingRequest[this.docList] = false;
+        }).catch((err) => {
             handleResponse(comp, null, err, callback);
+            handlingRequest[this.docList] = false;
         });
     },
 

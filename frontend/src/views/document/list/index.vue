@@ -81,10 +81,11 @@
             return {
                 pageSize: 20,
                 count: 0,
-                search: '',
+                search: "",
                 items: []
             }
         },
+        props: ['tabData'],
         methods: {
             openDetail: function (row) {
                 this.$emit('custom-tab-open', {
@@ -96,6 +97,14 @@
                 })
             },
             handleSearch(){
+                // 通知父组件
+                this.$emit('search-change', {
+                    tabType: 'list',
+                    tabData: {
+                        search: this.search,
+                    },
+                });
+                // 刷新页面
                 this.handleCurrentChange(1)
             },
             handleCurrentChange: function (page) {
@@ -154,6 +163,7 @@
             }
         },
         mounted() {
+            this.search = this.tabData.search;
             this.handleCurrentChange(1)
         }
     }

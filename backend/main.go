@@ -3,6 +3,7 @@ package main
 import (
 	"backend/api"
 	"backend/common/config"
+	"backend/task"
 	"fmt"
 	"time"
 
@@ -14,6 +15,8 @@ import (
 )
 
 func main() {
+	task.InitTask()
+
 	var err error
 	serviceConfig := config.ServiceConfig
 	address := fmt.Sprintf("%s:%s", serviceConfig.Host, serviceConfig.Port)

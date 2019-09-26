@@ -1,0 +1,2 @@
+endpoint: "http://localhost:9200"
+index_ah_doc: "ah_doc"

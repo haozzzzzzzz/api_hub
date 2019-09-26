@@ -205,6 +205,7 @@ func (m *HubDB) AhDocList(
 			doc_id,
 			title,
 			spec_url,
+			spec_content,
 			category_id,
 			author_id,
 			post_status,

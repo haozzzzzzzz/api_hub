@@ -28,6 +28,7 @@ export default new Router({
     {
       path: '/document',
       component: layout,
+      redirect: "/document/index",
       children: [
         {
           path: 'index',

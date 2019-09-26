@@ -8,8 +8,10 @@ import (
 	"backend/common/business"
 	"backend/common/db/model"
 	"backend/common/db/table"
+	"backend/common/es/indices"
 	"database/sql"
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 	"strings"
 	"time"
 
@@ -51,17 +53,10 @@ var DocList ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		reqCtx := ctx.RequestCtx
 
-		dbClient := table.NewHubDB(reqCtx)
-		respData.Count, err = dbClient.AhDocCount(queryData.Search)
-		if nil != err {
-			ctx.Errorf(code.CodeErrorDBQueryFailed.Clone(), "query doc count failed. %s", err)
-			return
-		}
-
 		bsDoc := business.NewBsDoc(reqCtx)
-		respData.Items, err = bsDoc.DocList(queryData.Page, queryData.Limit, queryData.Search)
+		respData.Count, respData.Items, err = bsDoc.DocSearch(queryData.Page, queryData.Limit, queryData.Search)
 		if nil != err {
-			ctx.Errorf(code.CodeErrorServer.Clone(), "get doc list failed. %s", err)
+			ctx.Errorf(code.CodeErrorServer.Clone(), "search doc failed. %s", err)
 			return
 		}
 
@@ -161,13 +156,18 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 			return
 		}
 
+		err = bsDoc.EsIndexAhDocById(uint32(respData.NewDocId))
+		if nil != err {
+			ctx.Errorf(code.CodeErrorServer.Clone(), "es index ah_doc by id failed. %s", err)
+			return
+		}
+
 		ctx.SuccessReturn(respData)
 		return
 	},
 }
 
 /*
-更新文档
 更新文档
 */
 var DocUpdate ginbuilder.HandleFunc = ginbuilder.HandleFunc{
@@ -222,6 +222,12 @@ var DocUpdate ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		)
 		if nil != err {
 			ctx.Errorf(code.CodeErrorDBUpdateFailed.Clone(), "update doc failed. %s", err)
+			return
+		}
+
+		err = bsDoc.EsIndexAhDocById(uriData.DocId)
+		if nil != err {
+			ctx.Errorf(code.CodeErrorServer.Clone(), "es index ah_doc by id failed. %s", err)
 			return
 		}
 
@@ -282,6 +288,12 @@ var DocChangeCategory ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 			return
 		}
 
+		err = bsDoc.EsIndexAhDocById(uriData.DocId)
+		if nil != err {
+			ctx.Errorf(code.CodeErrorServer.Clone(), "es index ah_doc by id failed. %s", err)
+			return
+		}
+
 		ctx.Success()
 		return
 	},
@@ -335,6 +347,12 @@ var DocChangeAuthor ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		err = bsDoc.DocUpdate(doc.DocId, doc.Title, doc.CategoryId, postData.AuthorId, doc.SpecUrl, doc.SpecContent, time.Now().Unix())
 		if nil != err {
 			ctx.Errorf(code.CodeErrorDBUpdateFailed.Clone(), "update doc category failed. %s", err)
+			return
+		}
+
+		err = bsDoc.EsIndexAhDocById(uriData.DocId)
+		if nil != err {
+			ctx.Errorf(code.CodeErrorServer.Clone(), "es index ah_doc by id failed. %s", err)
 			return
 		}
 
@@ -404,6 +422,12 @@ var DocChangeTitle ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 			return
 		}
 
+		err = bsDoc.EsIndexAhDocById(uriData.DocId)
+		if nil != err {
+			ctx.Errorf(code.CodeErrorServer.Clone(), "es index ah_doc by id failed. %s", err)
+			return
+		}
+
 		ctx.Success()
 		return
 	},
@@ -438,6 +462,13 @@ var DocDelele ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		}
 
 		ctx.Logger.Warnf("delete doc. doc_id: %d, %#v", uriData.DocId, ses.Auth)
+
+		esClient := indices.NewEsApiHub(reqCtx)
+		err = esClient.AhDocDelete(uriData.DocId)
+		if nil != err {
+			logrus.Errorf("es delete doc failed. error: %s.", err)
+			return
+		}
 
 		ctx.Success()
 		return

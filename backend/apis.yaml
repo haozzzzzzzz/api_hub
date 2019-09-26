@@ -2,23 +2,32 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data: null
     query_data: null
-    post_data: null
+    post_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields: []
+      description: ""
     response_data:
       type_class: struct
       name: struct
+      embedded: []
       fields: []
       description: ""
   api_handler_func_type: 1
@@ -45,15 +54,18 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data: null
@@ -61,28 +73,34 @@
     post_data:
       type_class: struct
       name: PostData
+      embedded: []
       fields:
       - name: Name
         type_name: string
         tags:
           form: name
           json: name
-        typespec:
+        type_spec:
           type_class: basic
           name: string
+          description: ""
+        embedded: false
         description: ""
       description: ""
     response_data:
       type_class: struct
       name: ResponseData
+      embedded: []
       fields:
       - name: NewAccountId
         type_name: int64
         tags:
           json: new_account_id
-        typespec:
+        type_spec:
           type_class: basic
           name: int64
+          description: ""
+        embedded: false
         description: ""
       description: ""
   api_handler_func_type: 1
@@ -109,21 +127,25 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data: null
     query_data:
       type_class: struct
       name: QueryData
+      embedded: []
       fields:
       - name: Page
         type_name: uint32
@@ -131,9 +153,11 @@
           binding: required
           form: page
           json: page
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
+          description: ""
+        embedded: false
         description: 分页ID
       - name: Limit
         type_name: uint8
@@ -141,73 +165,95 @@
           binding: required
           form: limit
           json: limit
-        typespec:
+        type_spec:
           type_class: basic
           name: uint8
+          description: ""
+        embedded: false
         description: 分页大小
       description: ""
-    post_data: null
+    post_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields: []
+      description: ""
     response_data:
       type_class: struct
       name: ResponseData
+      embedded: []
       fields:
       - name: Count
         type_name: int64
         tags:
           json: count
-        typespec:
+        type_spec:
           type_class: basic
           name: int64
+          description: ""
+        embedded: false
         description: ""
       - name: Items
         type_name: '[]AhAccount'
         tags:
           json: items
-        typespec:
+        type_spec:
           type_class: array
           name: '[]AhAccount'
+          description: ""
+          len: 0
           elt_name: AhAccount
           elt_spec:
             type_class: struct
             name: AhAccount
+            embedded: []
             fields:
             - name: AccId
               type_name: uint32
               tags:
                 db: acc_id
                 json: acc_id
-              typespec:
+              type_spec:
                 type_class: basic
                 name: uint32
+                description: ""
+              embedded: false
               description: ""
             - name: Name
               type_name: string
               tags:
                 db: name
                 json: name
-              typespec:
+              type_spec:
                 type_class: basic
                 name: string
+                description: ""
+              embedded: false
               description: ""
             - name: UpdateTime
               type_name: int64
               tags:
                 db: update_time
                 json: update_time
-              typespec:
+              type_spec:
                 type_class: basic
                 name: int64
+                description: ""
+              embedded: false
               description: ""
             - name: CreateTime
               type_name: int64
               tags:
                 db: create_time
                 json: create_time
-              typespec:
+              type_spec:
                 type_class: basic
                 name: int64
+                description: ""
+              embedded: false
               description: ""
             description: ""
+        embedded: false
         description: ""
       description: ""
   api_handler_func_type: 1
@@ -234,20 +280,24 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data:
       type_class: struct
       name: UriData
+      embedded: []
       fields:
       - name: AccountId
         type_name: uint32
@@ -255,15 +305,18 @@
           binding: required
           json: account_id
           uri: account_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
+          description: ""
+        embedded: false
         description: ""
       description: ""
     query_data: null
     post_data:
       type_class: struct
       name: PostData
+      embedded: []
       fields:
       - name: Name
         type_name: string
@@ -271,14 +324,17 @@
           binding: required
           form: name
           json: name
-        typespec:
+        type_spec:
           type_class: basic
           name: string
+          description: ""
+        embedded: false
         description: ""
       description: ""
     response_data:
       type_class: struct
       name: struct
+      embedded: []
       fields: []
       description: ""
   api_handler_func_type: 1
@@ -305,15 +361,18 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data: null
@@ -321,28 +380,34 @@
     post_data:
       type_class: struct
       name: PostData
+      embedded: []
       fields:
       - name: Name
         type_name: string
         tags:
           form: name
           json: name
-        typespec:
+        type_spec:
           type_class: basic
           name: string
+          description: ""
+        embedded: false
         description: ""
       description: ""
     response_data:
       type_class: struct
       name: ResponseData
+      embedded: []
       fields:
       - name: NewCatId
         type_name: int64
         tags:
           json: new_cat_id
-        typespec:
+        type_spec:
           type_class: basic
           name: int64
+          description: ""
+        embedded: false
         description: ""
       description: ""
   api_handler_func_type: 1
@@ -369,21 +434,25 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data: null
     query_data:
       type_class: struct
       name: QueryData
+      embedded: []
       fields:
       - name: Page
         type_name: uint32
@@ -391,9 +460,11 @@
           binding: required
           form: page
           json: page
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
+          description: ""
+        embedded: false
         description: 分页ID
       - name: Limit
         type_name: uint8
@@ -401,83 +472,107 @@
           binding: required
           form: limit
           json: limit
-        typespec:
+        type_spec:
           type_class: basic
           name: uint8
+          description: ""
+        embedded: false
         description: 分页大小
       description: ""
-    post_data: null
+    post_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields: []
+      description: ""
     response_data:
       type_class: struct
       name: ResponseData
+      embedded: []
       fields:
       - name: Count
         type_name: int64
         tags:
           json: count
-        typespec:
+        type_spec:
           type_class: basic
           name: int64
-        description: 记录数目
+          description: ""
+        embedded: false
+        description: ""
       - name: Items
         type_name: '[]AhCategory'
         tags:
           json: items
-        typespec:
+        type_spec:
           type_class: array
           name: '[]AhCategory'
+          description: ""
+          len: 0
           elt_name: AhCategory
           elt_spec:
             type_class: struct
             name: AhCategory
+            embedded: []
             fields:
             - name: CatId
               type_name: uint32
               tags:
                 db: cat_id
                 json: cat_id
-              typespec:
+              type_spec:
                 type_class: basic
                 name: uint32
+                description: ""
+              embedded: false
               description: ""
             - name: Name
               type_name: string
               tags:
                 db: name
                 json: name
-              typespec:
+              type_spec:
                 type_class: basic
                 name: string
+                description: ""
+              embedded: false
               description: ""
             - name: DocNum
               type_name: uint32
               tags:
                 db: doc_num
                 json: doc_num
-              typespec:
+              type_spec:
                 type_class: basic
                 name: uint32
+                description: ""
+              embedded: false
               description: ""
             - name: UpdateTime
               type_name: int64
               tags:
                 db: update_time
                 json: update_time
-              typespec:
+              type_spec:
                 type_class: basic
                 name: int64
+                description: ""
+              embedded: false
               description: ""
             - name: CreateTime
               type_name: int64
               tags:
                 db: create_time
                 json: create_time
-              typespec:
+              type_spec:
                 type_class: basic
                 name: int64
+                description: ""
+              embedded: false
               description: ""
             description: ""
-        description: 文档记录
+        embedded: false
+        description: ""
       description: ""
   api_handler_func_type: 1
   api_handler_func: CategoryList
@@ -503,20 +598,24 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data:
       type_class: struct
       name: UriData
+      embedded: []
       fields:
       - name: CatId
         type_name: uint32
@@ -524,15 +623,18 @@
           binding: required
           json: cat_id
           uri: cat_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
+          description: ""
+        embedded: false
         description: ""
       description: ""
     query_data: null
     post_data:
       type_class: struct
       name: PostData
+      embedded: []
       fields:
       - name: Name
         type_name: string
@@ -540,14 +642,17 @@
           binding: required
           form: name
           json: name
-        typespec:
+        type_spec:
           type_class: basic
           name: string
+          description: ""
+        embedded: false
         description: ""
       description: ""
     response_data:
       type_class: struct
       name: struct
+      embedded: []
       fields: []
       description: ""
   api_handler_func_type: 1
@@ -574,20 +679,24 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data:
       type_class: struct
       name: PathData
+      embedded: []
       fields:
       - name: DocId
         type_name: uint32
@@ -595,16 +704,24 @@
           binding: required
           json: doc_id
           uri: doc_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
-        description: ""
+          description: ""
+        embedded: false
+        description: 文档ID
       description: ""
     query_data: null
-    post_data: null
+    post_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields: []
+      description: ""
     response_data:
       type_class: struct
       name: struct
+      embedded: []
       fields: []
       description: ""
   api_handler_func_type: 1
@@ -632,15 +749,18 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data: null
@@ -648,6 +768,7 @@
     post_data:
       type_class: struct
       name: PostData
+      embedded: []
       fields:
       - name: Title
         type_name: string
@@ -655,50 +776,61 @@
           binding: required
           form: title
           json: title
-        typespec:
+        type_spec:
           type_class: basic
           name: string
-        description: 标题
+          description: ""
+        embedded: false
+        description: 文档标题
       - name: CategoryId
         type_name: uint32
         tags:
           binding: required
           form: category_id
           json: category_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
+          description: ""
+        embedded: false
         description: 分类ID
       - name: SpecUrl
         type_name: string
         tags:
           form: spec_url
           json: spec_url
-        typespec:
+        type_spec:
           type_class: basic
           name: string
+          description: ""
+        embedded: false
         description: swagger.json url
       - name: SpecContent
         type_name: string
         tags:
           form: spec_content
           json: spec_content
-        typespec:
+        type_spec:
           type_class: basic
           name: string
-        description: ""
+          description: ""
+        embedded: false
+        description: swagger content
       description: ""
     response_data:
       type_class: struct
       name: ResponseData
+      embedded: []
       fields:
       - name: NewDocId
         type_name: int64
         tags:
           json: new_doc_id
-        typespec:
+        type_spec:
           type_class: basic
           name: int64
+          description: ""
+        embedded: false
         description: 新建的文档ID
       description: ""
   api_handler_func_type: 1
@@ -726,20 +858,24 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data:
       type_class: struct
       name: UriData
+      embedded: []
       fields:
       - name: DocId
         type_name: uint32
@@ -747,15 +883,18 @@
           binding: required
           json: doc_id
           uri: doc_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
+          description: ""
+        embedded: false
         description: ""
       description: ""
     query_data: null
     post_data:
       type_class: struct
       name: PostData
+      embedded: []
       fields:
       - name: AuthorId
         type_name: uint32
@@ -763,14 +902,17 @@
           binding: required
           form: author_id
           json: author_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
+          description: ""
+        embedded: false
         description: ""
       description: ""
     response_data:
       type_class: struct
       name: struct
+      embedded: []
       fields: []
       description: ""
   api_handler_func_type: 1
@@ -798,20 +940,24 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data:
       type_class: struct
       name: UriData
+      embedded: []
       fields:
       - name: DocId
         type_name: uint32
@@ -819,15 +965,18 @@
           binding: required
           json: doc_id
           uri: doc_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
+          description: ""
+        embedded: false
         description: 文档ID
       description: ""
     query_data: null
     post_data:
       type_class: struct
       name: PostData
+      embedded: []
       fields:
       - name: CategoryId
         type_name: uint32
@@ -835,14 +984,17 @@
           binding: required
           form: category_id
           json: category_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
+          description: ""
+        embedded: false
         description: ""
       description: ""
     response_data:
       type_class: struct
       name: struct
+      embedded: []
       fields: []
       description: ""
   api_handler_func_type: 1
@@ -870,20 +1022,24 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data:
       type_class: struct
       name: UriData
+      embedded: []
       fields:
       - name: DocId
         type_name: uint32
@@ -891,15 +1047,18 @@
           binding: required
           json: doc_id
           uri: doc_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
-        description: ""
+          description: ""
+        embedded: false
+        description: 文档ID
       description: ""
     query_data: null
     post_data:
       type_class: struct
       name: PostData
+      embedded: []
       fields:
       - name: Title
         type_name: string
@@ -907,14 +1066,17 @@
           binding: required
           form: title
           json: title
-        typespec:
+        type_spec:
           type_class: basic
           name: string
+          description: ""
+        embedded: false
         description: ""
       description: ""
     response_data:
       type_class: struct
       name: struct
+      embedded: []
       fields: []
       description: ""
   api_handler_func_type: 1
@@ -942,15 +1104,18 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data: null
@@ -958,6 +1123,7 @@
     post_data:
       type_class: struct
       name: PostData
+      embedded: []
       fields:
       - name: Title
         type_name: string
@@ -965,50 +1131,61 @@
           binding: required
           form: title
           json: title
-        typespec:
+        type_spec:
           type_class: basic
           name: string
-        description: 标题
+          description: ""
+        embedded: false
+        description: 文档标题
       - name: CategoryId
         type_name: uint32
         tags:
           binding: required
           form: category_id
           json: category_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
+          description: ""
+        embedded: false
         description: 分类ID
       - name: SpecUrl
         type_name: string
         tags:
           form: spec_url
           json: spec_url
-        typespec:
+        type_spec:
           type_class: basic
           name: string
+          description: ""
+        embedded: false
         description: swagger.json url
       - name: SpecContent
         type_name: string
         tags:
           form: spec_content
           json: spec_content
-        typespec:
+        type_spec:
           type_class: basic
           name: string
-        description: ""
+          description: ""
+        embedded: false
+        description: swagger content
       description: ""
     response_data:
       type_class: struct
       name: ResponseData
+      embedded: []
       fields:
       - name: DocId
         type_name: int64
         tags:
           json: doc_id
-        typespec:
+        type_spec:
           type_class: basic
           name: int64
+          description: ""
+        embedded: false
         description: 文档ID
       description: ""
   api_handler_func_type: 1
@@ -1036,20 +1213,24 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data:
       type_class: struct
       name: UriData
+      embedded: []
       fields:
       - name: DocId
         type_name: uint32
@@ -1057,16 +1238,24 @@
           binding: required
           json: doc_id
           uri: doc_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
-        description: ""
+          description: ""
+        embedded: false
+        description: 文档ID
       description: ""
     query_data: null
-    post_data: null
+    post_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields: []
+      description: ""
     response_data:
       type_class: struct
       name: struct
+      embedded: []
       fields: []
       description: ""
   api_handler_func_type: 1
@@ -1094,20 +1283,24 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data:
       type_class: struct
       name: UriData
+      embedded: []
       fields:
       - name: DocId
         type_name: uint32
@@ -1115,107 +1308,135 @@
           binding: required
           json: doc_id
           uri: doc_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
-        description: ""
+          description: ""
+        embedded: false
+        description: 文档ID
       description: ""
     query_data: null
-    post_data: null
+    post_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields: []
+      description: ""
     response_data:
       type_class: struct
       name: ResponseData
+      embedded: []
       fields:
       - name: Doc
         type_name: AhDoc
         tags:
           json: doc
-        typespec:
+        type_spec:
           type_class: struct
           name: AhDoc
+          embedded: []
           fields:
           - name: DocId
             type_name: uint32
             tags:
               db: doc_id
               json: doc_id
-            typespec:
+            type_spec:
               type_class: basic
               name: uint32
+              description: ""
+            embedded: false
             description: ""
           - name: Title
             type_name: string
             tags:
               db: title
               json: title
-            typespec:
+            type_spec:
               type_class: basic
               name: string
+              description: ""
+            embedded: false
             description: ""
           - name: SpecUrl
             type_name: string
             tags:
               db: spec_url
               json: spec_url
-            typespec:
+            type_spec:
               type_class: basic
               name: string
+              description: ""
+            embedded: false
             description: ""
           - name: SpecContent
             type_name: string
             tags:
               db: spec_content
               json: spec_content
-            typespec:
+            type_spec:
               type_class: basic
               name: string
+              description: ""
+            embedded: false
             description: ""
           - name: CategoryId
             type_name: uint32
             tags:
               db: category_id
               json: category_id
-            typespec:
+            type_spec:
               type_class: basic
               name: uint32
+              description: ""
+            embedded: false
             description: ""
           - name: AuthorId
             type_name: uint32
             tags:
               db: author_id
               json: author_id
-            typespec:
+            type_spec:
               type_class: basic
               name: uint32
+              description: ""
+            embedded: false
             description: ""
           - name: PostStatus
             type_name: uint8
             tags:
               db: post_status
               json: post_status
-            typespec:
+            type_spec:
               type_class: basic
               name: uint8
+              description: ""
+            embedded: false
             description: ""
           - name: UpdateTime
             type_name: int64
             tags:
               db: update_time
               json: update_time
-            typespec:
+            type_spec:
               type_class: basic
               name: int64
+              description: ""
+            embedded: false
             description: ""
           - name: CreateTime
             type_name: int64
             tags:
               db: create_time
               json: create_time
-            typespec:
+            type_spec:
               type_class: basic
               name: int64
+              description: ""
+            embedded: false
             description: ""
           description: ""
+        embedded: false
         description: ""
       description: ""
   api_handler_func_type: 1
@@ -1243,21 +1464,25 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data: null
     query_data:
       type_class: struct
       name: QueryData
+      embedded: []
       fields:
       - name: Page
         type_name: uint32
@@ -1265,9 +1490,11 @@
           binding: required
           form: page
           json: page
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
+          description: ""
+        embedded: false
         description: 分页ID
       - name: Limit
         type_name: uint8
@@ -1275,103 +1502,133 @@
           binding: required
           form: limit
           json: limit
-        typespec:
+        type_spec:
           type_class: basic
           name: uint8
+          description: ""
+        embedded: false
         description: 分页大小
       - name: Search
         type_name: string
         tags:
           form: search
           json: search
-        typespec:
+        type_spec:
           type_class: basic
           name: string
+          description: ""
+        embedded: false
         description: ""
       description: ""
-    post_data: null
+    post_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields: []
+      description: ""
     response_data:
       type_class: struct
       name: ResponseData
+      embedded: []
       fields:
       - name: Count
         type_name: int64
         tags:
           json: count
-        typespec:
+        type_spec:
           type_class: basic
           name: int64
-        description: 记录数目
+          description: ""
+        embedded: false
+        description: ""
       - name: Items
         type_name: '[]DocListItem'
         tags:
           json: items
-        typespec:
+        type_spec:
           type_class: array
           name: '[]DocListItem'
+          description: ""
+          len: 0
           elt_name: DocListItem
           elt_spec:
             type_class: struct
             name: DocListItem
+            embedded: []
             fields:
             - name: DocId
               type_name: uint32
               tags:
                 json: doc_id
-              typespec:
+              type_spec:
                 type_class: basic
                 name: uint32
+                description: ""
+              embedded: false
               description: 文档ID
             - name: Title
               type_name: string
               tags:
                 json: title
-              typespec:
+              type_spec:
                 type_class: basic
                 name: string
+                description: ""
+              embedded: false
               description: 文档标题
             - name: CategoryName
               type_name: string
               tags:
                 json: category_name
-              typespec:
+              type_spec:
                 type_class: basic
                 name: string
+                description: ""
+              embedded: false
               description: 分类名称
             - name: AuthorName
               type_name: string
               tags:
                 json: author_name
-              typespec:
+              type_spec:
                 type_class: basic
                 name: string
+                description: ""
+              embedded: false
               description: 作者名称
             - name: SpecUrl
               type_name: string
               tags:
                 json: spec_url
-              typespec:
+              type_spec:
                 type_class: basic
                 name: string
+                description: ""
+              embedded: false
               description: swagger.json url
             - name: PostStatus
               type_name: uint8
               tags:
                 json: post_status
-              typespec:
+              type_spec:
                 type_class: basic
                 name: uint8
+                description: ""
+              embedded: false
               description: 状态
             - name: CreateTime
               type_name: int64
               tags:
                 json: create_time
-              typespec:
+              type_spec:
                 type_class: basic
                 name: int64
+                description: ""
+              embedded: false
               description: 创建时间
             description: ""
-        description: 文档记录
+        embedded: false
+        description: ""
       description: ""
   api_handler_func_type: 1
   api_handler_func: DocList
@@ -1398,20 +1655,24 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data:
       type_class: struct
       name: UriData
+      embedded: []
       fields:
       - name: DocId
         type_name: uint32
@@ -1419,15 +1680,18 @@
           binding: required
           json: doc_id
           uri: doc_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
-        description: ""
+          description: ""
+        embedded: false
+        description: 文档ID
       description: ""
     query_data: null
     post_data:
       type_class: struct
       name: PostData
+      embedded: []
       fields:
       - name: Title
         type_name: string
@@ -1435,9 +1699,11 @@
           binding: required
           form: title
           json: title
-        typespec:
+        type_spec:
           type_class: basic
           name: string
+          description: ""
+        embedded: false
         description: 文档标题
       - name: CategoryId
         type_name: uint32
@@ -1445,32 +1711,39 @@
           binding: required
           form: category_id
           json: category_id
-        typespec:
+        type_spec:
           type_class: basic
           name: uint32
+          description: ""
+        embedded: false
         description: 分类ID
       - name: SpecUrl
         type_name: string
         tags:
           form: spec_url
           json: spec_url
-        typespec:
+        type_spec:
           type_class: basic
           name: string
+          description: ""
+        embedded: false
         description: swagger.json url
       - name: SpecContent
         type_name: string
         tags:
           form: spec_content
           json: spec_content
-        typespec:
+        type_spec:
           type_class: basic
           name: string
+          description: ""
+        embedded: false
         description: swagger content
       description: ""
     response_data:
       type_class: struct
       name: struct
+      embedded: []
       fields: []
       description: ""
   api_handler_func_type: 1
@@ -1498,20 +1771,24 @@
     header_data:
       type_class: struct
       name: struct
+      embedded: []
       fields:
       - name: X-Ah-Account-Id
         type_name: uint32
         tags:
           binding: ""
           json: X-Ah-Account-Id
-        typespec:
+        type_spec:
           type_class: basic
           name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
         description: （公参）账户ID，不填默认为1
       description: ""
     uri_data:
       type_class: struct
       name: UriData
+      embedded: []
       fields:
       - name: ProxyType
         type_name: string
@@ -1519,25 +1796,35 @@
           binding: required
           json: proxy_type
           uri: proxy_type
-        typespec:
+        type_spec:
           type_class: basic
           name: string
+          description: ""
+        embedded: false
         description: ""
       - name: TargetUri
         type_name: string
         tags:
           json: target_uri
           uri: target_uri
-        typespec:
+        type_spec:
           type_class: basic
           name: string
+          description: ""
+        embedded: false
         description: ""
       description: ""
     query_data: null
-    post_data: null
+    post_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields: []
+      description: ""
     response_data:
       type_class: struct
       name: struct
+      embedded: []
       fields: []
       description: ""
   api_handler_func_type: 1

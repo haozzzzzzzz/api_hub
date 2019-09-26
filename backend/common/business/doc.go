@@ -3,6 +3,8 @@ package business
 import (
 	"backend/common/db/model"
 	"backend/common/db/table"
+	"backend/common/es/indices"
+	model2 "backend/common/es/model"
 	"context"
 	"time"
 
@@ -22,17 +24,16 @@ type DocListItem struct {
 	Title        string `json:"title"`         // 文档标题
 	CategoryName string `json:"category_name"` // 分类名称
 	AuthorName   string `json:"author_name"`   // 作者名称
-	SpecUrl      string `json:"spec_url"`      // swagger.json url
 	PostStatus   uint8  `json:"post_status"`   // 状态
 	CreateTime   int64  `json:"create_time"`   // 创建时间
 }
 
-func (m *BsDoc) DocList(
+func (m *BsDoc) DocWithNameList(
 	page uint32,
 	limit uint8,
 	search string,
-) (items []*DocListItem, err error) {
-	items = make([]*DocListItem, 0)
+) (items []*model.AhDocWithName, err error) {
+	items = make([]*model.AhDocWithName, 0)
 
 	dbClient := table.NewHubDB(m.Ctx)
 	docs, err := dbClient.AhDocList(page, limit, search)
@@ -71,12 +72,8 @@ func (m *BsDoc) DocList(
 	}
 
 	for _, doc := range docs {
-		item := &DocListItem{
-			DocId:      doc.DocId,
-			Title:      doc.Title,
-			SpecUrl:    doc.SpecUrl,
-			PostStatus: doc.PostStatus,
-			CreateTime: doc.CreateTime,
+		item := &model.AhDocWithName{
+			AhDoc: *doc,
 		}
 
 		// category
@@ -92,6 +89,63 @@ func (m *BsDoc) DocList(
 		}
 
 		items = append(items, item)
+	}
+
+	return
+}
+
+func (m *BsDoc) DocList(
+	page uint32,
+	limit uint8,
+	search string,
+) (items []*DocListItem, err error) {
+	items = make([]*DocListItem, 0)
+	docWithNameItems, err := m.DocWithNameList(page, limit, search)
+	if nil != err {
+		logrus.Errorf("get doc with name list failed. error: %s.", err)
+		return
+	}
+
+	for _, doc := range docWithNameItems {
+		items = append(items, &DocListItem{
+			DocId:        doc.DocId,
+			Title:        doc.Title,
+			CategoryName: doc.CategoryName,
+			AuthorName:   doc.AuthorName,
+			PostStatus:   doc.PostStatus,
+			CreateTime:   doc.CreateTime,
+		})
+	}
+
+	return
+}
+
+func (m *BsDoc) DocWithNameById(
+	docId uint32,
+) (docWithName *model.AhDocWithName, err error) {
+	dbClient := table.NewHubDB(m.Ctx)
+	doc, err := dbClient.AhDocGet(docId)
+	if nil != err {
+		logrus.Errorf("get doc failed. error: %s.", err)
+		return
+	}
+
+	category, err := dbClient.AhCategoryGet(doc.CategoryId)
+	if nil != err {
+		logrus.Errorf("get category failed. error: %s.", err)
+		return
+	}
+
+	author, err := dbClient.AhAccountGet(doc.AuthorId)
+	if nil != err {
+		logrus.Errorf("get author failed. error: %s.", err)
+		return
+	}
+
+	docWithName = &model.AhDocWithName{
+		AhDoc:        *doc,
+		AuthorName:   author.Name,
+		CategoryName: category.Name,
 	}
 
 	return
@@ -263,5 +317,119 @@ func (m *BsDoc) DocDel(docId uint32) (err error) {
 		return
 	}
 
+	return
+}
+
+// es
+func (m *BsDoc) EsIndexAhDoc(ahDoc *model.AhDocWithName) (err error) {
+	esClient := indices.NewEsApiHub(m.Ctx)
+	esAhDoc, err := model2.NewEsAhDoc(ahDoc)
+	if nil != err {
+		logrus.Errorf("new es ah doc failed. error: %s.", err)
+		return
+	}
+
+	err = esClient.AhDocIndex(esAhDoc)
+	if nil != err {
+		logrus.Errorf("index ah doc failed. error: %s.", err)
+		return
+	}
+
+	return
+}
+
+func (m *BsDoc) EsIndexAhDocById(docId uint32) (err error) {
+	doc, err := m.DocWithNameById(docId)
+	if nil != err {
+		logrus.Errorf("get doc with name by failed. error: %s.", err)
+		return
+	}
+
+	err = m.EsIndexAhDoc(doc)
+	if nil != err {
+		logrus.Errorf("index ah doc failed. error: %s.", err)
+		return
+	}
+
+	return
+}
+
+func (m *BsDoc) EsIndexAllAhDoc() (err error) {
+	limit := uint8(255)
+	i := uint32(0)
+	for {
+		i++
+
+		docs, errList := m.DocWithNameList(i, limit, "")
+		err = errList
+		if nil != err {
+			logrus.Errorf("get ah doc list failed. error: %s.", err)
+			return
+		}
+
+		if len(docs) == 0 {
+			break
+		}
+
+		for _, doc := range docs {
+			err = m.EsIndexAhDoc(doc)
+			if nil != err {
+				logrus.Errorf("get es index ah doc failed. error: %s.", err)
+				return
+			}
+		}
+	}
+	return
+}
+
+func (m *BsDoc) EsAhDocSearch(page uint32, limit uint8, search string) (count int64, items []*DocListItem, err error) {
+	items = make([]*DocListItem, 0)
+	esClient := indices.NewEsApiHub(m.Ctx)
+	count, esAhDocs, err := esClient.AhDocSearch(search, page, limit)
+	if nil != err {
+		logrus.Errorf("search ah_doc failed. error: %s.", err)
+		return
+	}
+
+	for _, esAhDoc := range esAhDocs {
+		items = append(items, &DocListItem{
+			DocId:        esAhDoc.DocId,
+			Title:        esAhDoc.Title,
+			CategoryName: esAhDoc.CategoryName,
+			AuthorName:   esAhDoc.AuthorName,
+			PostStatus:   esAhDoc.PostStatus,
+			CreateTime:   esAhDoc.CreateTimeUnix,
+		})
+	}
+
+	return
+}
+
+// search
+func (m *BsDoc) DocSearch(page uint32, limit uint8, search string) (count int64, items []*DocListItem, err error) {
+	items = make([]*DocListItem, 0)
+
+	dbClient := table.NewHubDB(m.Ctx)
+	if search == "" {
+		count, err = dbClient.AhDocCount("")
+		if nil != err {
+			logrus.Errorf("db get ah_doc count failed. error: %s.", err)
+			return
+		}
+
+		items, err = m.DocList(page, limit, "")
+		if nil != err {
+			logrus.Errorf("get doc list failed. error: %s.", err)
+			return
+		}
+
+		return
+	}
+
+	count, items, err = m.EsAhDocSearch(page, limit, search)
+	if nil != err {
+		logrus.Errorf("es ah_doc search failed. error: %s.", err)
+		return
+	}
 	return
 }

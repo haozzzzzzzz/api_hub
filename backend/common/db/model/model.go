@@ -10,6 +10,10 @@ const (
 const DefaultAccountId uint32 = 1
 const DefaultCategoryId uint32 = 1
 
+type SwaggerSpec struct {
+	Paths map[string]interface{} `json:"paths"`
+}
+
 type AhDoc struct {
 	DocId       uint32 `json:"doc_id" db:"doc_id"`
 	Title       string `json:"title" db:"title"`
@@ -20,6 +24,12 @@ type AhDoc struct {
 	PostStatus  uint8  `json:"post_status" db:"post_status"`
 	UpdateTime  int64  `json:"update_time" db:"update_time"`
 	CreateTime  int64  `json:"create_time" db:"create_time"`
+}
+
+type AhDocWithName struct {
+	AhDoc
+	AuthorName   string
+	CategoryName string
 }
 
 // 账户

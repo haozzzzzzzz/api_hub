@@ -1,7 +1,7 @@
 <template>
-    <el-tabs v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit" @tab-click="tabClick">
+    <el-tabs v-model="tabActiveName" type="card" editable @edit="handleTabsEdit" @tab-click="tabClick">
         <el-tab-pane
-                v-for="item in editableTabs"
+                v-for="item in tabs"
                 :key="item.name"
                 :label="item.title"
                 :name="item.name"
@@ -10,7 +10,7 @@
         >
             <transition name="fade-transform" mode="out-in">
                 <keep-alive>
-                    <component v-bind:is="item.tabView" @custom-tab-open="customTabOpen" :data="item.tabData"></component>
+                    <component v-bind:is="item.tabView" @custom-tab-open="customTabOpen" @search-change="searchChange" :tab-data="item.tabData"></component>
                 </keep-alive>
             </transition>
         </el-tab-pane>
@@ -28,47 +28,108 @@
         title: "document list",
         name: defaultTabId,
         tabType: 'list',
-        tabData: {},
+        tabData: {
+            search: "",
+        },
         tabView: document_list,
     };
+
+    function tabOpen(data) {
+        let tabType = data.tabType;
+        let tabData = data.tabData;
+
+        let tabActive = null;
+        switch (tabType) {
+            case 'detail':
+            {
+                let existTabName = "";
+                for( let tab of this.tabs) {
+                    if (tab.tabType === tabType && tab.tabData.doc_id == tabData.doc_id) { // 存在
+                        existTabName = tab.name;
+                        tabActive = tab;
+                        break;
+                    }
+                }
+
+                if (existTabName !== '') {
+                    this.tabActiveName = existTabName;
+                    return tabActive
+                }
+
+                let newTabName = ++ this.tabCounter + '';
+                let newTab = {
+                    title: (tabData.title ? "(" + tabData.doc_id + ") " + tabData.title : false) || 'New Tab',
+                    name: newTabName,
+                    tabType: 'detail',
+                    tabData: tabData,
+                    tabView: document_detail,
+                };
+
+                tabActive = newTab;
+                this.tabs.push(newTab);
+                this.tabActiveName = newTabName;
+
+            }
+        }
+
+        this.tabMap = {};
+        this.tabs.forEach((tab, index)=>{
+            this.tabMap[tab.name] = tab;
+        });
+
+        return tabActive;
+    }
 
     export default {
         name: "document",
         data(){
-            return {
-                editableTabsValue: defaultTabId,
-                editableTabs: [
+            let retData = {
+                tabActiveName: defaultTabId,
+                tabs: [
                     defaultDocumentTab
                 ],
-                editableTabMap: {
+                tabMap: {
                     defaultTabId: defaultDocumentTab
                 },
                 tabCounter: 0,
-            }
-        },
-        watch:{
-            editableTabs(newTabs, oldTabs) {
-                this.editableTabMap = {};
-                this.editableTabs.forEach((tab, index)=>{
-                    this.editableTabMap[tab.name] = tab;
-                });
-            }
-        },
-        mounted(){
+            };
+
             let query = this.$route.query;
+
             switch (query.tab_type) {
                 case 'detail':
                 {
-                    let doc_id = query.doc_id;
+                    let doc_id = parseInt(query.doc_id, 10);
                     let title = query.title;
-                    this.tabOpen({
+
+                    tabOpen.call(retData, {
                         tabType: "detail",
                         tabData: {
                             doc_id: doc_id,
                             title: title,
                         }
-                    })
+                    });
+
                 }
+                    break;
+                case 'list':
+                {
+                    let search = query.search;
+                    if (search != undefined && search != "") {
+                        defaultDocumentTab.tabData.search = search
+                    }
+                }
+                    break;
+            }
+
+            return retData;
+        },
+        watch:{
+            tabs(newTabs, oldTabs) {
+                this.tabMap = {};
+                newTabs.forEach((tab, index)=>{
+                    this.tabMap[tab.name] = tab;
+                });
             }
         },
         methods: {
@@ -86,8 +147,8 @@
                     }
                     case "remove":
                     {
-                        let tabs = this.editableTabs;
-                        let activeName = this.editableTabsValue;
+                        let tabs = this.tabs;
+                        let activeName = this.tabActiveName;
                         if ( targetName === defaultTabId ) {
                             return
                         }
@@ -101,8 +162,8 @@
                             }
                         });
 
-                        this.editableTabsValue = activeName;
-                        this.editableTabs = tabs.filter(tab=>tab.name !== targetName);
+                        this.tabActiveName = activeName;
+                        this.tabs = tabs.filter(tab=>tab.name !== targetName);
                         break;
                     }
                     default:
@@ -113,59 +174,45 @@
             customTabOpen(eventData) {
                 this.tabOpen(eventData)
             },
-            tabOpen(data) {
-                let tabType = data.tabType;
-                let tabData = data.tabData;
-
-                switch (tabType) {
-                    case 'detail':
-                    {
-                        let existTabName = "";
-                        for( let tab of this.editableTabs) {
-                            if (tab.tabType === tabType && tab.tabData.doc_id === tabData.doc_id) { // 存在
-                                existTabName = tab.name;
-                                break;
-                            }
-                        }
-
-                        if (existTabName !== '') {
-                            this.editableTabsValue = existTabName;
-                            return
-                        }
-
-                        let newTabName = ++ this.tabCounter + '';
-                        let editableTable = {
-                            title: (tabData.title ? "(" + tabData.doc_id + ") " + tabData.title : false) || 'New Tab',
-                            name: newTabName,
-                            tabType: 'detail',
-                            tabData: tabData,
-                            tabView: document_detail,
-                        };
-
-                        this.editableTabs.push(editableTable);
-                        this.editableTabsValue = newTabName;
-                        this.changeUrl(editableTable);
-                    }
-                }
+            searchChange(eventData){
+                defaultDocumentTab.tabData.search = eventData.tabData.search;
+                this.changeUrl(defaultDocumentTab);
             },
-
+            tabOpen(data){
+                let activeTab = tabOpen.call(this, data);
+                this.changeUrl(activeTab);
+            },
             tabClick(tab){
                 let tabName = tab.name;
-                let editableTab = this.editableTabMap[tabName];
-                if (editableTab===undefined){
-                    return
-                }
-
+                let editableTab = this.tabMap[tabName];
                 this.changeUrl(editableTab);
             },
 
-            changeUrl(editableTab){
+            changeUrl(tab){
+                if (tab == undefined) {
+                    console.error("change url(undefined)");
+                    return
+                }
+                let query = {};
+                switch (tab.tabType) {
+                    case "detail":
+                        query = {
+                            tab_type: tab.tabType,
+                            doc_id: tab.tabData.doc_id,
+                            title: tab.tabData.title
+                        };
+                        break;
+
+                    case "list":
+                        query = {
+                            tab_type: tab.tabType,
+                            search: tab.tabData.search,
+                        };
+                        break;
+                }
+
                 this.$router.push({
-                    query: {
-                        tab_type: editableTab.tabType,
-                        doc_id: editableTab.tabData.doc_id,
-                        title: editableTab.tabData.title
-                    }
+                    query: query
                 })
             }
         }

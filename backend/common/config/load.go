@@ -29,15 +29,24 @@ type ReverseProxyConfigFormat struct {
 	ProxyTypeHost map[string]string `yaml:"proxy_type_host"` // proxy_type => proxy_path_prefix
 }
 
+// elastic search
+type ElasticSearchConfigFormat struct {
+	Endpoint   string `yaml:"endpoint" validate:"required"`
+	IndexAhDoc string `yaml:"index_ah_doc" validate:"required"`
+}
+
 var ServiceConfig ServiceConfigFormat
 var DBConfig db.ClientConfigFormat
 var ReverseProxyConfig = ReverseProxyConfigFormat{
 	ProxyTypeHost: make(map[string]string),
 }
 
+var ElasticSearchConfig ElasticSearchConfigFormat
+
 // panic if fail, for stopping process
 func loadPanic() {
 	config.LoadFileYamlPanic("./config/service.yaml", &ServiceConfig)
 	config.LoadFileYamlPanic("./config/db.yaml", &DBConfig)
 	config.LoadFileYamlNoError("./config/reverse_proxy.yaml", &ReverseProxyConfig)
+	config.LoadFileYamlPanic("./config/elastic_search.yaml", &ElasticSearchConfig)
 }

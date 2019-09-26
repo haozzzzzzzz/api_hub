@@ -234,7 +234,7 @@ func (m *EsApiHub) AhDocSearch(
         {
           "multi_match": {
           "query": "%s",
-          "fields": ["title","spec_url","spec_paths","author_name",   "category_name"]
+          "fields": ["title", "spec_url", "spec_paths", "spec_tags", "author_name", "category_name"]
           }
         }
       ]

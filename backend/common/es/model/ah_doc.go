@@ -12,6 +12,7 @@ type EsAhDoc struct {
 	Title          string    `json:"title"`
 	SpecUrl        string    `json:"spec_url"`
 	SpecPaths      []string  `json:"spec_paths"`
+	SpecTags       []string  `json:"spec_tags"`
 	AuthorId       uint32    `json:"author_id"`
 	AuthorName     string    `json:"author_name"`
 	CategoryId     uint32    `json:"category_id"`
@@ -29,6 +30,7 @@ func NewEsAhDoc(
 		Title:          doc.Title,
 		SpecUrl:        doc.SpecUrl,
 		SpecPaths:      []string{},
+		SpecTags:       []string{},
 		AuthorId:       doc.AuthorId,
 		AuthorName:     doc.AuthorName,
 		CategoryId:     doc.CategoryId,
@@ -46,10 +48,25 @@ func NewEsAhDoc(
 			return
 		}
 
-		for path, _ := range swaggerSpec.Paths {
+		pathMap := make(map[string]bool)
+		tagMap := make(map[string]bool)
+		for path, actionMap := range swaggerSpec.Paths {
+			pathMap[path] = true
+			for method, action := range actionMap {
+				_ = method
+				for _, tag := range action.Tags {
+					tagMap[tag] = true
+				}
+			}
+		}
+
+		for path, _ := range pathMap {
 			esDoc.SpecPaths = append(esDoc.SpecPaths, path)
 		}
 
+		for tag, _ := range tagMap {
+			esDoc.SpecTags = append(esDoc.SpecTags, tag)
+		}
 	}
 
 	return

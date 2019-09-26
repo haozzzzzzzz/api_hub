@@ -11,7 +11,9 @@ const DefaultAccountId uint32 = 1
 const DefaultCategoryId uint32 = 1
 
 type SwaggerSpec struct {
-	Paths map[string]interface{} `json:"paths"`
+	Paths map[string]map[string]struct {
+		Tags []string `json:"tags"`
+	} `json:"paths"`
 }
 
 type AhDoc struct {

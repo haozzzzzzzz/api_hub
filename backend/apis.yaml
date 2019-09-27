@@ -499,7 +499,7 @@
           name: int64
           description: ""
         embedded: false
-        description: ""
+        description: 记录数目
       - name: Items
         type_name: '[]AhCategory'
         tags:
@@ -572,7 +572,7 @@
               description: ""
             description: ""
         embedded: false
-        description: ""
+        description: 文档记录
       description: ""
   api_handler_func_type: 1
   api_handler_func: CategoryList
@@ -709,7 +709,7 @@
           name: uint32
           description: ""
         embedded: false
-        description: 文档ID
+        description: ""
       description: ""
     query_data: null
     post_data:
@@ -970,7 +970,7 @@
           name: uint32
           description: ""
         embedded: false
-        description: 文档ID
+        description: ""
       description: ""
     query_data: null
     post_data:
@@ -1243,7 +1243,7 @@
           name: uint32
           description: ""
         embedded: false
-        description: 文档ID
+        description: ""
       description: ""
     query_data: null
     post_data:
@@ -1540,7 +1540,7 @@
           name: int64
           description: ""
         embedded: false
-        description: ""
+        description: 记录数目
       - name: Items
         type_name: '[]DocListItem'
         tags:
@@ -1596,16 +1596,6 @@
                 description: ""
               embedded: false
               description: 作者名称
-            - name: SpecUrl
-              type_name: string
-              tags:
-                json: spec_url
-              type_spec:
-                type_class: basic
-                name: string
-                description: ""
-              embedded: false
-              description: swagger.json url
             - name: PostStatus
               type_name: uint8
               tags:
@@ -1628,7 +1618,7 @@
               description: 创建时间
             description: ""
         embedded: false
-        description: ""
+        description: 文档记录
       description: ""
   api_handler_func_type: 1
   api_handler_func: DocList
@@ -1763,9 +1753,111 @@
   relative_paths:
   - /api/api_hub/v1/doc/doc/update/:doc_id
   summary: 更新文档
-  description: 更新文档
+  description: ""
   tags:
   - 文档
+  deprecated: false
+- apiitemparams:
+    header_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        type_spec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
+        description: （公参）账户ID，不填默认为1
+      description: ""
+    uri_data: null
+    query_data: null
+    post_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields: []
+      description: ""
+    response_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields: []
+      description: ""
+  api_handler_func_type: 1
+  api_handler_func: DocEsIndexAllAhDoc
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc_search.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc_search.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags: []
+    deprecated: false
+  http_method: POST
+  relative_paths:
+  - /api/api_hub/v1/doc/es/index_all_ah_doc
+  summary: ""
+  description: ""
+  tags: []
+  deprecated: false
+- apiitemparams:
+    header_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields:
+      - name: X-Ah-Account-Id
+        type_name: uint32
+        tags:
+          binding: ""
+          json: X-Ah-Account-Id
+        type_spec:
+          type_class: basic
+          name: （公参）账户ID，不填默认为1|uint32
+          description: ""
+        embedded: false
+        description: （公参）账户ID，不填默认为1
+      description: ""
+    uri_data: null
+    query_data: null
+    post_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields: []
+      description: ""
+    response_data:
+      type_class: struct
+      name: struct
+      embedded: []
+      fields: []
+      description: ""
+  api_handler_func_type: 1
+  api_handler_func: DocEsInitAhDoc
+  api_file:
+    source_file: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc_search.go
+    api_handler_package: doc
+    package_exported: backend/api/doc
+    package_dir: /Users/hao/Documents/Projects/Github/api_hub/backend/api/doc/api_doc_search.go
+    package_rel_alias: doc
+    summary: ""
+    description: ""
+    tags: []
+    deprecated: false
+  http_method: POST
+  relative_paths:
+  - /api/api_hub/v1/doc/es/init_ah_doc
+  summary: ""
+  description: ""
+  tags: []
   deprecated: false
 - apiitemparams:
     header_data:

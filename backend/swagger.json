@@ -406,9 +406,11 @@
 									"type": "object",
 									"properties": {
 										"count": {
+											"description": "记录数目",
 											"type": "integer"
 										},
 										"items": {
+											"description": "文档记录",
 											"type": "array",
 											"items": {
 												"type": "object",
@@ -530,7 +532,6 @@
 				"parameters": [
 					{
 						"type": "integer",
-						"description": "文档ID",
 						"name": "doc_id",
 						"in": "path",
 						"required": true
@@ -740,7 +741,6 @@
 				"parameters": [
 					{
 						"type": "integer",
-						"description": "文档ID",
 						"name": "doc_id",
 						"in": "path",
 						"required": true
@@ -961,7 +961,6 @@
 				"parameters": [
 					{
 						"type": "integer",
-						"description": "文档ID",
 						"name": "doc_id",
 						"in": "path",
 						"required": true
@@ -1158,9 +1157,11 @@
 									"type": "object",
 									"properties": {
 										"count": {
+											"description": "记录数目",
 											"type": "integer"
 										},
 										"items": {
+											"description": "文档记录",
 											"type": "array",
 											"items": {
 												"type": "object",
@@ -1184,10 +1185,6 @@
 													"post_status": {
 														"description": "状态",
 														"type": "integer"
-													},
-													"spec_url": {
-														"description": "swagger.json url",
-														"type": "string"
 													},
 													"title": {
 														"description": "文档标题",
@@ -1214,7 +1211,6 @@
 		},
 		"/api/api_hub/v1/doc/doc/update/{doc_id}": {
 			"post": {
-				"description": "更新文档",
 				"consumes": [
 					"application/json"
 				],
@@ -1270,6 +1266,104 @@
 									]
 								}
 							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"data": {
+									"description": "result data",
+									"type": "object"
+								},
+								"msg": {
+									"description": "result message",
+									"type": "string"
+								},
+								"ret": {
+									"description": "result code",
+									"type": "integer"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/api_hub/v1/doc/es/index_all_ah_doc": {
+			"post": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"operationId": "POST-/api/api_hub/v1/doc/es/index_all_ah_doc",
+				"parameters": [
+					{
+						"type": "integer",
+						"description": "（公参）账户ID，不填默认为1",
+						"name": "X-Ah-Account-Id",
+						"in": "header"
+					},
+					{
+						"name": "struct",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"type": "object"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"data": {
+									"description": "result data",
+									"type": "object"
+								},
+								"msg": {
+									"description": "result message",
+									"type": "string"
+								},
+								"ret": {
+									"description": "result code",
+									"type": "integer"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/api_hub/v1/doc/es/init_ah_doc": {
+			"post": {
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"operationId": "POST-/api/api_hub/v1/doc/es/init_ah_doc",
+				"parameters": [
+					{
+						"type": "integer",
+						"description": "（公参）账户ID，不填默认为1",
+						"name": "X-Ah-Account-Id",
+						"in": "header"
+					},
+					{
+						"name": "struct",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"type": "object"
 						}
 					}
 				],

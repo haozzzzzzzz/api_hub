@@ -1,7 +1,7 @@
 <template>
     <div class="tab-content">
         <div style="margin-bottom: 15px;">
-            <el-input placeholder="请输入关键字搜索标题、目录、作者、uri" v-model="search" class="input-with-select" @keyup.enter.native="handleSearch">
+            <el-input placeholder="请输入关键字搜索标题、目录、作者、uri、tags" v-model="search" class="input-with-select" @keyup.enter.native="handleSearch">
                 <el-button slot="append" icon="el-icon-search" @click="handleSearch"></el-button>
             </el-input>
         </div>

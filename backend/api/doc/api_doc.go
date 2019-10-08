@@ -541,6 +541,12 @@ var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 				return
 			}
 
+			err = bsDoc.EsIndexAhDocById(doc.DocId)
+			if nil != err {
+				ctx.Errorf(code.CodeErrorServer.Clone(), "es index ah_doc by id failed. %s", err)
+				return
+			}
+
 			ctx.SuccessReturn(respData)
 			return
 		}
@@ -558,6 +564,12 @@ var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		})
 		if nil != err {
 			ctx.Errorf(code.CodeErrorServer.Clone(), "bs doc add doc failed. %s", err)
+			return
+		}
+
+		err = bsDoc.EsIndexAhDocById(uint32(respData.DocId))
+		if nil != err {
+			ctx.Errorf(code.CodeErrorServer.Clone(), "es index ah_doc by id failed. %s", err)
 			return
 		}
 

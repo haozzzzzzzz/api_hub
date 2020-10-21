@@ -613,7 +613,13 @@ var DocDetailSpec ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		}
 
 		if doc.SpecContent != "" {
-			ctx.GinContext.Header("Content-Type", gin.MIMEJSON)
+			contentType := gin.MIMEPlain
+			switch doc.DocType {
+			case model.DocTypeSwagger:
+				contentType = gin.MIMEJSON
+			}
+
+			ctx.GinContext.Header("Content-Type", contentType)
 			ctx.String(doc.SpecContent)
 
 		} else if doc.SpecUrl != "" {

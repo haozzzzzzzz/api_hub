@@ -40,33 +40,37 @@ func NewEsAhDoc(
 		CreateTimeUnix: doc.CreateTime,
 	}
 
-	if doc.SpecContent != "" {
-		swaggerSpec := &model.SwaggerSpec{}
-		err = json.Unmarshal([]byte(doc.SpecContent), swaggerSpec)
-		if nil != err {
-			logrus.Errorf("unmarshal spec content failed. error: %s.", err)
-			return
-		}
+	switch doc.DocType {
+	case model.DocTypeSwagger:
+		if doc.SpecContent != "" {
+			swaggerSpec := &model.SwaggerSpec{}
+			err = json.Unmarshal([]byte(doc.SpecContent), swaggerSpec)
+			if nil != err {
+				logrus.Errorf("unmarshal spec content failed. error: %s.", err)
+				return
+			}
 
-		pathMap := make(map[string]bool)
-		tagMap := make(map[string]bool)
-		for path, actionMap := range swaggerSpec.Paths {
-			pathMap[path] = true
-			for method, action := range actionMap {
-				_ = method
-				for _, tag := range action.Tags {
-					tagMap[tag] = true
+			pathMap := make(map[string]bool)
+			tagMap := make(map[string]bool)
+			for path, actionMap := range swaggerSpec.Paths {
+				pathMap[path] = true
+				for method, action := range actionMap {
+					_ = method
+					for _, tag := range action.Tags {
+						tagMap[tag] = true
+					}
 				}
+			}
+
+			for path, _ := range pathMap {
+				esDoc.SpecPaths = append(esDoc.SpecPaths, path)
+			}
+
+			for tag, _ := range tagMap {
+				esDoc.SpecTags = append(esDoc.SpecTags, tag)
 			}
 		}
 
-		for path, _ := range pathMap {
-			esDoc.SpecPaths = append(esDoc.SpecPaths, path)
-		}
-
-		for tag, _ := range tagMap {
-			esDoc.SpecTags = append(esDoc.SpecTags, tag)
-		}
 	}
 
 	return

@@ -11,7 +11,7 @@ require (
 	github.com/haozzzzzzzz/go-rapid-development v0.1.27
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/sirupsen/logrus v1.4.2
-	gopkg.in/go-playground/validator.v9 v9.29.1
+	gopkg.in/go-playground/validator.v9 v9.31.0
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 )
 

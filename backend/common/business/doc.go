@@ -200,6 +200,7 @@ func (m *BsDoc) DocAdd(doc *model.AhDoc) (newDocId int64, err error) {
 func (m *BsDoc) DocUpdate(
 	docId uint32,
 	title string,
+	docType model.DocType,
 	categoryId uint32,
 	accountId uint32,
 	specUrl string,
@@ -244,7 +245,18 @@ func (m *BsDoc) DocUpdate(
 
 	}()
 
-	_, err = dbClient.AhDocUpdateTx(tx, docId, title, specUrl, specContent, categoryId, accountId, oldDoc.PostStatus, updateTime)
+	_, err = dbClient.AhDocUpdateTx(
+		tx,
+		docId,
+		title,
+		docType,
+		specUrl,
+		specContent,
+		categoryId,
+		accountId,
+		oldDoc.PostStatus,
+		updateTime,
+	)
 	if nil != err {
 		logrus.Errorf("ah doc update failed. error: %s.", err)
 		return

@@ -113,10 +113,11 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		// request post data
 		type PostData struct {
-			Title       string `json:"title" form:"title" binding:"required"`             // 文档标题
-			CategoryId  uint32 `json:"category_id" form:"category_id" binding:"required"` // 分类ID
-			SpecUrl     string `json:"spec_url" form:"spec_url"`                          // swagger.json url
-			SpecContent string `json:"spec_content" form:"spec_content"`                  // swagger content
+			Title       string        `json:"title" form:"title" binding:"required"`             // 文档标题
+			DocType     model.DocType `json:"doc_type" form:"doc_type"`                          // 文档类型
+			CategoryId  uint32        `json:"category_id" form:"category_id" binding:"required"` // 分类ID
+			SpecUrl     string        `json:"spec_url" form:"spec_url"`                          // swagger.json url
+			SpecContent string        `json:"spec_content" form:"spec_content"`                  // swagger content
 		}
 		postData := PostData{}
 		retCode, err := ctx.BindPostData(&postData)
@@ -143,6 +144,7 @@ var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		now := time.Now().Unix()
 		respData.NewDocId, err = bsDoc.DocAdd(&model.AhDoc{
 			Title:       postData.Title,
+			DocType:     postData.DocType,
 			SpecUrl:     postData.SpecUrl,
 			SpecContent: postData.SpecContent,
 			CategoryId:  postData.CategoryId,
@@ -191,10 +193,11 @@ var DocUpdate ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		// request post data
 		type PostData struct {
-			Title       string `json:"title" form:"title" binding:"required"`             // 文档标题
-			CategoryId  uint32 `json:"category_id" form:"category_id" binding:"required"` // 分类ID
-			SpecUrl     string `json:"spec_url" form:"spec_url"`                          // swagger.json url
-			SpecContent string `json:"spec_content" form:"spec_content"`                  // swagger content
+			Title       string        `json:"title" form:"title" binding:"required"`             // 文档标题
+			DocType     model.DocType `json:"doc_type" form:"doc_type"`                          // 文档类型。0：swagger; 1: markdown
+			CategoryId  uint32        `json:"category_id" form:"category_id" binding:"required"` // 分类ID
+			SpecUrl     string        `json:"spec_url" form:"spec_url"`                          // swagger.json url
+			SpecContent string        `json:"spec_content" form:"spec_content"`                  // swagger content
 		}
 		postData := PostData{}
 		retCode, err = ctx.BindPostData(&postData)
@@ -214,6 +217,7 @@ var DocUpdate ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		err = bsDoc.DocUpdate(
 			uriData.DocId,
 			postData.Title,
+			postData.DocType,
 			postData.CategoryId,
 			ses.Auth.AccountId,
 			postData.SpecUrl,
@@ -282,7 +286,7 @@ var DocChangeCategory ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		}
 
 		bsDoc := business.NewBsDoc(reqCtx)
-		err = bsDoc.DocUpdate(doc.DocId, doc.Title, postData.CategoryId, doc.AuthorId, doc.SpecUrl, doc.SpecContent, time.Now().Unix())
+		err = bsDoc.DocUpdate(doc.DocId, doc.Title, doc.DocType, postData.CategoryId, doc.AuthorId, doc.SpecUrl, doc.SpecContent, time.Now().Unix())
 		if nil != err {
 			ctx.Errorf(code.CodeErrorDBUpdateFailed.Clone(), "update doc category failed. %s", err)
 			return
@@ -344,7 +348,7 @@ var DocChangeAuthor ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		}
 
 		bsDoc := business.NewBsDoc(reqCtx)
-		err = bsDoc.DocUpdate(doc.DocId, doc.Title, doc.CategoryId, postData.AuthorId, doc.SpecUrl, doc.SpecContent, time.Now().Unix())
+		err = bsDoc.DocUpdate(doc.DocId, doc.Title, doc.DocType, doc.CategoryId, postData.AuthorId, doc.SpecUrl, doc.SpecContent, time.Now().Unix())
 		if nil != err {
 			ctx.Errorf(code.CodeErrorDBUpdateFailed.Clone(), "update doc category failed. %s", err)
 			return
@@ -411,6 +415,7 @@ var DocChangeTitle ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 		err = bsDoc.DocUpdate(
 			doc.DocId,
 			postData.Title,
+			doc.DocType,
 			doc.CategoryId,
 			doc.AuthorId,
 			doc.SpecUrl,
@@ -487,10 +492,11 @@ var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		// request post data
 		type PostData struct {
-			Title       string `json:"title" form:"title" binding:"required"`             // 标题
-			CategoryId  uint32 `json:"category_id" form:"category_id" binding:"required"` // 分类ID
-			SpecUrl     string `json:"spec_url" form:"spec_url"`                          // swagger.json url
-			SpecContent string `json:"spec_content" form:"spec_content"`
+			Title       string        `json:"title" form:"title" binding:"required"`             // 标题
+			DocType     model.DocType `json:"doc_type" form:"doc_type"`                          // 文档类型
+			CategoryId  uint32        `json:"category_id" form:"category_id" binding:"required"` // 分类ID
+			SpecUrl     string        `json:"spec_url" form:"spec_url"`                          // swagger.json url
+			SpecContent string        `json:"spec_content" form:"spec_content"`
 		}
 		postData := PostData{}
 		retCode, err := ctx.BindPostData(&postData)
@@ -530,6 +536,7 @@ var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 			err = bsDoc.DocUpdate(
 				doc.DocId,
 				doc.Title,
+				doc.DocType,
 				postData.CategoryId,
 				ses.Auth.AccountId,
 				postData.SpecUrl,
@@ -554,6 +561,7 @@ var DocCheckPost ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 
 		respData.DocId, err = bsDoc.DocAdd(&model.AhDoc{
 			Title:       postData.Title,
+			DocType:     postData.DocType,
 			SpecUrl:     postData.SpecUrl,
 			SpecContent: postData.SpecContent,
 			CategoryId:  postData.CategoryId,

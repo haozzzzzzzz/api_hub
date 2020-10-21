@@ -57,11 +57,11 @@ func (m *HubDB) AhDocAddTx(
 	strSql := `
 		INSERT INTO ah_doc
 		(
-			title, spec_url, spec_content, category_id, author_id, post_status, update_time, create_time
+			title, doc_type, spec_url, spec_content, category_id, author_id, post_status, update_time, create_time
 		)
 		VALUES
 		(
-			:title, :spec_url, :spec_content, :category_id, :author_id, :post_status, :update_time, :create_time
+			:title, :doc_type, :spec_url, :spec_content, :category_id, :author_id, :post_status, :update_time, :create_time
 		)
 	`
 	result, err := tx.NamedExec(strSql, doc)
@@ -83,6 +83,7 @@ func (m *HubDB) AhDocUpdateTx(
 	tx *sqlx.Tx,
 	docId uint32,
 	title string,
+	docType model.DocType,
 	specUrl string,
 	specContent string,
 	categoryId uint32,
@@ -94,6 +95,7 @@ func (m *HubDB) AhDocUpdateTx(
 		UPDATE ah_doc
 		SET
 			title=?,
+		    doc_type=?,
 			spec_url=?,
 			spec_content=?,
 			category_id=?,
@@ -106,6 +108,7 @@ func (m *HubDB) AhDocUpdateTx(
 	`
 	result, err = tx.Exec(strSql,
 		title,
+		docType,
 		specUrl,
 		specContent,
 		categoryId,
@@ -139,6 +142,7 @@ func (m *HubDB) AhDocGet(docId uint32) (doc *model.AhDoc, err error) {
 		SELECT
 			doc_id,
 			title,
+			doc_type,
 			spec_url,
 			spec_content,
 			category_id,
@@ -170,6 +174,7 @@ func (m *HubDB) AhDocGetByTitle(
 		SELECT
 			doc_id,
 			title,
+			doc_type,
 			spec_url,
 			category_id,
 			author_id,
@@ -204,6 +209,7 @@ func (m *HubDB) AhDocList(
 		SELECT
 			doc_id,
 			title,
+			doc_type,
 			spec_url,
 			spec_content,
 			category_id,

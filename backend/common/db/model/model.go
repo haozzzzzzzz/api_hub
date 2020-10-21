@@ -16,16 +16,22 @@ type SwaggerSpec struct {
 	} `json:"paths"`
 }
 
+type DocType uint8
+
+const DocTypeSwagger DocType = 0
+const DocTypeMarkdown DocType = 1
+
 type AhDoc struct {
-	DocId       uint32 `json:"doc_id" db:"doc_id"`
-	Title       string `json:"title" db:"title"`
-	SpecUrl     string `json:"spec_url" db:"spec_url"`
-	SpecContent string `json:"spec_content" db:"spec_content"`
-	CategoryId  uint32 `json:"category_id" db:"category_id"`
-	AuthorId    uint32 `json:"author_id" db:"author_id"`
-	PostStatus  uint8  `json:"post_status" db:"post_status"`
-	UpdateTime  int64  `json:"update_time" db:"update_time"`
-	CreateTime  int64  `json:"create_time" db:"create_time"`
+	DocId       uint32  `json:"doc_id" db:"doc_id"`
+	Title       string  `json:"title" db:"title"`
+	DocType     DocType `json:"doc_type" db:"doc_type"`
+	SpecUrl     string  `json:"spec_url" db:"spec_url"`
+	SpecContent string  `json:"spec_content" db:"spec_content"`
+	CategoryId  uint32  `json:"category_id" db:"category_id"`
+	AuthorId    uint32  `json:"author_id" db:"author_id"`
+	PostStatus  uint8   `json:"post_status" db:"post_status"`
+	UpdateTime  int64   `json:"update_time" db:"update_time"`
+	CreateTime  int64   `json:"create_time" db:"create_time"`
 }
 
 type AhDocWithName struct {

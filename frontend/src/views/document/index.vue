@@ -1,5 +1,5 @@
 <template>
-    <el-tabs v-model="tabActiveName" type="card" editable @edit="handleTabsEdit" @tab-click="tabClick">
+    <el-tabs v-model="tabActiveName" type="card" closable @edit="handleTabsEdit" @tab-click="tabClick">
         <el-tab-pane
                 v-for="item in tabs"
                 :key="item.name"
@@ -18,12 +18,14 @@
 </template>
 
 <script>
-    import document_detail from './detail'
+    import swagger_detail from './detail/swagger'
+    import markdown_detail from './detail/markdown'
     import document_list from './list'
 
-    let documentTabId = '0';
-    let defaultTabId = documentTabId;
+    let documentTabId = '0'; // document tab id
+    let defaultTabId = documentTabId; // default tab id
 
+    // default tab
     let defaultDocumentTab = {
         title: "document list",
         name: defaultTabId,
@@ -62,8 +64,22 @@
                     name: newTabName,
                     tabType: 'detail',
                     tabData: tabData,
-                    tabView: document_detail,
+                    // tabView: swagger_detail,
                 };
+
+                const DocTypeSwagger = "swagger";
+                const DocTypeMarkdown = "markdown";
+
+                switch (tabData.doc_type) {
+                    case DocTypeSwagger:
+                      newTab.tabView = swagger_detail;
+                      break;
+                    case DocTypeMarkdown:
+                      newTab.tabView = markdown_detail;
+                      break;
+                    default:
+                      newTab.tabView = undefined;
+                }
 
                 tabActive = newTab;
                 this.tabs.push(newTab);
@@ -101,17 +117,20 @@
                 {
                     let doc_id = parseInt(query.doc_id, 10);
                     let title = query.title;
+                    let doc_type = query.doc_type || "swagger";
 
                     tabOpen.call(retData, {
                         tabType: "detail",
                         tabData: {
                             doc_id: doc_id,
                             title: title,
+                            doc_type: doc_type,
                         }
                     });
 
                 }
                     break;
+
                 case 'list':
                 {
                     let search = query.search;
@@ -124,6 +143,7 @@
 
             return retData;
         },
+
         watch:{
             tabs(newTabs, oldTabs) {
                 this.tabMap = {};
@@ -132,6 +152,7 @@
                 });
             }
         },
+
         methods: {
             handleTabsEdit(targetName, action) {
                 switch (action) {
@@ -174,14 +195,17 @@
             customTabOpen(eventData) {
                 this.tabOpen(eventData)
             },
+
             searchChange(eventData){
                 defaultDocumentTab.tabData.search = eventData.tabData.search;
                 this.changeUrl(defaultDocumentTab);
             },
+
             tabOpen(data){
                 let activeTab = tabOpen.call(this, data);
                 this.changeUrl(activeTab);
             },
+
             tabClick(tab){
                 let tabName = tab.name;
                 let editableTab = this.tabMap[tabName];
@@ -193,13 +217,15 @@
                     console.error("change url(undefined)");
                     return
                 }
+
                 let query = {};
                 switch (tab.tabType) {
                     case "detail":
                         query = {
                             tab_type: tab.tabType,
                             doc_id: tab.tabData.doc_id,
-                            title: tab.tabData.title
+                            title: tab.tabData.title,
+                            doc_type: tab.tabData.doc_type
                         };
                         break;
 

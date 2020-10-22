@@ -8,18 +8,19 @@ import (
 )
 
 type EsAhDoc struct {
-	DocId          uint32    `json:"doc_id"`
-	Title          string    `json:"title"`
-	SpecUrl        string    `json:"spec_url"`
-	SpecPaths      []string  `json:"spec_paths"`
-	SpecTags       []string  `json:"spec_tags"`
-	AuthorId       uint32    `json:"author_id"`
-	AuthorName     string    `json:"author_name"`
-	CategoryId     uint32    `json:"category_id"`
-	CategoryName   string    `json:"category_name"`
-	CreateTime     time.Time `json:"create_time"`
-	PostStatus     uint8     `json:"post_status"`
-	CreateTimeUnix int64     `json:"create_time_unix"`
+	DocId          uint32        `json:"doc_id"`
+	Title          string        `json:"title"`
+	DocType        model.DocType `json:"doc_type"`
+	SpecUrl        string        `json:"spec_url"`
+	SpecPaths      []string      `json:"spec_paths"`
+	SpecTags       []string      `json:"spec_tags"`
+	AuthorId       uint32        `json:"author_id"`
+	AuthorName     string        `json:"author_name"`
+	CategoryId     uint32        `json:"category_id"`
+	CategoryName   string        `json:"category_name"`
+	CreateTime     time.Time     `json:"create_time"`
+	PostStatus     uint8         `json:"post_status"`
+	CreateTimeUnix int64         `json:"create_time_unix"`
 }
 
 func NewEsAhDoc(
@@ -28,6 +29,7 @@ func NewEsAhDoc(
 	esDoc = &EsAhDoc{
 		DocId:          doc.DocId,
 		Title:          doc.Title,
+		DocType:        doc.DocType,
 		SpecUrl:        doc.SpecUrl,
 		SpecPaths:      []string{},
 		SpecTags:       []string{},
@@ -72,6 +74,5 @@ func NewEsAhDoc(
 		}
 
 	}
-
 	return
 }

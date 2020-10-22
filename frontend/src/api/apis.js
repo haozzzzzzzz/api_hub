@@ -88,5 +88,11 @@ export default {
 
     docDetailSpecUrl(docId) {
         return config.AppConfig.backend_api + '/api/api_hub/v1/doc/detail/spec/' + docId
+    },
+
+    docDetailText(url, callback) {
+        client.get(url).then((response) => {
+            callback(response.data);
+        })
     }
 }

@@ -8,7 +8,7 @@
     import apis from '@/api/apis'
     import Swagger_vue from "@/components/swagger_vue/index";
     export default {
-        name: "document_detail",
+        name: "swagger_detail",
         components: {
             Swagger_vue,
         },

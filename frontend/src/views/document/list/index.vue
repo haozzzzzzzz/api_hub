@@ -31,34 +31,24 @@
                     width="100"
             ></el-table-column>
 
-<!--            tags-->
-<!--            <el-table-column-->
-<!--                    prop="tags"-->
-<!--                    label="tags"-->
-<!--                    width="200"-->
-<!--            >-->
-<!--                <template slot-scope="scope">-->
-<!--                    <el-tag effect="light">tag 1</el-tag>-->
-<!--                    <el-tag effect="light">tag 2</el-tag>-->
-<!--                    <el-tag effect="light">tag 3</el-tag>-->
-<!--                </template>-->
-<!--            </el-table-column>-->
-
             <el-table-column
                     prop="author_name"
                     label="author"
                     width="100"
             ></el-table-column>
+
             <el-table-column
-                    prop="post_status"
-                    label="status"
+                    prop="doc_type"
+                    label="type"
                     width="100"
             ></el-table-column>
+
             <el-table-column
                     prop="create_time"
                     label="time"
                     width="200"
             ></el-table-column>
+
         </el-table>
         <el-pagination
                 background
@@ -93,9 +83,11 @@
                     tabData: {
                         doc_id: row.doc_id,
                         title: row.title,
+                        doc_type: row.doc_type,
                     }
                 })
             },
+
             handleSearch(){
                 // 通知父组件
                 this.$emit('search-change', {
@@ -104,9 +96,11 @@
                         search: this.search,
                     },
                 });
+
                 // 刷新页面
                 this.handleCurrentChange(1)
             },
+
             handleCurrentChange: function (page) {
                 this.items = [];
                 apis.docList(this, page, this.pageSize, this.search.trim(), (data, err) => {
@@ -128,6 +122,7 @@
                         const PostStatusNotPublished = 0;
                         const PostStatusPublished = 1;
                         const PostStatusDeleted = 2;
+
                         switch (item.post_status) {
                             case PostStatusNotPublished:
                                 postStatus = "not_published";
@@ -145,9 +140,23 @@
 
                         }
 
+                        let docType = "unknown";
+                        switch (parseInt(item.doc_type)) {
+                            case 0:
+                              docType = "swagger";
+                              break;
+
+                            case 1:
+                              docType = "markdown";
+                              break;
+                            default:
+                                break;
+                        }
+
                         this.items.push({
                             doc_id: item.doc_id,
                             title: item.title,
+                            doc_type: docType,
                             category_name: item.category_name,
                             author_name: item.author_name,
                             spec_url: item.spec_url,
@@ -162,6 +171,7 @@
                 });
             }
         },
+
         mounted() {
             this.search = this.tabData.search;
             this.handleCurrentChange(1)

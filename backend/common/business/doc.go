@@ -20,12 +20,13 @@ func NewBsDoc(ctx context.Context) *BsDoc {
 }
 
 type DocListItem struct {
-	DocId        uint32 `json:"doc_id"`        // 文档ID
-	Title        string `json:"title"`         // 文档标题
-	CategoryName string `json:"category_name"` // 分类名称
-	AuthorName   string `json:"author_name"`   // 作者名称
-	PostStatus   uint8  `json:"post_status"`   // 状态
-	CreateTime   int64  `json:"create_time"`   // 创建时间
+	DocId        uint32        `json:"doc_id"`        // 文档ID
+	Title        string        `json:"title"`         // 文档标题
+	DocType      model.DocType `json:"doc_type"`      // 文档类型。0：swagger；1: markdown
+	CategoryName string        `json:"category_name"` // 分类名称
+	AuthorName   string        `json:"author_name"`   // 作者名称
+	PostStatus   uint8         `json:"post_status"`   // 状态
+	CreateTime   int64         `json:"create_time"`   // 创建时间
 }
 
 func (m *BsDoc) DocWithNameList(
@@ -110,6 +111,7 @@ func (m *BsDoc) DocList(
 		items = append(items, &DocListItem{
 			DocId:        doc.DocId,
 			Title:        doc.Title,
+			DocType:      doc.DocType,
 			CategoryName: doc.CategoryName,
 			AuthorName:   doc.AuthorName,
 			PostStatus:   doc.PostStatus,
@@ -407,6 +409,7 @@ func (m *BsDoc) EsAhDocSearch(page uint32, limit uint8, search string) (count in
 		items = append(items, &DocListItem{
 			DocId:        esAhDoc.DocId,
 			Title:        esAhDoc.Title,
+			DocType:      esAhDoc.DocType,
 			CategoryName: esAhDoc.CategoryName,
 			AuthorName:   esAhDoc.AuthorName,
 			PostStatus:   esAhDoc.PostStatus,

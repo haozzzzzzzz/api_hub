@@ -25,5 +25,10 @@ npm run test
 npm run lint
 ```
 
+### Manage project in gui
+```
+vue ui
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

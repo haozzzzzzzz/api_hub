@@ -1,6 +1,6 @@
 <template>
   <div class="markdown-vue markdown-body">
-    <vue-markdown :source="content" toc toc-id="markdown-toc"></vue-markdown>
+    <vue-markdown :source="content" toc toc-id="markdown-toc" @toc-rendered="tocRendered"></vue-markdown>
   </div>
 </template>
 
@@ -30,7 +30,16 @@
       apis.docDetailText(url, (text) => {
           this.content = text;
       });
-
+    },
+    methods: {
+      tocRendered: function (tocHtml) {
+        // 如果存在哈希，则尝试跳转至哈希(不一定能100%成功)
+        if(this.$route.hash) {
+          setTimeout(()=>{
+            location.href = this.$route.hash;
+          }, 1)
+        }
+      }
     }
   }
 </script>

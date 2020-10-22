@@ -102,6 +102,55 @@ var DocGet ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	},
 }
 
+type SummaryItem struct {
+	DocId   uint32        `json:"doc_id" db:"doc_id"`
+	Title   string        `json:"title" db:"title"`
+	DocType model.DocType `json:"doc_type" db:"doc_type"`
+}
+
+// 获取文档内容
+var DocGetSummary ginbuilder.HandleFunc = ginbuilder.HandleFunc{
+	HttpMethod: "GET",
+	RelativePaths: []string{
+		"/api/api_hub/v1/doc/doc/summary/:doc_id",
+	},
+	Handle: func(ctx *ginbuilder.Context) (err error) {
+		// request uri data
+		type UriData struct {
+			DocId uint32 `json:"doc_id" uri:"doc_id" binding:"required"`
+		}
+		uriData := UriData{}
+		retCode, err := ctx.BindUriData(&uriData)
+		if err != nil {
+			ctx.Errorf(retCode, "verify  uri data failed. %s.", err)
+			return
+		}
+
+		// response data
+		type ResponseData struct {
+			Summary *SummaryItem `json:"summary"`
+		}
+		respData := &ResponseData{}
+
+		reqCtx := ctx.RequestCtx
+		dbClient := table.NewHubDB(reqCtx)
+		doc, err := dbClient.AhDocGet(uriData.DocId)
+		if nil != err {
+			ctx.Errorf(code.CodeErrorDBQueryFailed.Clone(), "get ah doc failed. %s", err)
+			return
+		}
+
+		respData.Summary = &SummaryItem{
+			DocId:   doc.DocId,
+			Title:   doc.Title,
+			DocType: doc.DocType,
+		}
+
+		ctx.SuccessReturn(respData)
+		return
+	},
+}
+
 // 添加文档
 var DocAdd ginbuilder.HandleFunc = ginbuilder.HandleFunc{
 	HttpMethod: "POST",

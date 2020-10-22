@@ -26,6 +26,7 @@ func BindRouters(engine *gin.Engine) (err error) {
 	engine.Handle("POST", "/api/api_hub/v1/doc/doc/delete/:doc_id", doc.DocDelele.GinHandler)
 	engine.Handle("GET", "/api/api_hub/v1/doc/doc/get/:doc_id", doc.DocGet.GinHandler)
 	engine.Handle("GET", "/api/api_hub/v1/doc/doc/list", doc.DocList.GinHandler)
+	engine.Handle("GET", "/api/api_hub/v1/doc/doc/summary/:doc_id", doc.DocGetSummary.GinHandler)
 	engine.Handle("POST", "/api/api_hub/v1/doc/doc/update/:doc_id", doc.DocUpdate.GinHandler)
 	engine.Handle("POST", "/api/api_hub/v1/doc/es/index_all_ah_doc", doc.DocEsIndexAllAhDoc.GinHandler)
 	engine.Handle("POST", "/api/api_hub/v1/doc/es/init_ah_doc", doc.DocEsInitAhDoc.GinHandler)

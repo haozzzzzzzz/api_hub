@@ -18,6 +18,7 @@
 </template>
 
 <script>
+    import apis from "@/api/apis"
     import swagger_detail from './detail/swagger'
     import markdown_detail from './detail/markdown'
     import document_list from './list'
@@ -74,9 +75,11 @@
                     case DocTypeSwagger:
                       newTab.tabView = swagger_detail;
                       break;
+
                     case DocTypeMarkdown:
                       newTab.tabView = markdown_detail;
                       break;
+
                     default:
                       newTab.tabView = undefined;
                 }
@@ -116,17 +119,40 @@
                 case 'detail':
                 {
                     let doc_id = parseInt(query.doc_id, 10);
-                    let title = query.title;
-                    let doc_type = query.doc_type || "swagger";
+                    if (!query.doc_id) {
+                        break;
+                    }
 
-                    tabOpen.call(retData, {
-                        tabType: "detail",
-                        tabData: {
-                            doc_id: doc_id,
-                            title: title,
-                            doc_type: doc_type,
+                    apis.docSummary(this, doc_id, (data, err) => {
+                        if (err) {
+                          return
                         }
-                    });
+
+                        let title = data.data.summary.title;
+
+                        let doc_type = "unknown";
+                        switch (parseInt(data.data.summary.doc_type)) {
+                          case 0:
+                            doc_type = "swagger";
+                            break;
+
+                          case 1:
+                            doc_type = "markdown";
+                            break;
+
+                          default:
+                            break;
+                        }
+
+                        tabOpen.call(retData, {
+                            tabType: "detail",
+                            tabData: {
+                                doc_id: doc_id,
+                                title: title,
+                                doc_type: doc_type,
+                            }
+                        });
+                    })
 
                 }
                     break;
@@ -224,8 +250,6 @@
                         query = {
                             tab_type: tab.tabType,
                             doc_id: tab.tabData.doc_id,
-                            title: tab.tabData.title,
-                            doc_type: tab.tabData.doc_type
                         };
                         break;
 

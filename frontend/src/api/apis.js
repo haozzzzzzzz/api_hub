@@ -53,6 +53,7 @@ function handleResponse(comp, resp, err, callback) {
 }
 
 let handlingRequest = {};
+
 export default {
     /**
      * api document list
@@ -84,6 +85,25 @@ export default {
             handleResponse(comp, null, err, callback);
             handlingRequest[this.docList] = false;
         });
+    },
+
+    docSummary(comp, docId, callback) {
+        if (handlingRequest[this.docSummary]) {
+            callback(null, "last doc summary request is not finish");
+            return
+        }
+
+        handlingRequest[this.docSummary] = true;
+
+        client.get("/api/api_hub/v1/doc/doc/summary/" + docId)
+            .then((response)=>{
+                handleResponse(comp, response, null, callback);
+                handlingRequest[this.docSummary]  = false;
+
+            }).catch((err) => {
+                handleResponse(comp, null, err, callback);
+                handlingRequest[this.docSummary] = false;
+            });
     },
 
     docDetailSpecUrl(docId) {

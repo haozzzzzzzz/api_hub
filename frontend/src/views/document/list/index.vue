@@ -127,6 +127,7 @@
                             case PostStatusNotPublished:
                                 postStatus = "not_published";
                                 break;
+
                             case PostStatusPublished:
                                 postStatus = "published";
                                 break;
@@ -149,6 +150,7 @@
                             case 1:
                               docType = "markdown";
                               break;
+
                             default:
                                 break;
                         }

@@ -2,5 +2,5 @@
 cd backend
 ./main 2>&1 &
 
-cd ../frontend
+cd ../frontend_service
 npm start

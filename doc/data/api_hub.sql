@@ -5,6 +5,7 @@ CREATE TABLE ah_doc
 (
     doc_id int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'doc increment id',
     title varchar(255) NOT NULL COMMENT 'doc title',
+    `doc_type` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '0:swagger; 1:markdown',
     spec_url varchar(500) NOT NULL DEFAULT '' COMMENT 'api specification url',
     spec_content longtext NOT NULL COMMENT 'api specification content',
     category_id int(10) unsigned NOT NULL DEFAULT '1' COMMENT 'category id',

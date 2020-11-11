@@ -1,6 +1,11 @@
 import config from '@/config/config.js'
-let proxyMap = config.AppConfig.proxy;
+let proxyMap = config.AppConfig.plugin_config.proxy;
 
+/**
+ * 获取代理的url
+ * @param reqUrl
+ * @returns {*}
+ */
 function getProxyUrl(reqUrl) {
     for (let host in proxyMap) {
         let idx = reqUrl.indexOf(host);

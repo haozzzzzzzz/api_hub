@@ -10,6 +10,7 @@ let SwaggerRequestProxyPlugin = {
     }
 };
 
+// swagger请求中间件
 let SwaggerRequestPlugins = {
     plugins: [SwaggerRequestProxyPlugin],
     requestInterceptor(req) {

@@ -1,0 +1,2 @@
+GET /api/api_hub/v1/frontend/config/get
+Host: 127.0.0.1:18000

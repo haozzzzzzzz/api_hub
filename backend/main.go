@@ -5,6 +5,7 @@ import (
 	"backend/common/config"
 	"backend/task"
 	"fmt"
+	"github.com/haozzzzzzzz/go-rapid-development/metrics"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -26,6 +27,8 @@ func main() {
 	corsConfig.AllowAllOrigins = true
 	corsConfig.AddAllowHeaders("*")
 	engine.Use(cors.New(corsConfig))
+
+	metrics.PrometheusGinMetrics(engine, "/metrics")
 
 	err = api.BindRouters(engine)
 	if nil != err {

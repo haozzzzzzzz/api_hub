@@ -11,7 +11,7 @@
     "core-js": "^2.6.11",
     "element-ui": "^2.14.0",
     "github-markdown-css": "^4.0.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "sass-loader": "^7.3.1",
     "swagger-ui": "^3.36.2",
     "url-parse": "^1.4.7",
